@@ -1,0 +1,157 @@
+
+h3 {
+  color: #043D5D;
+  font-weight: bold;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+h4 {
+  color: #4D6D7E;
+  font-size: 14px;
+  font-weight: bold;
+}
+.checkbox {
+  accent-color: #043D5D
+}
+
+.control-label {
+  color: #4D6D7E;
+}
+
+.tab-content {
+  background: #f9f9f9;
+}
+
+.well {
+  background-color: #f9f9f9;
+  border: none;
+  border-radius: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border: none;
+}
+
+/* navigation pills for panels */
+
+.nav {
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.nav-pills > li > a {
+  background: #DBDDDE;
+  color: black;
+  font-weight: bold;
+  height: 30px;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-top: 10px;
+}
+
+.nav-pills > li.active > a, .nav-pills > li.active > a:focus, .nav-pills > li.active > a:hover {
+  background-color: #043D5D;
+  height: 40px;
+  padding-top: 10px;
+  margin-top: 0px;
+}
+
+/* handle for year slider */
+
+.irs--shiny {
+  left: 10px;
+  width: 220px;
+}
+
+.irs--shiny .irs-handle {
+  top: 20px;
+  width: 17px;
+  height: 17px;
+  border: 1.5px solid black;
+  background-color: #94989D;
+}
+
+.irs--shiny .irs-min {
+  background: none;
+  font-size: 14px;
+}
+
+.irs--shiny .irs-max {
+  background: none;
+  font-size: 14px;
+}
+
+.irs--shiny .irs-from {
+  background: none;
+  font-size: 14px;
+  color: black;
+  font-weight: bold;
+}
+
+.irs--shiny .irs-to {
+  background: none;
+  font-size: 14px;
+  color: black;
+  font-weight: bold;
+}
+
+.irs--shiny .irs-single {
+  background: none;
+  font-size: 14px;
+  color: black;
+  font-weight: bold;
+}
+
+.irs--shiny .irs-line {
+  border: 1.5px solid black;
+}
+
+.irs--shiny .irs-bar {
+  border: 1.5px solid black;
+  background: #94989D;
+}
+
+/* dd usage radio button formatting*/
+
+.radio-button {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.radio-button input[type="radio"] {
+  opacity: 0;
+  position: fixed;
+  width: 0;
+}
+
+.radio-button label {
+  display: inline-block;
+  background-color: white;
+  padding: 3px 5px;
+  font-size: 14px;
+  border: 1.5px solid black;
+  border-radius: 4px;
+  width: 55px;
+  text-align: center;
+}
+
+.radio-button label:hover {
+  background-color: #DBDDDE;
+}
+
+.radio-button input[type="radio"]:checked+label {
+  background-color: #043D5D;
+  border-color: black;
+  color: white;
+}
+
+
+/*no background for d3 graphs*/
+
+svg {
+  background: none !important;
+}
+
+
+
