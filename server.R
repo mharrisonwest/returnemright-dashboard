@@ -18,9 +18,11 @@ server <- function(input, output, session) {
   }))
   
   historicaldata<-reactive({
-    
+    print(input$years_historical[1])
     hist_data_filtered <- source_historical_data()%>%
-      filter(species %in% input$fishery_historical
+      filter(species %in% input$fishery_historical,
+             year >= input$years_historical[1],
+             year <= input$years_historical[2]
              )
     
     #filter based on user inputs

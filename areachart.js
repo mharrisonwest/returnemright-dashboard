@@ -46,6 +46,7 @@ var legendGroup = svg.append("g").attr("class", "legend");
 
 // Update-render logic
 r2d3.onRender((data, svg, width, height, options) => {
+  
 
   var x = d3.scalePoint()
     .domain(data.map(d => d.year))
@@ -70,22 +71,38 @@ r2d3.onRender((data, svg, width, height, options) => {
 
   var areaSeries = d3.group(data.filter(d => d.type === "area"), d => d.series);
   var lineSeries = d3.group(data.filter(d => d.type === "line"), d => d.series);
+  
+  var years = Array.from(new Set(data.map(d => d.year))).sort();
 
-  //area chart transition
-  var areaPaths = areaGroup.selectAll(".area-path")
+  // Bind data to area paths
+  const areaPaths = svg.select(".areas").selectAll("path")
     .data(Array.from(areaSeries.entries()), d => d[0]);
 
-  areaPaths.enter().append("path")
-    .attr("class", "area-path")
+  // Enter + update
+  areaPaths.enter()
+    .append("path")
     .attr("fill", d => color(d[0]))
     .attr("stroke", d => color(d[0]))
     .attr("stroke-width", 1.5)
-    .attr("d", d => area(d[1]))
+    .attr("d", d => {
+      // Start flat at bottom for transition in
+      return d3.area()
+        .x(d => x(d.year))
+        .y0(innerHeight)
+        .y1(innerHeight)(d[1]);
+    })
     .merge(areaPaths)
-    .transition().duration(1000)
-      .attr("d", d => area(d[1]));
-
-  areaPaths.exit().remove();
+    .transition()
+    .duration(1000)
+    .attr("d", d => area(d[1]));
+    
+  // Remove exit
+  areaPaths.exit()
+    .transition()
+    .duration(500)
+    .attr("opacity", 0)
+    .remove();
+  
 
   //line chart transition
   var linePaths = lineGroup.selectAll(".line-path")
