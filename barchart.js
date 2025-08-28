@@ -32,7 +32,7 @@ r2d3.onRender(function(data, svg, width, height, options) {
     .padding(0.5);
 
   var y = d3.scaleLinear()
-    .domain([0, d3.max(data, d => d.value)]).nice()
+    .domain([0,data[0].value*1.2]).nice()
     .range([innerHeight, 0]);
 
   var color = d3.scaleOrdinal(["#043D5D", "#6FA0A2"]);

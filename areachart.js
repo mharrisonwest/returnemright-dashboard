@@ -92,6 +92,12 @@ r2d3.onRender((data, svg, width, height, options) => {
     .duration(0)
     .attr("d", d => area(d[1]));
     
+  areaPaths.exit()
+    .transition()
+    .duration(500)
+    .style("opacity", 0)
+    .remove();
+    
 
 
   //line chart transition
@@ -165,4 +171,3 @@ r2d3.onRender((data, svg, width, height, options) => {
 //r2d3.onResize(function(width, height) {
   // Do nothing – this disables auto-redraw on resize
 //});
-

@@ -14,7 +14,7 @@ server <- function(input, output, session) {
     print(input$sector_historical)
     print(input$region_scenario)
     hist_data_filtered <- source_historical_data() %>%
-      filter(species %in% "Red Snapper",#input$fishery_scenario,
+      filter(species %in% input$fishery_scenario,
              year >= input$years_scenario[1],
              year <= input$years_scenario[2],
              sector1 %in% input$sector_scenario | sector2 %in% input$sector_scenario,
@@ -44,18 +44,32 @@ server <- function(input, output, session) {
     
     
     hist_tot <- sum(summed_data$value[summed_data$series == "Released Alive"])
-    new_tot <- hist_tot + sum(summed_data$value[summed_data$series == "Dead Upon Release"])*.2
+    new_tot <- hist_tot + sum(summed_data$value[summed_data$series == "Dead Upon Release"])*.2*as.numeric(input$scenario_choice)
     return(data.frame(group=c("Historical","50%"), value=c(hist_tot,new_tot)))
     
   })
   
   output$scenariochart <- renderD3({
     print(scenariodata())
+    print(input$scenario_choice)
     r2d3(data=scenariodata(), script = "barchart.js", options = list(xLabel = "",
                                                                                                                 yLabel = "Millions",
                                                                                                                 title = "Fish Released Alive with 25% of",
                                                                                                                 title2 = "Anglers Using Descender Devices",
                                                                                                                 subtitle = "2023"))
+  })
+  
+  #text associated with this:
+  output$selected_scenario <- renderUI({
+    div(
+      "With a ", span(class = "narrative_emphasis",paste0(as.numeric(input$scenario_choice)*100,"%")), " Descender Device usage rate, fish survival would increase by ", span(class = "narrative_emphasis", paste0(round((scenariodata()$value[2]/scenariodata()$value[1]-1)*100,0),"%")), " in 2023."
+    )
+  })
+  
+  output$fish_saved_text <- renderUI({
+    div(
+      format(round((scenariodata()$value[2]-scenariodata()$value[1])*1000000,0),big.mark=",")
+    )
   })
   
   source_historical_data <- reactive(({
@@ -76,7 +90,8 @@ server <- function(input, output, session) {
       summarise(tot_discards = sum(discards),
                 tot_dead = sum(dead_disc),
                 tot_landings = sum(landings),
-                type = ""
+                type = "",
+                yearnumeric = 0,
       ) %>%
       pivot_longer(cols = tot_discards:tot_landings,
                    names_to = "series",
@@ -85,6 +100,7 @@ server <- function(input, output, session) {
         series = str_replace(series, "tot_discards","Released Alive"),
         series = str_replace(series, "tot_dead","Dead Upon Release"),
         series = str_replace(series, "tot_landings","Fish Kept"),
+        yearnumeric = year,
         year = str_replace(as.character(year),"20","'")
       )
     
@@ -96,7 +112,10 @@ server <- function(input, output, session) {
   })
   
   output$historicalchart <- renderD3({
-    r2d3(data=historicaldata(), script = "areachart.js",options = list(subtitle = "(2005-2023)"))
+    r2d3(data=historicaldata(), script = "areachart.js",options = list(subtitle = "(2005-2023)",x_min = input$years_historical[1],x_max = input$years_historical[2]
+                                                                       ))
   })
+  
+  
   
 }

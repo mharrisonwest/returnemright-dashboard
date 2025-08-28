@@ -6,7 +6,7 @@ library(tidyverse)
 ui <- fluidPage(
   tags$head(
     tags$link(rel = "stylesheet", type = "text/css", href = "stylesheet.css")
-  ),
+    ),
   
   
   navset_pill( 
@@ -72,23 +72,34 @@ ui <- fluidPage(
                   
                   h4(style="width: 140px","% of Anglers Using Descender Devices"),
                   div(class = "radio-button",
-                      tags$input(type = "radio",name="scenario_choice", id="scenario_1", value="25", checked="checked"),
+                      tags$input(type = "radio",name="scenario_choice", id="scenario_1", value=.25, checked="checked"),
                       tags$label('for'="scenario_1","25%"),
-                      tags$input(type = "radio",name="scenario_choice", id="scenario_2", value="50"),
+                      tags$input(type = "radio",name="scenario_choice", id="scenario_2", value=.5),
                       tags$label('for'="scenario_2","50%"),
                       br(),
-                      tags$input(type = "radio",name="scenario_choice", id="scenario_3", value="75"),
+                      tags$input(type = "radio",name="scenario_choice", id="scenario_3", value=.75),
                       tags$label('for'="scenario_3","75%"),
-                      tags$input(type = "radio",name="scenario_choice", id="scenario_4", value="100"),
+                      tags$input(type = "radio",name="scenario_choice", id="scenario_4", value=1),
                       tags$label('for'="scenario_4","100%")
                       
                   ),
+                  tags$script(HTML("
+                  $(document).on('shiny:connected', function(event) {
+                      setTimeout(function() {
+                        var checked = $('input[name=\"scenario_choice\"]:checked').val();
+                        Shiny.setInputValue('scenario_choice', checked, {priority: 'event'});
+                      }, 50);
+                    });
+                    $(document).on('change', 'input[name=\"scenario_choice\"]', function() {
+                      Shiny.setInputValue('scenario_choice', this.value);
+                    });
+                  ")),
                   
                   checkboxGroupInput(
                     "fishery_scenario",
                     "Fishery",
-                    choices = list("Red Snapper" = "snapper", "Gag" = "gag", "Red Grouper" = "grouper"),
-                    selected = "snapper"
+                    choices = list("Red Snapper" = "Red Snapper", "Gag" = "Gag", "Red Grouper" = "Red Grouper"),
+                    selected = "Red Snapper"
                   ),
                   
                   sliderInput(
@@ -125,8 +136,18 @@ ui <- fluidPage(
                 )),
                 
                 ##Text Section##
-                column(4,wellPanel(
-                  "text here"
+                column(4,wellPanel(style = "margin:auto",
+                  div(id = "fish-saved-block",
+                    div(id = "fish-saved-title",
+                      "Total Fish Saved"),
+                    div(id = "fish-saved-amount",
+                        uiOutput("fish_saved_text")
+                        )
+                  ),
+                  br(),
+                  div(id = "fish-saved-narrative",
+                      uiOutput("selected_scenario")
+                  )
 
                   
                 ))

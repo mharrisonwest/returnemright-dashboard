@@ -154,4 +154,29 @@ svg {
 }
 
 
+/*fish saved text*/
+#fish-saved-block {
+  background: #6FA0A2;
+  color: white;
+  text-align: center;
+  padding: inherit;
+  font-weight: bold;
+  margin-top: 10px;
+}
 
+#fish-saved-title {
+  font-size:18px;
+}
+
+#fish-saved-amount {
+  font-size:24px;
+}
+
+#fish-saved-narrative {
+  text-align: center;
+}
+
+.narrative_emphasis {
+  color: #6FA0A2;
+  font-weight: bold;
+}
