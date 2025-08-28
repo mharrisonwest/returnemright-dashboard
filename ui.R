@@ -21,8 +21,8 @@ ui <- fluidPage(
                          checkboxGroupInput(
                            "fishery_historical",
                            "Fishery",
-                           choices = list("Red Snapper" = "snapper", "Gag" = "gag", "Red Grouper" = "grouper"),
-                           selected = "snapper"
+                           choices = list("Red Snapper" = "Red Snapper", "Gag" = "Gag", "Red Grouper" = "Red Grouper"),
+                           selected = "Red Snapper"
                          ),
                          
                          sliderInput(
@@ -38,15 +38,15 @@ ui <- fluidPage(
                          checkboxGroupInput(
                            "region_historical",
                            "Regions",
-                           choices = list("Atlantic" = "atlantic", "Gulf" = "gulf"),
-                           selected = c("atlantic","gulf")
+                           choices = list("Atlantic" = "Atlantic", "Gulf" = "Gulf"),
+                           selected = c("Atlantic","Gulf")
                          ),
                          
                          checkboxGroupInput(
                            "sector_historical",
                            "Sector",
-                           choices = list("For Hire (Charter & Headboats)" = "forhire", "Private" = "private"),
-                           selected = c("forhire","private")
+                           choices = list("For Hire (Charter & Headboats)" = "For Hire", "Private" = "Private"),
+                           selected = c("For Hire","Private")
                          )
                          
       )),
@@ -104,21 +104,21 @@ ui <- fluidPage(
                   checkboxGroupInput(
                     "region_scenario",
                     "Regions",
-                    choices = list("Atlantic" = "atlantic", "Gulf" = "gulf"),
-                    selected = c("atlantic","gulf")
+                    choices = list("Atlantic" = "Atlantic", "Gulf" = "Gulf"),
+                    selected = c("Atlantic","Gulf")
                   ),
                   
                   checkboxGroupInput(
                     "sector_scenario",
                     "Sector",
-                    choices = list("For Hire (Charter & Headboats)" = "forhire", "Private" = "private"),
-                    selected = c("forhire","private")
+                    choices = list("For Hire (Charter & Headboats)" = "For Hire", "Private" = "Private"),
+                    selected = c("For Hire","Private")
                   )
                   
                 )),
                 
                 ##Graph Section##
-                column(4,wellPanel(
+                column(4,wellPanel(style = "padding:0",
                   ##d3 scenario chart here
                   d3Output("scenariochart")
                   

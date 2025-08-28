@@ -1,199 +1,199 @@
-﻿year,species,region,sector,area,discards,dead_disc,landings
-2005,Gag,Atlantic,Headboat,all,6.68,1.67,8.047
-2005,Gag,Atlantic,Private-Charter,all,359.7796626,89.94491565,55.90355766
-2005,Gag,Gulf,Charter,all,339.608,40.75296,126.872
-2005,Gag,Gulf,Headboat,all,42.7113,5.125356,16.784
-2005,Gag,Gulf,Private,all,2820.73,338.4876,533.962
-2005,Red Grouper,Atlantic,Headboat,all,9.74,1.948,11.47
-2005,Red Grouper,Atlantic,Private-Charter,all,179.6,35.92,39.46
-2005,Red Grouper,Gulf,Gen.Rec,all,2135.46,247.71336,366.584
-2005,Red Snapper,Atlantic,Headboat,all,9.972,3.68964,8.907
-2005,Red Snapper,Atlantic,Private-Charter,all,129.834,48.03858,53.373
-2005,Red Snapper,Gulf,Charter,Central,571.9528,96.6600232,385.561
-2005,Red Snapper,Gulf,Headboat,Central,39.288,9.586272,41.61
-2005,Red Snapper,Gulf,Private,Central,4028.06,1196.33382,899.701
-2006,Gag,Atlantic,Headboat,all,3.736,0.934,4.602
-2006,Gag,Atlantic,Private-Charter,all,401.7854155,100.4463539,80.58901582
-2006,Gag,Gulf,Charter,all,140.619,16.87428,70.4454
-2006,Gag,Gulf,Headboat,all,12.7649,1.531788,6.764
-2006,Gag,Gulf,Private,all,1752.99,210.3588,285.535
-2006,Red Grouper,Atlantic,Headboat,all,5,1,5.24
-2006,Red Grouper,Atlantic,Private-Charter,all,155.36,31.072,95.34
-2006,Red Grouper,Gulf,Gen.Rec,all,1616.31,187.49196,273.237
-2006,Red Snapper,Atlantic,Headboat,all,17.447,6.45539,5.945
-2006,Red Snapper,Atlantic,Private-Charter,all,452.519,167.43203,62.23
-2006,Red Snapper,Gulf,Charter,Central,803.202,135.741138,388.461
-2006,Red Snapper,Gulf,Headboat,Central,61.514,15.009416,46.74
-2006,Red Snapper,Gulf,Private,Central,4173.11,1239.41367,985.371
-2007,Gag,Atlantic,Headboat,all,3.53,0.8825,6.703
-2007,Gag,Atlantic,Private-Charter,all,583.8234768,145.9558692,77.71831903
-2007,Gag,Gulf,Charter,all,113.324,13.59888,33.9911
-2007,Gag,Gulf,Headboat,all,35.0285,4.20342,11.141
-2007,Gag,Gulf,Private,all,2712.74,325.5288,236.24
-2007,Red Grouper,Atlantic,Headboat,all,4.14,0.828,5.16
-2007,Red Grouper,Atlantic,Private-Charter,all,100.97,20.194,150.14
-2007,Red Grouper,Gulf,Gen.Rec,all,1216.46,141.10936,225.583
-2007,Red Snapper,Atlantic,Headboat,all,73.401,27.15837,6.889
-2007,Red Snapper,Atlantic,Private-Charter,all,963.575,356.52275,60.086
-2007,Red Snapper,Gulf,Charter,Central,685.093,115.780717,475.791
-2007,Red Snapper,Gulf,Headboat,Central,57.591,14.052204,62.84
-2007,Red Snapper,Gulf,Private,Central,5695.97,1691.70309,1526.401
-2008,Gag,Atlantic,Headboat,all,4.631,1.15775,3.062
-2008,Gag,Atlantic,Private-Charter,all,505.4904896,126.3726224,102.9141351
-2008,Gag,Gulf,Charter,all,313.363,37.60356,89.1096
-2008,Gag,Gulf,Headboat,all,53.173,6.38076,10.521
-2008,Gag,Gulf,Private,all,4442.42,533.0904,379.698
-2008,Red Grouper,Atlantic,Headboat,all,6.74,1.348,2.44
-2008,Red Grouper,Atlantic,Private-Charter,all,99.67,19.934,227.46
-2008,Red Grouper,Gulf,Gen.Rec,all,4586.27,532.00732,192.793
-2008,Red Snapper,Atlantic,Headboat,all,74.686,27.63382,18.943
-2008,Red Snapper,Atlantic,Private-Charter,all,1422.482,526.31834,328.723
-2008,Red Snapper,Gulf,Charter,Central,486.489,82.216641,265.441
-2008,Red Snapper,Gulf,Headboat,Central,94.052,22.948688,60.63
-2008,Red Snapper,Gulf,Private,Central,4356.13,1293.77061,898.071
-2009,Gag,Atlantic,Headboat,all,8.344,2.086,3.001
-2009,Gag,Atlantic,Private-Charter,all,392.5254339,98.13135849,72.46140187
-2009,Gag,Gulf,Charter,all,267.022,32.04264,46.6923
-2009,Gag,Gulf,Headboat,all,52.392,6.28704,9.483
-2009,Gag,Gulf,Private,all,2936.55,352.386,196.587
-2009,Red Grouper,Atlantic,Headboat,all,12.27,2.454,1.43
-2009,Red Grouper,Atlantic,Private-Charter,all,120.88,24.176,159.7
-2009,Red Grouper,Gulf,Gen.Rec,all,4672.46,542.00536,153.594
-2009,Red Snapper,Atlantic,Headboat,all,57.906,21.42522,21.507
-2009,Red Snapper,Atlantic,Private-Charter,all,960.896,355.53152,421.979
-2009,Red Snapper,Gulf,Charter,Central,475.856,80.419664,205.261
-2009,Red Snapper,Gulf,Headboat,Central,94.201,22.985044,78.42
-2009,Red Snapper,Gulf,Private,Central,3836.63,1139.47911,1079.271
-2010,Gag,Atlantic,Headboat,all,4.839,1.20975,3.281
-2010,Gag,Atlantic,Private-Charter,all,285.0005708,71.25014271,40.91078256
-2010,Gag,Gulf,Charter,all,325.174,39.02088,60.2332
-2010,Gag,Gulf,Headboat,all,46.592,5.59104,11.094
-2010,Gag,Gulf,Private,all,2314.74,277.7688,251.765
-2010,Red Grouper,Atlantic,Headboat,all,14.34,2.868,1.28
-2010,Red Grouper,Atlantic,Private-Charter,all,108.75,21.75,22.14
-2010,Red Grouper,Gulf,Gen.Rec,all,4154.5,481.922,251.029
-2010,Red Snapper,Atlantic,Headboat,all,38.84,14.3708,0.477
-2010,Red Snapper,Atlantic,Private-Charter,all,465.996,172.41852,0.058
-2010,Red Snapper,Gulf,Charter,Central,226.6524,38.3042556,68.841
-2010,Red Snapper,Gulf,Headboat,Central,52.8,12.8832,33.93
-2010,Red Snapper,Gulf,Private,Central,4425.91,1314.49527,1032.621
-2011,Gag,Atlantic,Headboat,all,3.864,0.966,2.632
-2011,Gag,Atlantic,Private-Charter,all,201.8530421,50.46326053,34.31885105
-2011,Gag,Gulf,Charter,all,190.736,22.88832,10.632
-2011,Gag,Gulf,Headboat,all,45.679,5.48148,5.099
-2011,Gag,Gulf,Private,all,1594.7,191.364,133.382
-2011,Red Grouper,Atlantic,Headboat,all,6.61,1.322,1.56
-2011,Red Grouper,Atlantic,Private-Charter,all,76.92,15.384,36.75
-2011,Red Grouper,Gulf,Gen.Rec,all,4517.5,524.03,210.727
-2011,Red Snapper,Atlantic,Headboat,all,41.982,10.91532,1.359
-2011,Red Snapper,Atlantic,Private-Charter,all,251.243,70.34804,0.058
-2011,Red Snapper,Gulf,Charter,Central,375.9453,63.5347557,153.431
-2011,Red Snapper,Gulf,Headboat,Central,82.104,20.033376,66.16
-2011,Red Snapper,Gulf,Private,Central,3729.513,1107.665361,1242.751
-2012,Gag,Atlantic,Headboat,all,5.193,1.29825,2.1
-2012,Gag,Atlantic,Private-Charter,all,374.1009839,93.52524598,36.69472209
-2012,Gag,Gulf,Charter,all,170.375,20.445,46.7545
-2012,Gag,Gulf,Headboat,all,37.878,4.54536,5.253
-2012,Gag,Gulf,Private,all,1139.79,136.7748,101.646
-2012,Red Grouper,Atlantic,Headboat,all,9.78,1.956,1.44
-2012,Red Grouper,Atlantic,Private-Charter,all,96.94,19.388,89.65
-2012,Red Grouper,Gulf,Gen.Rec,all,3463.19,401.73004,512.227
-2012,Red Snapper,Atlantic,Headboat,all,47.305,12.2993,2.127
-2012,Red Snapper,Atlantic,Private-Charter,all,382.558,107.11624,18.185
-2012,Red Snapper,Gulf,Charter,Central,258.4582,43.6794358,150.031
-2012,Red Snapper,Gulf,Headboat,Central,71.576,17.464544,51.71
-2012,Red Snapper,Gulf,Private,Central,3971.316,1179.480852,1160.661
-2013,Gag,Atlantic,Headboat,all,1.984,0.496,1.383
-2013,Gag,Atlantic,Private-Charter,all,155.932453,38.98311326,19.53523883
-2013,Gag,Gulf,Charter,all,234.277,28.11324,24.9393
-2013,Gag,Gulf,Headboat,all,34.756,4.17072,5.276
-2013,Gag,Gulf,Private,all,1190.85,142.902,186.23
-2013,Red Grouper,Atlantic,Headboat,all,9.74,1.948,1.16
-2013,Red Grouper,Atlantic,Private-Charter,all,124.92,24.984,29.7
-2013,Red Grouper,Gulf,Gen.Rec,all,3946.67,457.81372,647.499
-2013,Red Snapper,Atlantic,Headboat,all,46.74,12.1524,1.52
-2013,Red Snapper,Atlantic,Private-Charter,all,210.777,59.01756,7.48
-2013,Red Snapper,Gulf,Charter,Central,402.9501,68.0985669,165.651
-2013,Red Snapper,Gulf,Headboat,Central,80.013,19.523172,41.3
-2013,Red Snapper,Gulf,Private,Central,4871.39,1446.80283,2091.561
-2014,Gag,Atlantic,Headboat,all,1.366,0.3415,1.042
-2014,Gag,Atlantic,Private-Charter,all,270.3436667,67.58591666,36.77330782
-2014,Gag,Gulf,Charter,all,67.9713,8.156556,12.4251
-2014,Gag,Gulf,Headboat,all,20.162,2.41944,6.203
-2014,Gag,Gulf,Private,all,1025.68,123.0816,132.567
-2014,Red Grouper,Atlantic,Headboat,all,5.03,1.006,1.85
-2014,Red Grouper,Atlantic,Private-Charter,all,105.24,21.048,26.26
-2014,Red Grouper,Gulf,Gen.Rec,all,3338.55,387.2718,633.195
-2014,Red Snapper,Atlantic,Headboat,all,46.612,12.11912,2.952
-2014,Red Snapper,Atlantic,Private-Charter,all,743.415,208.1562,37.997
-2014,Red Snapper,Gulf,Charter,Central,281.5476,47.5815444,35.281
-2014,Red Snapper,Gulf,Headboat,Central,59.827,14.597788,40.55
-2014,Red Snapper,Gulf,Private,Central,3864.994,1147.903218,893.061
-2015,Gag,Atlantic,Headboat,all,1.127,0.28175,0.872
-2015,Gag,Atlantic,Private-Charter,all,167.9970396,41.99925989,19.84987869
-2015,Gag,Gulf,Charter,all,72.6227,8.714724,12.9775
-2015,Gag,Gulf,Headboat,all,15.967,1.91604,3.626
-2015,Gag,Gulf,Private,all,662.074,79.44888,111.003
-2015,Red Grouper,Atlantic,Headboat,all,6.42,1.284,1.74
-2015,Red Grouper,Atlantic,Private-Charter,all,93.14,18.628,25.79
-2015,Red Grouper,Gulf,Gen.Rec,all,2074,240.584,400.641
-2015,Red Snapper,Atlantic,Headboat,all,54.405,14.1453,0.75
-2015,Red Snapper,Atlantic,Private-Charter,all,1308.76,366.4528,2.035
-2015,Red Snapper,Gulf,Charter,Central,258.4098,43.6712562,204.971
-2015,Red Snapper,Gulf,Headboat,Central,53.346,13.016424,42.35
-2015,Red Snapper,Gulf,Private,Central,3157.76,937.85472,1023.321
-2016,Gag,Atlantic,Headboat,all,0.981,0.24525,0.637
-2016,Gag,Atlantic,Private-Charter,all,72.35996942,18.08999236,25.40499136
-2016,Gag,Gulf,Charter,all,104.765,12.5718,17.6235
-2016,Gag,Gulf,Headboat,all,20.739,2.48868,2.49
-2016,Gag,Gulf,Private,all,1102.68,132.3216,82.2664
-2016,Red Grouper,Gulf,Gen.Rec,all,2494.69,289.38404,355.68
-2016,Red Snapper,Atlantic,Headboat,all,66.511,17.29286,0.331
-2016,Red Snapper,Atlantic,Private-Charter,all,2392.562,669.91736,0.077
-2016,Red Snapper,Gulf,Charter,Central,416.809,70.440721,217.941
-2016,Red Snapper,Gulf,Headboat,Central,81.816,19.963104,35.55
-2016,Red Snapper,Gulf,Private,Central,5482.6,1628.3322,1281.041
-2017,Gag,Atlantic,Headboat,all,0.691,0.17275,0.639
-2017,Gag,Atlantic,Private-Charter,all,38.94724042,9.736810105,28.62635726
-2017,Gag,Gulf,Charter,all,145.159,17.41908,25.4241
-2017,Gag,Gulf,Headboat,all,16.555,1.9866,2.932
-2017,Gag,Gulf,Private,all,1527.7,183.324,106.941
-2017,Red Grouper,Gulf,Gen.Rec,all,1470.51,170.57916,137.564
-2017,Red Snapper,Atlantic,Headboat,all,41.301,10.32525,2.724
-2017,Red Snapper,Atlantic,Private-Charter,all,1618.291,420.75566,25.9
-2017,Red Snapper,Gulf,Charter,Central,537.942,90.912198,239.361
-2017,Red Snapper,Gulf,Headboat,Central,115.406,28.159064,50.27
-2017,Red Snapper,Gulf,Private,Central,8266.63,2455.18911,2568.121
-2018,Gag,Atlantic,Headboat,all,0.722,0.1805,0.786
-2018,Gag,Atlantic,Private-Charter,all,52.95757653,13.23939413,24.91304661
-2018,Gag,Gulf,Charter,all,126.194,15.14328,19.8231
-2018,Gag,Gulf,Headboat,all,21.04,2.5248,3.026
-2018,Gag,Gulf,Private,all,1036.35,124.362,121.852
-2018,Red Grouper,Gulf,Gen.Rec,all,1690.86,196.13976,158.032
-2018,Red Snapper,Atlantic,Headboat,all,47.286,11.8215,4.435
-2018,Red Snapper,Atlantic,Private-Charter,all,3226.233,838.82058,60.411
-2018,Red Snapper,Gulf,Charter,Central,422.031,71.323239,229.201
-2018,Red Snapper,Gulf,Headboat,Central,95.229,23.235876,56.76
-2018,Red Snapper,Gulf,Private,Central,5025.45,1492.55865,1751.101
-2019,Gag,Atlantic,Headboat,all,0.481,0.12025,0.463
-2019,Gag,Atlantic,Private-Charter,all,24.1068397,6.026709924,21.72390421
-2019,Gag,Gulf,Charter,all,99.1775,11.9013,28.5368
-2019,Gag,Gulf,Headboat,all,18.297,2.19564,2.65
-2019,Gag,Gulf,Private,all,1370.26,164.4312,97.9993
-2019,Red Grouper,Gulf,Gen.Rec,all,864.442,100.275272,153.604
-2019,Red Snapper,Atlantic,Headboat,all,48.561,12.14025,4.055
-2019,Red Snapper,Atlantic,Private-Charter,all,1965.522,511.03572,71.955
-2019,Red Snapper,Gulf,Charter,Central,497.157,84.019533,282.021
-2019,Red Snapper,Gulf,Headboat,Central,77.428,18.892432,41.1
-2019,Red Snapper,Gulf,Private,Central,5764.68,1712.10996,1947.001
-2020,Red Grouper,Gulf,Gen.Rec,all,1438.71,166.89036,267.355
-2020,Red Snapper,Atlantic,Headboat,all,53.042,13.2605,3.224
-2020,Red Snapper,Atlantic,Private-Charter,all,3416.098,888.18548,73.264
-2021,Red Grouper,Gulf,Gen.Rec,all,2381.87,276.29692,388.307
-2021,Red Snapper,Atlantic,Headboat,all,72.067,15.85474,5.038
-2021,Red Snapper,Atlantic,Private-Charter,all,2186.909,502.98907,53.707
-2022,Red Grouper,Gulf,Gen.Rec,all,1533.16,177.84656,212.146
-2022,Red Snapper,Atlantic,Headboat,all,45.482,10.00604,1.593
-2022,Red Snapper,Atlantic,Private-Charter,all,2581.075,593.64725,39.07
-2023,Red Snapper,Atlantic,Headboat,all,35.723,7.85906,1.884
-2023,Red Snapper,Atlantic,Private-Charter,all,2072.548,476.68604,120.569
+﻿year,species,region,sector,area,discards,dead_disc,landings,fill,sector1,sector2
+2005,Gag,Atlantic,Headboat,all,6.68,1.67,8.047,1,For Hire,
+2005,Gag,Atlantic,Private-Charter,all,359.7796626,89.94491565,55.90355766,1,For Hire,Private
+2005,Gag,Gulf,Charter,all,339.608,40.75296,126.872,1,For Hire,
+2005,Gag,Gulf,Headboat,all,42.7113,5.125356,16.784,1,For Hire,
+2005,Gag,Gulf,Private,all,2820.73,338.4876,533.962,1,Private,
+2005,Red Grouper,Atlantic,Headboat,all,9.74,1.948,11.47,1,For Hire,
+2005,Red Grouper,Atlantic,Private-Charter,all,179.6,35.92,39.46,1,For Hire,Private
+2005,Red Grouper,Gulf,Gen.Rec,all,2135.46,247.71336,366.584,1,Private,
+2005,Red Snapper,Atlantic,Headboat,all,9.972,3.68964,8.907,1,For Hire,
+2005,Red Snapper,Atlantic,Private-Charter,all,129.834,48.03858,53.373,1,For Hire,Private
+2005,Red Snapper,Gulf,Charter,Central,571.9528,96.6600232,385.561,1,For Hire,
+2005,Red Snapper,Gulf,Headboat,Central,39.288,9.586272,41.61,1,For Hire,
+2005,Red Snapper,Gulf,Private,Central,4028.06,1196.33382,899.701,1,Private,
+2006,Gag,Atlantic,Headboat,all,3.736,0.934,4.602,1,For Hire,
+2006,Gag,Atlantic,Private-Charter,all,401.7854155,100.4463539,80.58901582,1,For Hire,Private
+2006,Gag,Gulf,Charter,all,140.619,16.87428,70.4454,1,For Hire,
+2006,Gag,Gulf,Headboat,all,12.7649,1.531788,6.764,1,For Hire,
+2006,Gag,Gulf,Private,all,1752.99,210.3588,285.535,1,Private,
+2006,Red Grouper,Atlantic,Headboat,all,5,1,5.24,1,For Hire,
+2006,Red Grouper,Atlantic,Private-Charter,all,155.36,31.072,95.34,1,For Hire,Private
+2006,Red Grouper,Gulf,Gen.Rec,all,1616.31,187.49196,273.237,1,Private,
+2006,Red Snapper,Atlantic,Headboat,all,17.447,6.45539,5.945,1,For Hire,
+2006,Red Snapper,Atlantic,Private-Charter,all,452.519,167.43203,62.23,1,For Hire,Private
+2006,Red Snapper,Gulf,Charter,Central,803.202,135.741138,388.461,1,For Hire,
+2006,Red Snapper,Gulf,Headboat,Central,61.514,15.009416,46.74,1,For Hire,
+2006,Red Snapper,Gulf,Private,Central,4173.11,1239.41367,985.371,1,Private,
+2007,Gag,Atlantic,Headboat,all,3.53,0.8825,6.703,1,For Hire,
+2007,Gag,Atlantic,Private-Charter,all,583.8234768,145.9558692,77.71831903,1,For Hire,Private
+2007,Gag,Gulf,Charter,all,113.324,13.59888,33.9911,1,For Hire,
+2007,Gag,Gulf,Headboat,all,35.0285,4.20342,11.141,1,For Hire,
+2007,Gag,Gulf,Private,all,2712.74,325.5288,236.24,1,Private,
+2007,Red Grouper,Atlantic,Headboat,all,4.14,0.828,5.16,1,For Hire,
+2007,Red Grouper,Atlantic,Private-Charter,all,100.97,20.194,150.14,1,For Hire,Private
+2007,Red Grouper,Gulf,Gen.Rec,all,1216.46,141.10936,225.583,1,Private,
+2007,Red Snapper,Atlantic,Headboat,all,73.401,27.15837,6.889,1,For Hire,
+2007,Red Snapper,Atlantic,Private-Charter,all,963.575,356.52275,60.086,1,For Hire,Private
+2007,Red Snapper,Gulf,Charter,Central,685.093,115.780717,475.791,1,For Hire,
+2007,Red Snapper,Gulf,Headboat,Central,57.591,14.052204,62.84,1,For Hire,
+2007,Red Snapper,Gulf,Private,Central,5695.97,1691.70309,1526.401,1,Private,
+2008,Gag,Atlantic,Headboat,all,4.631,1.15775,3.062,1,For Hire,
+2008,Gag,Atlantic,Private-Charter,all,505.4904896,126.3726224,102.9141351,1,For Hire,Private
+2008,Gag,Gulf,Charter,all,313.363,37.60356,89.1096,1,For Hire,
+2008,Gag,Gulf,Headboat,all,53.173,6.38076,10.521,1,For Hire,
+2008,Gag,Gulf,Private,all,4442.42,533.0904,379.698,1,Private,
+2008,Red Grouper,Atlantic,Headboat,all,6.74,1.348,2.44,1,For Hire,
+2008,Red Grouper,Atlantic,Private-Charter,all,99.67,19.934,227.46,1,For Hire,Private
+2008,Red Grouper,Gulf,Gen.Rec,all,4586.27,532.00732,192.793,1,Private,
+2008,Red Snapper,Atlantic,Headboat,all,74.686,27.63382,18.943,1,For Hire,
+2008,Red Snapper,Atlantic,Private-Charter,all,1422.482,526.31834,328.723,1,For Hire,Private
+2008,Red Snapper,Gulf,Charter,Central,486.489,82.216641,265.441,1,For Hire,
+2008,Red Snapper,Gulf,Headboat,Central,94.052,22.948688,60.63,1,For Hire,
+2008,Red Snapper,Gulf,Private,Central,4356.13,1293.77061,898.071,1,Private,
+2009,Gag,Atlantic,Headboat,all,8.344,2.086,3.001,1,For Hire,
+2009,Gag,Atlantic,Private-Charter,all,392.5254339,98.13135849,72.46140187,1,For Hire,Private
+2009,Gag,Gulf,Charter,all,267.022,32.04264,46.6923,1,For Hire,
+2009,Gag,Gulf,Headboat,all,52.392,6.28704,9.483,1,For Hire,
+2009,Gag,Gulf,Private,all,2936.55,352.386,196.587,1,Private,
+2009,Red Grouper,Atlantic,Headboat,all,12.27,2.454,1.43,1,For Hire,
+2009,Red Grouper,Atlantic,Private-Charter,all,120.88,24.176,159.7,1,For Hire,Private
+2009,Red Grouper,Gulf,Gen.Rec,all,4672.46,542.00536,153.594,1,Private,
+2009,Red Snapper,Atlantic,Headboat,all,57.906,21.42522,21.507,1,For Hire,
+2009,Red Snapper,Atlantic,Private-Charter,all,960.896,355.53152,421.979,1,For Hire,Private
+2009,Red Snapper,Gulf,Charter,Central,475.856,80.419664,205.261,1,For Hire,
+2009,Red Snapper,Gulf,Headboat,Central,94.201,22.985044,78.42,1,For Hire,
+2009,Red Snapper,Gulf,Private,Central,3836.63,1139.47911,1079.271,1,Private,
+2010,Gag,Atlantic,Headboat,all,4.839,1.20975,3.281,1,For Hire,
+2010,Gag,Atlantic,Private-Charter,all,285.0005708,71.25014271,40.91078256,1,For Hire,Private
+2010,Gag,Gulf,Charter,all,325.174,39.02088,60.2332,1,For Hire,
+2010,Gag,Gulf,Headboat,all,46.592,5.59104,11.094,1,For Hire,
+2010,Gag,Gulf,Private,all,2314.74,277.7688,251.765,1,Private,
+2010,Red Grouper,Atlantic,Headboat,all,14.34,2.868,1.28,1,For Hire,
+2010,Red Grouper,Atlantic,Private-Charter,all,108.75,21.75,22.14,1,For Hire,Private
+2010,Red Grouper,Gulf,Gen.Rec,all,4154.5,481.922,251.029,1,Private,
+2010,Red Snapper,Atlantic,Headboat,all,38.84,14.3708,0.477,1,For Hire,
+2010,Red Snapper,Atlantic,Private-Charter,all,465.996,172.41852,0.058,1,For Hire,Private
+2010,Red Snapper,Gulf,Charter,Central,226.6524,38.3042556,68.841,1,For Hire,
+2010,Red Snapper,Gulf,Headboat,Central,52.8,12.8832,33.93,1,For Hire,
+2010,Red Snapper,Gulf,Private,Central,4425.91,1314.49527,1032.621,1,Private,
+2011,Gag,Atlantic,Headboat,all,3.864,0.966,2.632,1,For Hire,
+2011,Gag,Atlantic,Private-Charter,all,201.8530421,50.46326053,34.31885105,1,For Hire,Private
+2011,Gag,Gulf,Charter,all,190.736,22.88832,10.632,1,For Hire,
+2011,Gag,Gulf,Headboat,all,45.679,5.48148,5.099,1,For Hire,
+2011,Gag,Gulf,Private,all,1594.7,191.364,133.382,1,Private,
+2011,Red Grouper,Atlantic,Headboat,all,6.61,1.322,1.56,1,For Hire,
+2011,Red Grouper,Atlantic,Private-Charter,all,76.92,15.384,36.75,1,For Hire,Private
+2011,Red Grouper,Gulf,Gen.Rec,all,4517.5,524.03,210.727,1,Private,
+2011,Red Snapper,Atlantic,Headboat,all,41.982,10.91532,1.359,1,For Hire,
+2011,Red Snapper,Atlantic,Private-Charter,all,251.243,70.34804,0.058,1,For Hire,Private
+2011,Red Snapper,Gulf,Charter,Central,375.9453,63.5347557,153.431,1,For Hire,
+2011,Red Snapper,Gulf,Headboat,Central,82.104,20.033376,66.16,1,For Hire,
+2011,Red Snapper,Gulf,Private,Central,3729.513,1107.665361,1242.751,1,Private,
+2012,Gag,Atlantic,Headboat,all,5.193,1.29825,2.1,1,For Hire,
+2012,Gag,Atlantic,Private-Charter,all,374.1009839,93.52524598,36.69472209,1,For Hire,Private
+2012,Gag,Gulf,Charter,all,170.375,20.445,46.7545,1,For Hire,
+2012,Gag,Gulf,Headboat,all,37.878,4.54536,5.253,1,For Hire,
+2012,Gag,Gulf,Private,all,1139.79,136.7748,101.646,1,Private,
+2012,Red Grouper,Atlantic,Headboat,all,9.78,1.956,1.44,1,For Hire,
+2012,Red Grouper,Atlantic,Private-Charter,all,96.94,19.388,89.65,1,For Hire,Private
+2012,Red Grouper,Gulf,Gen.Rec,all,3463.19,401.73004,512.227,1,Private,
+2012,Red Snapper,Atlantic,Headboat,all,47.305,12.2993,2.127,1,For Hire,
+2012,Red Snapper,Atlantic,Private-Charter,all,382.558,107.11624,18.185,1,For Hire,Private
+2012,Red Snapper,Gulf,Charter,Central,258.4582,43.6794358,150.031,1,For Hire,
+2012,Red Snapper,Gulf,Headboat,Central,71.576,17.464544,51.71,1,For Hire,
+2012,Red Snapper,Gulf,Private,Central,3971.316,1179.480852,1160.661,1,Private,
+2013,Gag,Atlantic,Headboat,all,1.984,0.496,1.383,1,For Hire,
+2013,Gag,Atlantic,Private-Charter,all,155.932453,38.98311326,19.53523883,1,For Hire,Private
+2013,Gag,Gulf,Charter,all,234.277,28.11324,24.9393,1,For Hire,
+2013,Gag,Gulf,Headboat,all,34.756,4.17072,5.276,1,For Hire,
+2013,Gag,Gulf,Private,all,1190.85,142.902,186.23,1,Private,
+2013,Red Grouper,Atlantic,Headboat,all,9.74,1.948,1.16,1,For Hire,
+2013,Red Grouper,Atlantic,Private-Charter,all,124.92,24.984,29.7,1,For Hire,Private
+2013,Red Grouper,Gulf,Gen.Rec,all,3946.67,457.81372,647.499,1,Private,
+2013,Red Snapper,Atlantic,Headboat,all,46.74,12.1524,1.52,1,For Hire,
+2013,Red Snapper,Atlantic,Private-Charter,all,210.777,59.01756,7.48,1,For Hire,Private
+2013,Red Snapper,Gulf,Charter,Central,402.9501,68.0985669,165.651,1,For Hire,
+2013,Red Snapper,Gulf,Headboat,Central,80.013,19.523172,41.3,1,For Hire,
+2013,Red Snapper,Gulf,Private,Central,4871.39,1446.80283,2091.561,1,Private,
+2014,Gag,Atlantic,Headboat,all,1.366,0.3415,1.042,1,For Hire,
+2014,Gag,Atlantic,Private-Charter,all,270.3436667,67.58591666,36.77330782,1,For Hire,Private
+2014,Gag,Gulf,Charter,all,67.9713,8.156556,12.4251,1,For Hire,
+2014,Gag,Gulf,Headboat,all,20.162,2.41944,6.203,1,For Hire,
+2014,Gag,Gulf,Private,all,1025.68,123.0816,132.567,1,Private,
+2014,Red Grouper,Atlantic,Headboat,all,5.03,1.006,1.85,1,For Hire,
+2014,Red Grouper,Atlantic,Private-Charter,all,105.24,21.048,26.26,1,For Hire,Private
+2014,Red Grouper,Gulf,Gen.Rec,all,3338.55,387.2718,633.195,1,Private,
+2014,Red Snapper,Atlantic,Headboat,all,46.612,12.11912,2.952,1,For Hire,
+2014,Red Snapper,Atlantic,Private-Charter,all,743.415,208.1562,37.997,1,For Hire,Private
+2014,Red Snapper,Gulf,Charter,Central,281.5476,47.5815444,35.281,1,For Hire,
+2014,Red Snapper,Gulf,Headboat,Central,59.827,14.597788,40.55,1,For Hire,
+2014,Red Snapper,Gulf,Private,Central,3864.994,1147.903218,893.061,1,Private,
+2015,Gag,Atlantic,Headboat,all,1.127,0.28175,0.872,1,For Hire,
+2015,Gag,Atlantic,Private-Charter,all,167.9970396,41.99925989,19.84987869,1,For Hire,Private
+2015,Gag,Gulf,Charter,all,72.6227,8.714724,12.9775,1,For Hire,
+2015,Gag,Gulf,Headboat,all,15.967,1.91604,3.626,1,For Hire,
+2015,Gag,Gulf,Private,all,662.074,79.44888,111.003,1,Private,
+2015,Red Grouper,Atlantic,Headboat,all,6.42,1.284,1.74,1,For Hire,
+2015,Red Grouper,Atlantic,Private-Charter,all,93.14,18.628,25.79,1,For Hire,Private
+2015,Red Grouper,Gulf,Gen.Rec,all,2074,240.584,400.641,1,Private,
+2015,Red Snapper,Atlantic,Headboat,all,54.405,14.1453,0.75,1,For Hire,
+2015,Red Snapper,Atlantic,Private-Charter,all,1308.76,366.4528,2.035,1,For Hire,Private
+2015,Red Snapper,Gulf,Charter,Central,258.4098,43.6712562,204.971,1,For Hire,
+2015,Red Snapper,Gulf,Headboat,Central,53.346,13.016424,42.35,1,For Hire,
+2015,Red Snapper,Gulf,Private,Central,3157.76,937.85472,1023.321,1,Private,
+2016,Gag,Atlantic,Headboat,all,0.981,0.24525,0.637,1,For Hire,
+2016,Gag,Atlantic,Private-Charter,all,72.35996942,18.08999236,25.40499136,1,For Hire,Private
+2016,Gag,Gulf,Charter,all,104.765,12.5718,17.6235,1,For Hire,
+2016,Gag,Gulf,Headboat,all,20.739,2.48868,2.49,1,For Hire,
+2016,Gag,Gulf,Private,all,1102.68,132.3216,82.2664,1,Private,
+2016,Red Grouper,Gulf,Gen.Rec,all,2494.69,289.38404,355.68,1,Private,
+2016,Red Snapper,Atlantic,Headboat,all,66.511,17.29286,0.331,1,For Hire,
+2016,Red Snapper,Atlantic,Private-Charter,all,2392.562,669.91736,0.077,1,For Hire,Private
+2016,Red Snapper,Gulf,Charter,Central,416.809,70.440721,217.941,1,For Hire,
+2016,Red Snapper,Gulf,Headboat,Central,81.816,19.963104,35.55,1,For Hire,
+2016,Red Snapper,Gulf,Private,Central,5482.6,1628.3322,1281.041,1,Private,
+2017,Gag,Atlantic,Headboat,all,0.691,0.17275,0.639,1,For Hire,
+2017,Gag,Atlantic,Private-Charter,all,38.94724042,9.736810105,28.62635726,1,For Hire,Private
+2017,Gag,Gulf,Charter,all,145.159,17.41908,25.4241,1,For Hire,
+2017,Gag,Gulf,Headboat,all,16.555,1.9866,2.932,1,For Hire,
+2017,Gag,Gulf,Private,all,1527.7,183.324,106.941,1,Private,
+2017,Red Grouper,Gulf,Gen.Rec,all,1470.51,170.57916,137.564,1,Private,
+2017,Red Snapper,Atlantic,Headboat,all,41.301,10.32525,2.724,1,For Hire,
+2017,Red Snapper,Atlantic,Private-Charter,all,1618.291,420.75566,25.9,1,For Hire,Private
+2017,Red Snapper,Gulf,Charter,Central,537.942,90.912198,239.361,1,For Hire,
+2017,Red Snapper,Gulf,Headboat,Central,115.406,28.159064,50.27,1,For Hire,
+2017,Red Snapper,Gulf,Private,Central,8266.63,2455.18911,2568.121,1,Private,
+2018,Gag,Atlantic,Headboat,all,0.722,0.1805,0.786,1,For Hire,
+2018,Gag,Atlantic,Private-Charter,all,52.95757653,13.23939413,24.91304661,1,For Hire,Private
+2018,Gag,Gulf,Charter,all,126.194,15.14328,19.8231,1,For Hire,
+2018,Gag,Gulf,Headboat,all,21.04,2.5248,3.026,1,For Hire,
+2018,Gag,Gulf,Private,all,1036.35,124.362,121.852,1,Private,
+2018,Red Grouper,Gulf,Gen.Rec,all,1690.86,196.13976,158.032,1,Private,
+2018,Red Snapper,Atlantic,Headboat,all,47.286,11.8215,4.435,1,For Hire,
+2018,Red Snapper,Atlantic,Private-Charter,all,3226.233,838.82058,60.411,1,For Hire,Private
+2018,Red Snapper,Gulf,Charter,Central,422.031,71.323239,229.201,1,For Hire,
+2018,Red Snapper,Gulf,Headboat,Central,95.229,23.235876,56.76,1,For Hire,
+2018,Red Snapper,Gulf,Private,Central,5025.45,1492.55865,1751.101,1,Private,
+2019,Gag,Atlantic,Headboat,all,0.481,0.12025,0.463,1,For Hire,
+2019,Gag,Atlantic,Private-Charter,all,24.1068397,6.026709924,21.72390421,1,For Hire,Private
+2019,Gag,Gulf,Charter,all,99.1775,11.9013,28.5368,1,For Hire,
+2019,Gag,Gulf,Headboat,all,18.297,2.19564,2.65,1,For Hire,
+2019,Gag,Gulf,Private,all,1370.26,164.4312,97.9993,1,Private,
+2019,Red Grouper,Gulf,Gen.Rec,all,864.442,100.275272,153.604,1,Private,
+2019,Red Snapper,Atlantic,Headboat,all,48.561,12.14025,4.055,1,For Hire,
+2019,Red Snapper,Atlantic,Private-Charter,all,1965.522,511.03572,71.955,1,For Hire,Private
+2019,Red Snapper,Gulf,Charter,Central,497.157,84.019533,282.021,1,For Hire,
+2019,Red Snapper,Gulf,Headboat,Central,77.428,18.892432,41.1,1,For Hire,
+2019,Red Snapper,Gulf,Private,Central,5764.68,1712.10996,1947.001,1,Private,
+2020,Red Grouper,Gulf,Gen.Rec,all,1438.71,166.89036,267.355,1,Private,
+2020,Red Snapper,Atlantic,Headboat,all,53.042,13.2605,3.224,1,For Hire,
+2020,Red Snapper,Atlantic,Private-Charter,all,3416.098,888.18548,73.264,1,For Hire,Private
+2021,Red Grouper,Gulf,Gen.Rec,all,2381.87,276.29692,388.307,1,Private,
+2021,Red Snapper,Atlantic,Headboat,all,72.067,15.85474,5.038,1,For Hire,
+2021,Red Snapper,Atlantic,Private-Charter,all,2186.909,502.98907,53.707,1,For Hire,Private
+2022,Red Grouper,Gulf,Gen.Rec,all,1533.16,177.84656,212.146,1,Private,
+2022,Red Snapper,Atlantic,Headboat,all,45.482,10.00604,1.593,1,For Hire,
+2022,Red Snapper,Atlantic,Private-Charter,all,2581.075,593.64725,39.07,1,For Hire,Private
+2023,Red Snapper,Atlantic,Headboat,all,35.723,7.85906,1.884,1,For Hire,
+2023,Red Snapper,Atlantic,Private-Charter,all,2072.548,476.68604,120.569,1,For Hire,Private

@@ -44,10 +44,12 @@ var areaGroup = g.append("g").attr("class", "areas");
 var lineGroup = g.append("g").attr("class", "lines");
 var legendGroup = svg.append("g").attr("class", "legend");
 
+
+let prevData = new Map();
+
 // Update-render logic
 r2d3.onRender((data, svg, width, height, options) => {
   
-
   var x = d3.scalePoint()
     .domain(data.map(d => d.year))
     .range([1, innerWidth]);
@@ -72,37 +74,25 @@ r2d3.onRender((data, svg, width, height, options) => {
   var areaSeries = d3.group(data.filter(d => d.type === "area"), d => d.series);
   var lineSeries = d3.group(data.filter(d => d.type === "line"), d => d.series);
   
-  var years = Array.from(new Set(data.map(d => d.year))).sort();
 
   // Bind data to area paths
   const areaPaths = svg.select(".areas").selectAll("path")
     .data(Array.from(areaSeries.entries()), d => d[0]);
 
+
   // Enter + update
   areaPaths.enter()
     .append("path")
+    .attr("class", "area-path") //new
     .attr("fill", d => color(d[0]))
     .attr("stroke", d => color(d[0]))
     .attr("stroke-width", 1.5)
-    .attr("d", d => {
-      // Start flat at bottom for transition in
-      return d3.area()
-        .x(d => x(d.year))
-        .y0(innerHeight)
-        .y1(innerHeight)(d[1]);
-    })
     .merge(areaPaths)
     .transition()
-    .duration(1000)
+    .duration(0)
     .attr("d", d => area(d[1]));
     
-  // Remove exit
-  areaPaths.exit()
-    .transition()
-    .duration(500)
-    .attr("opacity", 0)
-    .remove();
-  
+
 
   //line chart transition
   var linePaths = lineGroup.selectAll(".line-path")
@@ -117,12 +107,11 @@ r2d3.onRender((data, svg, width, height, options) => {
     .attr("stroke-linecap", "round")
     .attr("d", d => line(d[1].map(p => ({ ...p, value: 0 }))))
     .merge(linePaths)
-    .transition().duration(1000)
+    .transition().duration(0)
       .attr("d", d => line(d[1]));
 
   linePaths.exit().remove();
 
-  //axis transition
   g.select(".x-axis")
     .transition().duration(1000)
     .call(d3.axisBottom(x).tickSize(0).tickPadding(15));
@@ -172,3 +161,8 @@ r2d3.onRender((data, svg, width, height, options) => {
   });
 
 });
+
+//r2d3.onResize(function(width, height) {
+  // Do nothing – this disables auto-redraw on resize
+//});
+

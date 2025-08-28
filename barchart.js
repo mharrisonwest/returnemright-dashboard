@@ -1,94 +1,109 @@
 svg.style("background", "none");
 
-var margin = { top: 120, right: 30, bottom: 100, left: 70 },
-    innerWidth = width - margin.left - margin.right,
-    innerHeight = height - margin.top - margin.bottom,
-    barWidth = Math.floor(innerWidth/data.length),
-    xmax = d3.max(data, function(d) { return d.group; }),
-    xmin = d3.min(data, function(d) { 0; }),
-    ymax = d3.max(data, function(d) { return d.value; })
-    color = d3.scaleOrdinal(["#043D5D", "#6FA0A2"]); //new set colors
+var margin = { top: 120, right: 30, bottom: 100, left: 70 };
 
+r2d3.onRender(function(data, svg, width, height, options) {
+  var innerWidth = width - margin.left - margin.right;
+  var innerHeight = height - margin.top - margin.bottom;
 
-var g = svg.append("g")
-  .attr("transform", `translate(${margin.left},${margin.top})`);
+  // Create or select main group
+  let g = svg.select("g.main-group");
+  if (g.empty()) {
+    g = svg.append("g")
+      .attr("class", "main-group")
+      .attr("transform", `translate(${margin.left},${margin.top})`);
 
-//Create the x axis
-var x = d3.scaleBand()
-          .domain(data.map(function(d) { return d.group; }))
-          .range([0, innerWidth])
-          .padding(0.5);
-          
-g.append("g")
-  .attr("transform", `translate(0,${innerHeight})`)
-  .call(d3.axisBottom(x).tickSize(0).tickPadding(15))
-  .style("font-size", "14pt");
-  
-g.append("text")             
-  .attr("transform", `translate(0,${innerHeight+margin.bottom / 2})`)
-  //.attr("dx", "20")
-  .style("text-anchor", "middle")
-  .style("font-weight", "bold")
-  .style("font-size", "20pt")
-  .text(options.xLabel);
+    g.append("g").attr("class", "x-axis").attr("transform", `translate(0,${innerHeight})`);
+    g.append("g").attr("class", "y-axis");
+    g.append("text")
+      .attr("class", "y-axis-label")
+      .attr("transform", "rotate(-90)")
+      .attr("x", -innerHeight / 2)
+      .attr("y", -70)
+      .attr("dy", "1em")
+      .style("text-anchor", "middle")
+      .style("font-size", "14px")
+      .text("Millions");
+  }
 
-//Create the y axis
-var y = d3.scaleLinear()
-          .range([innerHeight, 0])
-          .domain([0, ymax]);
+  var x = d3.scaleBand()
+    .domain(data.map(d => d.group))
+    .range([0, innerWidth])
+    .padding(0.5);
 
-g.append("g")
-  .call(d3.axisLeft(y))
-  .style("font-size", "12pt");
-  
-g.selectAll(".domain, .tick line")
-  .attr("stroke", "#aaa");
+  var y = d3.scaleLinear()
+    .domain([0, d3.max(data, d => d.value)]).nice()
+    .range([innerHeight, 0]);
 
-g.append("text")
-  .attr("text-anchor", "middle")
-  .attr("transform", `rotate(-90)`)
-  .attr("x", -innerHeight / 2)
-  .attr("y", -45)
-  .style("font-size", "14px")
-  .text("Millions");
-  
+  var color = d3.scaleOrdinal(["#043D5D", "#6FA0A2"]);
 
-//chart
-g.selectAll('rect')
-   .data(data)
-   .enter()
-   .append('rect')
-   .attr("x", function(d) { return x(d.group); })
-   .attr("y", function(d) { return y(d.value); })
-   .attr("width", x.bandwidth())
-   .attr("height", function(d) { return innerHeight - y(d.value); })
-   .attr('fill', function(d, i) {
-    return color(i);
-  })
+  // Update axes
+  g.select(".x-axis")
+    .transition()
+    .duration(500)
+    .call(d3.axisBottom(x).tickSize(0).tickPadding(15))
+    .selectAll("text")
+    .style("font-size", "12pt");
+
+  g.select(".y-axis")
+    .transition()
+    .duration(500)
+    .call(d3.axisLeft(y).ticks(4))
+    .selectAll("text")
+    .style("font-size", "12pt");
   
   
-//chart title
-svg.append("text")
-  .attr("x", width / 2)
-  .attr("y", margin.top / 2)
-  .attr("text-anchor", "middle")
-  .style("font-size", "16px")
-  .style("font-weight", "bold")
-  .text(options.title);
-  
-svg.append("text")
-  .attr("x", width / 2)
-  .attr("y", margin.top / 2 + 18)
-  .attr("text-anchor", "middle")
-  .style("font-size", "16px")
-  .style("font-weight", "bold")
-  .text(options.title2);
 
-svg.append("text")
-  .attr("x", width / 2)
-  .attr("y", margin.top / 2 + 40)
-  .attr("text-anchor", "middle")
-  .style("font-size", "16px")
-  .style("font-weight", "bold")
-  .style("fill","#94989D")
-  .text(options.subtitle);
+  // Bars
+  var bars = g.selectAll("rect")
+    .data(data, d => d.group);
+
+  // ENTER
+  bars.enter()
+    .append("rect")
+    .attr("x", d => x(d.group))
+    .attr("width", x.bandwidth())
+    .attr("y", y(0)) // Start from bottom
+    .attr("height", 0)
+    .attr("fill", (d, i) => color(i))
+    .merge(bars) // ENTER + UPDATE
+    .transition()
+    .duration(800)
+    .attr("x", d => x(d.group))
+    .attr("width", x.bandwidth())
+    .attr("y", d => y(d.value))
+    .attr("height", d => innerHeight - y(d.value))
+    .attr("fill", (d, i) => color(i));
+
+  // EXIT
+  bars.exit()
+    .transition()
+    .duration(400)
+    .attr("y", y(0))
+    .attr("height", 0)
+    .remove();
+
+  // Titles
+  function updateText(selector, text, dy) {
+    let el = svg.select(selector);
+    if (el.empty()) {
+      el = svg.append("text").attr("class", selector.replace(".", ""));
+    }
+    el.attr("x", width / 2)
+      .attr("y", margin.top / 2 + dy)
+      .attr("text-anchor", "middle")
+      .style("font-size", "14px")
+      .style("font-weight", "bold")
+      .text(text || "");
+  }
+
+  updateText(".chart-title", options.title, 0);
+  updateText(".chart-title2", options.title2, 18);
+  svg.select(".chart-title2").style("fill", "#000");
+  updateText(".chart-subtitle", options.subtitle, 40);
+  svg.select(".chart-subtitle").style("fill", "#94989D");
+});
+
+//r2d3.onResize(function(width, height) {
+  // Do nothing – this disables auto-redraw on resize
+//});
