@@ -108,8 +108,8 @@ r2d3.onRender((data, svg, width, height, options) => {
     .attr("class", "line-path")
     .attr("fill", "none")
     .attr("stroke", d => color(d[0]))
-    .attr("stroke-width", 2.5)
-    .attr("stroke-dasharray", "0 4")
+    .attr("stroke-width", 4)
+    .attr("stroke-dasharray", "0 6")
     .attr("stroke-linecap", "round")
     .attr("d", d => line(d[1].map(p => ({ ...p, value: 0 }))))
     .merge(linePaths)
@@ -120,11 +120,13 @@ r2d3.onRender((data, svg, width, height, options) => {
 
   g.select(".x-axis")
     .transition().duration(1000)
-    .call(d3.axisBottom(x).tickSize(0).tickPadding(15));
+    .call(d3.axisBottom(x).tickSize(0).tickPadding(15))
+    .style("font-size","14px");
 
   g.select(".y-axis")
     .transition().duration(1000)
-    .call(d3.axisLeft(y));
+    .call(d3.axisLeft(y))
+    .style("font-size","14px");
 
   //subtitle update
   svg.select(".chart-subtitle").text(options.subtitle || "");

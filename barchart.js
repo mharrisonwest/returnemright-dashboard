@@ -92,7 +92,7 @@ r2d3.onRender(function(data, svg, width, height, options) {
     el.attr("x", width / 2)
       .attr("y", margin.top / 2 + dy)
       .attr("text-anchor", "middle")
-      .style("font-size", "14px")
+      .style("font-size", "18px")
       .style("font-weight", "bold")
       .text(text || "");
   }

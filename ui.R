@@ -15,7 +15,7 @@ ui <- fluidPage(
     fluidRow(
       
       ##Filters Section##
-      column(4,wellPanel(
+      column(4, style= "width:320px", wellPanel(
                          h3("Filters"),
                          
                          checkboxGroupInput(
@@ -52,7 +52,7 @@ ui <- fluidPage(
       )),
       
       ##Graph Section##
-      column(8,wellPanel(
+      column(8, style= "max-width:800px", wellPanel(
             d3Output("historicalchart")             
       ))
       
@@ -67,7 +67,7 @@ ui <- fluidPage(
               fluidRow(
                 
                 ##Filters Section##
-                column(4,wellPanel(
+                column(4, style= "width:320px", wellPanel(
                   h3("Filters"),
                   
                   h4(style="width: 140px","% of Anglers Using Descender Devices"),
@@ -129,14 +129,14 @@ ui <- fluidPage(
                 )),
                 
                 ##Graph Section##
-                column(4,wellPanel(style = "padding:0",
+                column(5,wellPanel(style = "padding:0",
                   ##d3 scenario chart here
-                  d3Output("scenariochart")
+                  d3Output(height = "500px", "scenariochart")
                   
                 )),
                 
                 ##Text Section##
-                column(4,wellPanel(style = "margin:auto",
+                column(3,style = "padding:0", wellPanel(style = "margin:auto",
                   div(id = "fish-saved-block",
                     div(id = "fish-saved-title",
                       "Total Fish Saved"),

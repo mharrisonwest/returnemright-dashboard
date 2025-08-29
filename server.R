@@ -52,11 +52,11 @@ server <- function(input, output, session) {
   output$scenariochart <- renderD3({
     print(scenariodata())
     print(input$scenario_choice)
-    r2d3(data=scenariodata(), script = "barchart.js", options = list(xLabel = "",
-                                                                                                                yLabel = "Millions",
-                                                                                                                title = "Fish Released Alive with 25% of",
-                                                                                                                title2 = "Anglers Using Descender Devices",
-                                                                                                                subtitle = "2023"))
+    r2d3(data=scenariodata(), script = "barchart.js", options =  list(xLabel = "",
+                                                                      yLabel = "Millions",
+                                                                      title = "Fish Released Alive with 25% of",
+                                                                      title2 = "Anglers Using Descender Devices",
+                                                                      subtitle = if(input$years_scenario[1]==input$years_scenario[2]){input$years_scenario[1]}else{paste0(input$years_scenario[1]," - ",input$years_scenario[2])}))
   })
   
   #text associated with this:
@@ -82,7 +82,7 @@ server <- function(input, output, session) {
              year >= input$years_historical[1],
              year <= input$years_historical[2],
              sector1 %in% input$sector_historical | sector2 %in% input$sector_historical,
-             region %in% input$region_scenario
+             region %in% input$region_historical
              )
     
     #filter based on user inputs
@@ -112,7 +112,9 @@ server <- function(input, output, session) {
   })
   
   output$historicalchart <- renderD3({
-    r2d3(data=historicaldata(), script = "areachart.js",options = list(subtitle = "(2005-2023)",x_min = input$years_historical[1],x_max = input$years_historical[2]
+    r2d3(data=historicaldata(), script = "areachart.js",options = list(subtitle = if(input$years_historical[1]==input$years_historical[2]){input$years_historical[1]}else{paste0(input$years_historical[1]," - ",input$years_historical[2])},
+                                                                       x_min = input$years_historical[1],
+                                                                       x_max = input$years_historical[2]
                                                                        ))
   })
   
