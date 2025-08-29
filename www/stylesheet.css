@@ -156,27 +156,103 @@ svg {
 
 /*fish saved text*/
 #fish-saved-block {
+  display: flex;
+  height: 180px;
+  flex-direction: column;
+  justify-content: center;
   background: #6FA0A2;
   color: white;
   text-align: center;
-  padding: inherit;
   font-weight: bold;
   margin-top: 10px;
 }
 
 #fish-saved-title {
-  font-size:18px;
+  font-size:20px;
 }
 
 #fish-saved-amount {
-  font-size:24px;
+  font-size:28px;
 }
 
 #fish-saved-narrative {
   text-align: center;
+  font-size: 18px;
 }
 
 .narrative_emphasis {
   color: #6FA0A2;
   font-weight: bold;
+}
+
+
+
+
+/* New mobile desktop layout stuff*/
+.responsive-container {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+}
+
+.filters-panel {
+  flex: 0 0 320px;
+}
+
+.graph-panel {
+  flex: 1;
+}
+
+.mobile-toggle {
+  display: none;
+  margin-bottom: 10px;
+}
+
+/* Mobile layout */
+@media (max-width: 768px) {
+  .responsive-container {
+    flex-direction: column;
+  }
+
+  .filters-panel, .graph-panel {
+    width: 100%;
+  }
+
+  .mobile-toggle {
+    display: block;
+    width: 80%;
+    padding: 10px;
+    margin: auto;
+    margin-top: 15px;
+    background-color: #043D5D;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+  }
+
+
+  /* Default mobile: show graph, hide filters */
+  .mobile-hidden {
+    display: none;
+  }
+  
+  #scenariochart {
+    height: 300px !important;
+  }
+  
+  /* make navigation pills stack */
+  .nav-pills {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .nav-pills > li.active > a, .nav-pills > li.active > a:focus, .nav-pills > li.active > a:hover {
+    margin-top: 5px;
+  }
+  
+  .nav-pills > li > a {
+    margin-top: 5px;
+  }
+
 }

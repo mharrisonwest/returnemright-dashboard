@@ -14,8 +14,17 @@ ui <- fluidPage(
     ##Historical Panel##
     fluidRow(
       
+      div(class = "responsive-container",
+          
+          #toggle buttom (mobile only)
+          tags$button(
+            id = "toggle-filters",
+            class = "mobile-toggle",
+            "Show Filters"
+          ),
+      
       ##Filters Section##
-      column(4, style= "width:320px", wellPanel(
+      column(4,id = "filters-panel", class = "filters-panel", style= "width:320px", wellPanel(
                          h3("Filters"),
                          
                          checkboxGroupInput(
@@ -52,22 +61,31 @@ ui <- fluidPage(
       )),
       
       ##Graph Section##
-      column(8, style= "max-width:800px", wellPanel(
+      column(8,id = "graph-panel", class = "graph-panel", style= "max-width:800px; aspect-ratio: 16 / 9;", wellPanel(
             d3Output("historicalchart")             
       ))
+      )
       
     )
     
     ),##End Historical Panel##
-    nav_panel("Descender Device Use",
-              
-              
     
+    
+    nav_panel("Descender Device Use",
               ##DD Use Panel##
               fluidRow(
                 
+                div(class = "responsive-container",
+                    
+                    #toggle buttom (mobile only)
+                    tags$button(
+                      id = "toggle-filters-2",
+                      class = "mobile-toggle",
+                      "Show Filters"
+                    ),
+                
                 ##Filters Section##
-                column(4, style= "width:320px", wellPanel(
+                column(4, id = "filters-panel-2", class = "filters-panel", style= "width:320px", wellPanel(
                   h3("Filters"),
                   
                   h4(style="width: 140px","% of Anglers Using Descender Devices"),
@@ -128,35 +146,114 @@ ui <- fluidPage(
                   
                 )),
                 
-                ##Graph Section##
-                column(5,wellPanel(style = "padding:0",
-                  ##d3 scenario chart here
-                  d3Output(height = "500px", "scenariochart")
-                  
-                )),
-                
-                ##Text Section##
-                column(3,style = "padding:0", wellPanel(style = "margin:auto",
-                  div(id = "fish-saved-block",
-                    div(id = "fish-saved-title",
-                      "Total Fish Saved"),
-                    div(id = "fish-saved-amount",
-                        uiOutput("fish_saved_text")
-                        )
-                  ),
-                  br(),
-                  div(id = "fish-saved-narrative",
-                      uiOutput("selected_scenario")
-                  )
-
-                  
-                ))
-                
+                div(id = "scenario-main-content",
+                  ##Graph Section##
+                  column(6,wellPanel(style = "padding:0",
+                    ##d3 scenario chart here
+                    d3Output(height = "500px", "scenariochart")
+                    
+                  )),
+                  ##Text Section##
+                  column(5, wellPanel(style = "margin:auto",
+                    div(id = "fish-saved-block",
+                        div(id = "fish-saved-title",
+                            "Total Fish Saved"),
+                        div(id = "fish-saved-amount",
+                            uiOutput("fish_saved_text"))
+                    ),
+                    br(),
+                    div(id = "fish-saved-narrative",
+                        uiOutput("selected_scenario")
+                    )
+                  ))
+                )
                 
               )
              
-    ),##End DD Use Panel##
+    )),##End DD Use Panel##
     nav_panel("About", "About page content")
-  )
+  ),
+  
+  #new mobile viewing
+  tags$script(HTML("
+    document.addEventListener('DOMContentLoaded', function () {
+      // Existing toggle for first tab
+      var toggleBtn1 = document.getElementById('toggle-filters');
+      var filters1 = document.getElementById('filters-panel');
+      var graph1 = document.getElementById('graph-panel');
+    
+      var toggleBtn2 = document.getElementById('toggle-filters-2');
+      var filters2 = document.getElementById('filters-panel-2');
+      var mainContent2 = document.getElementById('scenario-main-content');
+    
+      function isMobile() {
+        return window.innerWidth <= 768;
+      }
+    
+      // Initial state for first tab
+      if (isMobile()) {
+        filters1.classList.add('mobile-hidden');
+      }
+    
+      // Initial state for second tab
+      if (isMobile()) {
+        filters2.classList.add('mobile-hidden');
+      }
+    
+      // Toggle function for first tab
+      toggleBtn1.addEventListener('click', function () {
+        if (!isMobile()) return;
+        var filtersHidden = filters1.classList.contains('mobile-hidden');
+        if (filtersHidden) {
+          filters1.classList.remove('mobile-hidden');
+          graph1.classList.add('mobile-hidden');
+          toggleBtn1.textContent = 'Hide Filters';
+        } else {
+          filters1.classList.add('mobile-hidden');
+          graph1.classList.remove('mobile-hidden');
+          toggleBtn1.textContent = 'Show Filters';
+        }
+      });
+    
+      // Toggle function for second tab
+      toggleBtn2.addEventListener('click', function () {
+        if (!isMobile()) return;
+        var filtersHidden = filters2.classList.contains('mobile-hidden');
+        if (filtersHidden) {
+          filters2.classList.remove('mobile-hidden');
+          mainContent2.classList.add('mobile-hidden');
+          toggleBtn2.textContent = 'Hide Filters';
+        } else {
+          filters2.classList.add('mobile-hidden');
+          mainContent2.classList.remove('mobile-hidden');
+          toggleBtn2.textContent = 'Show Filters';
+        }
+      });
+    
+      // Reset view on resize for both tabs
+      window.addEventListener('resize', function () {
+        if (!isMobile()) {
+          filters1.classList.remove('mobile-hidden');
+          graph1.classList.remove('mobile-hidden');
+          toggleBtn1.style.display = 'none';
+    
+          filters2.classList.remove('mobile-hidden');
+          mainContent2.classList.remove('mobile-hidden');
+          toggleBtn2.style.display = 'none';
+        } else {
+          filters1.classList.add('mobile-hidden');
+          graph1.classList.remove('mobile-hidden');
+          toggleBtn1.style.display = 'block';
+          toggleBtn1.textContent = 'Show Filters';
+    
+          filters2.classList.add('mobile-hidden');
+          mainContent2.classList.remove('mobile-hidden');
+          toggleBtn2.style.display = 'block';
+          toggleBtn2.textContent = 'Show Filters';
+        }
+      });
+    });  
+  "))
+
   
 )

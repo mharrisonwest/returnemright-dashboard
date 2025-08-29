@@ -1,10 +1,16 @@
 svg.style("background", "none");
 
-var margin = { top: 120, right: 30, bottom: 100, left: 70 };
+var isMobile = width < 300;
+
+var height = isMobile ? 300 : 500;
+
+var margin = isMobile ? { top: 80, right: 30, bottom: 30, left: 70 } : { top: 120, right: 30, bottom: 100, left: 70 };
+
+var innerWidth = width - margin.left - margin.right;
+var innerHeight = height - margin.top - margin.bottom;
 
 r2d3.onRender(function(data, svg, width, height, options) {
-  var innerWidth = width - margin.left - margin.right;
-  var innerHeight = height - margin.top - margin.bottom;
+
 
   // Create or select main group
   let g = svg.select("g.main-group");
@@ -19,10 +25,10 @@ r2d3.onRender(function(data, svg, width, height, options) {
       .attr("class", "y-axis-label")
       .attr("transform", "rotate(-90)")
       .attr("x", -innerHeight / 2)
-      .attr("y", -70)
+      .attr("y",isMobile ? -55 : -70)
       .attr("dy", "1em")
       .style("text-anchor", "middle")
-      .style("font-size", "14px")
+      .style("font-size", "16px")
       .text("Millions");
   }
 
@@ -51,14 +57,10 @@ r2d3.onRender(function(data, svg, width, height, options) {
     .call(d3.axisLeft(y).ticks(4))
     .selectAll("text")
     .style("font-size", "12pt");
-  
-  
 
-  // Bars
   var bars = g.selectAll("rect")
     .data(data, d => d.group);
 
-  // ENTER
   bars.enter()
     .append("rect")
     .attr("x", d => x(d.group))
@@ -75,7 +77,6 @@ r2d3.onRender(function(data, svg, width, height, options) {
     .attr("height", d => innerHeight - y(d.value))
     .attr("fill", (d, i) => color(i));
 
-  // EXIT
   bars.exit()
     .transition()
     .duration(400)
@@ -83,7 +84,7 @@ r2d3.onRender(function(data, svg, width, height, options) {
     .attr("height", 0)
     .remove();
 
-  // Titles
+  //titles
   function updateText(selector, text, dy) {
     let el = svg.select(selector);
     if (el.empty()) {
@@ -92,7 +93,7 @@ r2d3.onRender(function(data, svg, width, height, options) {
     el.attr("x", width / 2)
       .attr("y", margin.top / 2 + dy)
       .attr("text-anchor", "middle")
-      .style("font-size", "18px")
+      .style("font-size", "16px")
       .style("font-weight", "bold")
       .text(text || "");
   }

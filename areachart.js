@@ -1,6 +1,11 @@
 svg.style("background", "none");
 
-var margin = { top: 80, right: 30, bottom: 100, left: 70 },
+//var height = width
+var isMobile = width < 600;
+
+var height = isMobile ? width*1.3 : height;
+
+var margin = isMobile ? { top: 90, right: 10, bottom: 100, left: 45 } : { top: 80, right: 30, bottom: 100, left: 70 },
     innerWidth = width - margin.left - margin.right,
     innerHeight = height - margin.top - margin.bottom,
     color = d3.scaleOrdinal()
@@ -15,18 +20,38 @@ g.append("g").attr("class", "x-axis")
 
 g.append("g").attr("class", "y-axis");
 
-svg.append("text")
+//title wraps only if mobile
+var title = svg.append("text")
   .attr("x", width / 2)
-  .attr("y", margin.top / 2)
+  .attr("y",isMobile ? 0 : margin.top / 2)
   .attr("text-anchor", "middle")
   .style("font-size", "16px")
-  .style("font-weight", "bold")
-  .text("Historical Fish Released Alive, Dead Upon Release, and Fish Kept");
+  .style("font-weight", "bold");
+
+if (isMobile) {
+  // Manual wrap with multiple tspans for mobile
+  title.append("tspan")
+    .attr("x", width / 2)
+    .attr("dy", "1.2em")
+    .text("Historical Fish Released Alive,");
+
+  title.append("tspan")
+    .attr("x", width / 2)
+    .attr("dy", "1.2em")
+    .text("Dead Upon Release,");
+    title.append("tspan")
+    .attr("x", width / 2)
+    .attr("dy", "1.2em")
+    .text("and Fish Kept");
+} else {
+  // Single line title for desktop
+  title.text("Historical Fish Released Alive, Dead Upon Release, and Fish Kept");
+}
 
 svg.append("text")
   .attr("class", "chart-subtitle")
   .attr("x", width / 2)
-  .attr("y", margin.top / 2 + 18)
+  .attr("y", isMobile ? 80 : margin.top / 2 + 18)
   .attr("text-anchor", "middle")
   .style("font-size", "16px")
   .style("font-weight", "bold");
@@ -36,9 +61,9 @@ g.append("text")
   .attr("text-anchor", "middle")
   .attr("transform", `rotate(-90)`)
   .attr("x", -innerHeight / 2)
-  .attr("y", -45)
+  .attr("y", -30)
   .style("font-size", "14px")
-  .text("Millions");
+  .text(options.yLabel);
 
 var areaGroup = g.append("g").attr("class", "areas");
 var lineGroup = g.append("g").attr("class", "lines");
@@ -50,9 +75,21 @@ let prevData = new Map();
 // Update-render logic
 r2d3.onRender((data, svg, width, height, options) => {
   
+  //new mobile stuff
+  
+  var fullDomain = data.map(d => d.year);
   var x = d3.scalePoint()
-    .domain(data.map(d => d.year))
-    .range([1, innerWidth]);
+    .domain(fullDomain)
+    .range([0, innerWidth]);
+  
+  //set tick years to show
+  let tickYears;
+  if (isMobile) {
+    var step = Math.floor(fullDomain.length / 4);
+    tickYears = [fullDomain[0], fullDomain[step], fullDomain[2 * step], fullDomain[3 * step], fullDomain[fullDomain.length - 1]];
+  } else {
+    tickYears = fullDomain;
+  }
 
   var y = d3.scaleLinear()
     .domain([0, d3.max(data, d => d.value)])
@@ -120,33 +157,36 @@ r2d3.onRender((data, svg, width, height, options) => {
 
   g.select(".x-axis")
     .transition().duration(1000)
-    .call(d3.axisBottom(x).tickSize(0).tickPadding(15))
+    .call(d3.axisBottom(x).tickSize(0).tickPadding(15).tickValues(tickYears))
     .style("font-size","14px");
 
   g.select(".y-axis")
     .transition().duration(1000)
-    .call(d3.axisLeft(y))
+    .call(d3.axisLeft(y).ticks(isMobile ? 4 : null))
     .style("font-size","14px");
 
   //subtitle update
   svg.select(".chart-subtitle").text(options.subtitle || "");
+  
+  
 
   //legend
   var seriesNames = [...new Set(data.map(d => d.series))];
   legendGroup.selectAll("*").remove();
 
-  var legendSpacing = 180;
-  var totalLegendWidth = seriesNames.length * legendSpacing;
-  var legendXStart = (width - totalLegendWidth) / 2 + 20;
-  var legendY = innerHeight + margin.top + 60;
-
+  var legendSpacing = isMobile ? 30 : 180;
+  var legendXStart = isMobile ? margin.left : (width - legendSpacing * seriesNames.length) / 2 + 20;
+  var legendYStart = isMobile ? innerHeight + margin.top + 50 : innerHeight + margin.top + 60;
+  
   seriesNames.forEach((name, i) => {
-    var xPos = legendXStart + i * legendSpacing;
+    var xPos = isMobile ? legendXStart : legendXStart + i * legendSpacing;
+    var yPos = isMobile ? legendYStart + i * legendSpacing : legendYStart;
+  
     if (lineSeries.has(name)) {
-      [0, 10, 20].forEach(offset => {
+      [5, 15, 25].forEach(offset => {
         legendGroup.append("circle")
           .attr("cx", xPos + offset)
-          .attr("cy", legendY + 6)
+          .attr("cy", yPos + 6)
           .attr("r", 4)
           .attr("fill", color(name))
           .attr("stroke", "black")
@@ -155,19 +195,19 @@ r2d3.onRender((data, svg, width, height, options) => {
     } else {
       legendGroup.append("rect")
         .attr("x", xPos)
-        .attr("y", legendY)
+        .attr("y", yPos)
         .attr("width", 30)
         .attr("height", 12)
         .attr("fill", color(name));
     }
+    
     legendGroup.append("text")
       .attr("x", xPos + 36)
-      .attr("y", legendY + 10)
+      .attr("y", yPos + 10)
       .style("font-size", "14px")
       .style("font-weight", "bold")
       .text(name);
   });
-
 });
 
 //r2d3.onResize(function(width, height) {

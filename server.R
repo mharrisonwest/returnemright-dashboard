@@ -113,6 +113,7 @@ server <- function(input, output, session) {
   
   output$historicalchart <- renderD3({
     r2d3(data=historicaldata(), script = "areachart.js",options = list(subtitle = if(input$years_historical[1]==input$years_historical[2]){input$years_historical[1]}else{paste0(input$years_historical[1]," - ",input$years_historical[2])},
+                                                                       yLabel = "Millions",
                                                                        x_min = input$years_historical[1],
                                                                        x_max = input$years_historical[2]
                                                                        ))
