@@ -24,7 +24,7 @@ ui <- fluidPage(
           ),
       
       ##Filters Section##
-      column(4,id = "filters-panel", class = "filters-panel", style= "width:320px", wellPanel(
+      column(4,id = "filters-panel", class = "filters-panel", wellPanel(
                          h3("Filters"),
                          
                          checkboxGroupInput(
@@ -54,7 +54,7 @@ ui <- fluidPage(
                          checkboxGroupInput(
                            "sector_historical",
                            "Sector",
-                           choices = list("For Hire (Charter & Headboats)" = "For Hire", "Private" = "Private"),
+                           choices = list("For Hire" = "For Hire", "Private" = "Private"),
                            selected = c("For Hire","Private")
                          )
                          
@@ -85,7 +85,7 @@ ui <- fluidPage(
                     ),
                 
                 ##Filters Section##
-                column(4, id = "filters-panel-2", class = "filters-panel", style= "width:320px", wellPanel(
+                column(4, id = "filters-panel-2", class = "filters-panel", wellPanel(
                   h3("Filters"),
                   
                   h4(style="width: 140px","% of Anglers Using Descender Devices"),
@@ -94,7 +94,6 @@ ui <- fluidPage(
                       tags$label('for'="scenario_1","25%"),
                       tags$input(type = "radio",name="scenario_choice", id="scenario_2", value=.5),
                       tags$label('for'="scenario_2","50%"),
-                      br(),
                       tags$input(type = "radio",name="scenario_choice", id="scenario_3", value=.75),
                       tags$label('for'="scenario_3","75%"),
                       tags$input(type = "radio",name="scenario_choice", id="scenario_4", value=1),
@@ -125,7 +124,7 @@ ui <- fluidPage(
                     "Years",
                     min = 2005,
                     max = 2023,
-                    value = c(2005, 2023),
+                    value = c(2023,2023),
                     ticks = FALSE,
                     sep = ""
                   ),
@@ -140,7 +139,7 @@ ui <- fluidPage(
                   checkboxGroupInput(
                     "sector_scenario",
                     "Sector",
-                    choices = list("For Hire (Charter & Headboats)" = "For Hire", "Private" = "Private"),
+                    choices = list("For Hire" = "For Hire", "Private" = "Private"),
                     selected = c("For Hire","Private")
                   )
                   
@@ -150,7 +149,7 @@ ui <- fluidPage(
                   ##Graph Section##
                   column(6,wellPanel(style = "padding:0",
                     ##d3 scenario chart here
-                    d3Output(height = "500px", "scenariochart")
+                    d3Output(height = "450px", "scenariochart")
                     
                   )),
                   ##Text Section##

@@ -1,8 +1,8 @@
 svg.style("background", "none");
 
-var isMobile = width < 300;
+var isMobile = width < 350;
 
-var height = isMobile ? 300 : 500;
+var height = isMobile ? 350 : 500;
 
 var margin = isMobile ? { top: 80, right: 30, bottom: 30, left: 70 } : { top: 120, right: 30, bottom: 100, left: 70 };
 
@@ -44,10 +44,12 @@ r2d3.onRender(function(data, svg, width, height, options) {
   var color = d3.scaleOrdinal(["#043D5D", "#6FA0A2"]);
 
   // Update axes
+  let tickLabels = ['Historical',options.scenario];
+  
   g.select(".x-axis")
     .transition()
     .duration(500)
-    .call(d3.axisBottom(x).tickSize(0).tickPadding(15))
+    .call(d3.axisBottom(x).tickSize(0).tickPadding(15).tickFormat((d,i) => tickLabels[i]))
     .selectAll("text")
     .style("font-size", "12pt");
 
@@ -102,7 +104,7 @@ r2d3.onRender(function(data, svg, width, height, options) {
   updateText(".chart-title2", options.title2, 18);
   svg.select(".chart-title2").style("fill", "#000");
   updateText(".chart-subtitle", options.subtitle, 40);
-  svg.select(".chart-subtitle").style("fill", "#94989D");
+  //svg.select(".chart-subtitle").style("fill", "#94989D");
 });
 
 //r2d3.onResize(function(width, height) {

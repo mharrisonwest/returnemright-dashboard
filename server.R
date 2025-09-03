@@ -52,9 +52,10 @@ server <- function(input, output, session) {
   output$scenariochart <- renderD3({
     print(scenariodata())
     print(input$scenario_choice)
-    r2d3(data=scenariodata(), script = "barchart.js", options =  list(xLabel = "",
+    r2d3(data=scenariodata(), script = "barchart.js", options =  list(scenario = paste0(as.numeric(input$scenario_choice)*100,"%"),
+                                                                      xLabel = "",
                                                                       yLabel = "Millions",
-                                                                      title = "Fish Released Alive with 25% of",
+                                                                      title = paste0("Fish Released Alive with ",as.numeric(input$scenario_choice)*100,"% of"),
                                                                       title2 = "Anglers Using Descender Devices",
                                                                       subtitle = if(input$years_scenario[1]==input$years_scenario[2]){input$years_scenario[1]}else{paste0(input$years_scenario[1]," - ",input$years_scenario[2])}))
   })
@@ -62,13 +63,14 @@ server <- function(input, output, session) {
   #text associated with this:
   output$selected_scenario <- renderUI({
     div(
-      "With a ", span(class = "narrative_emphasis",paste0(as.numeric(input$scenario_choice)*100,"%")), " Descender Device usage rate, fish survival would increase by ", span(class = "narrative_emphasis", paste0(round((scenariodata()$value[2]/scenariodata()$value[1]-1)*100,0),"%")), " in 2023."
+      "With a ", span(class = "narrative_emphasis",paste0(as.numeric(input$scenario_choice)*100,"%")), " Descender Device usage rate, fish survival would increase by ", span(class = "narrative_emphasis", paste0(round((scenariodata()$value[2]/scenariodata()$value[1]-1)*100,0),"%")), 
+      if(input$years_scenario[1]==input$years_scenario[2]){paste0(" in ",input$years_scenario[1])}else{paste0(" from ",input$years_scenario[1]," to ",input$years_scenario[2])},"."
     )
   })
   
   output$fish_saved_text <- renderUI({
     div(
-      format(round((scenariodata()$value[2]-scenariodata()$value[1])*1000000,0),big.mark=",")
+      format(round((scenariodata()$value[2]-scenariodata()$value[1])*1000000,-3),big.mark=",")
     )
   })
   

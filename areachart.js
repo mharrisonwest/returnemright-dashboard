@@ -1,9 +1,9 @@
 svg.style("background", "none");
 
 //var height = width
-var isMobile = width < 600;
+var isMobile = width < 400;
 
-var height = isMobile ? width*1.3 : height;
+var height = isMobile ? 370 : height;
 
 var margin = isMobile ? { top: 90, right: 10, bottom: 100, left: 45 } : { top: 80, right: 30, bottom: 100, left: 70 },
     innerWidth = width - margin.left - margin.right,

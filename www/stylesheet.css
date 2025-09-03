@@ -157,7 +157,7 @@ svg {
 /*fish saved text*/
 #fish-saved-block {
   display: flex;
-  height: 180px;
+  height: 220px;
   flex-direction: column;
   justify-content: center;
   background: #6FA0A2;
@@ -168,11 +168,12 @@ svg {
 }
 
 #fish-saved-title {
-  font-size:20px;
+  font-size:24px;
 }
 
 #fish-saved-amount {
-  font-size:28px;
+  font-size:48px;
+  margin-top: -10px;
 }
 
 #fish-saved-narrative {
@@ -197,6 +198,7 @@ svg {
 
 .filters-panel {
   flex: 0 0 320px;
+  padding-right:0px
 }
 
 .graph-panel {
@@ -215,7 +217,7 @@ svg {
   }
 
   .filters-panel, .graph-panel {
-    width: 100%;
+    width: 100% !important;
   }
 
   .mobile-toggle {
@@ -238,7 +240,7 @@ svg {
   }
   
   #scenariochart {
-    height: 300px !important;
+    height: 350px !important;
   }
   
   /* make navigation pills stack */
@@ -256,3 +258,42 @@ svg {
   }
 
 }
+
+/* new */
+.checkbox input[type="checkbox"] {
+  display: none;
+}
+
+.checkbox {
+  display: inline-block;
+  position: relative;
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: inline-block;
+  background-color: white;
+  padding: 3px 5px;
+  font-size: 14px;
+  border: 1.5px solid black;
+  border-radius: 4px;
+  max-width: 120px;
+  text-align: center;
+  min-width: 50px;
+}
+
+.checkbox label {
+  padding-left: 0px;
+  vertical-align: middle;
+    font-weight: bold; 
+}
+
+.checkbox:has(input:checked) {
+  background-color: #043D5D;
+  border-color: black;
+  color: white;
+}
+
+
+
+
+
