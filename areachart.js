@@ -63,6 +63,7 @@ g.append("text")
   .attr("x", -innerHeight / 2)
   .attr("y", -30)
   .style("font-size", "14px")
+  .style("font-weight", "bold")
   .text(options.yLabel);
 
 var areaGroup = g.append("g").attr("class", "areas");
@@ -208,7 +209,91 @@ r2d3.onRender((data, svg, width, height, options) => {
       .style("font-weight", "bold")
       .text(name);
   });
+  
+  
+  //tooltip stuff:
+  
+  var tooltip = svg.append("g")
+    .attr("class", "tooltip")
+    .style("display", "none");
+  
+  var tooltipwidth = 220
+  
+  const tooltipBox = tooltip.append("rect")
+  .attr("fill", "white")
+  .attr("width", tooltipwidth)
+  .attr("height", 90)
+  .attr("rx", 4)
+  .attr("ry", 4)
+  .attr("opacity", 0.9);
+
+  const tooltipText = tooltip.append("text")
+    .attr("x", 8)
+    .attr("y", 10)
+    .style("font-size", "14px")
+    .style("font-weight", "bold");
+  
+  
+  // Transparent overlay to capture mouse events
+  g.append("rect")
+    .attr("class", "overlay")
+    .attr("width", innerWidth)
+    .attr("height", innerHeight)
+    .attr("fill", "transparent")
+    .on("mousemove", function (event) {
+      var [mouseX] = d3.pointer(event, this);
+      var closestYear = x.domain().reduce((a, b) => {
+        return Math.abs(x(a) - mouseX) < Math.abs(x(b) - mouseX) ? a : b;
+      });
+  
+      var values = data.filter(d => d.year === closestYear);
+  
+      if (values.length === 0) return;
+  
+      // Position the tooltip
+      let tooltipX = mouseX + margin.left + 10;
+      let tooltipY = margin.top - 10;
+      
+      if (tooltipX + tooltipwidth + margin.right > width) {
+        tooltipX = width - tooltipwidth - margin.right;
+      }
+      
+      if (tooltipX < margin.left) {
+        tooltipX = margin.left + 10;
+      }
+  
+      tooltip.attr("transform", `translate(${tooltipX},${tooltipY})`);
+  
+      //text
+      tooltipText.selectAll("*").remove();
+      
+      tooltipText.append("tspan")
+        .text(`${values[0]?.yearnumeric ?? closestYear}`)
+        .attr("x", 8)
+        .attr("dy", "1.2em")
+        .style("font-size", "16px");
+  
+      values.forEach((d, i) => {
+        let format = d3.format(",.1f")
+        
+        tooltipText.append("tspan")
+          .text(`${d.series}: ${format(d.value)} million`)
+          .attr("x", 8)
+          .attr("dy", "1.2em");
+      });
+  
+  
+      tooltip.style("display", null);
+    })
+    .on("mouseleave", () => {
+      tooltip.style("display", "none");
+    });
+  
 });
+
+
+
+
 
 //r2d3.onResize(function(width, height) {
   // Do nothing – this disables auto-redraw on resize

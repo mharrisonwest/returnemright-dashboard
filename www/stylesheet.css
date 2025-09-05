@@ -201,6 +201,10 @@ svg {
   padding-right:0px
 }
 
+#filters-panel {
+  height: 450px;
+}
+
 .graph-panel {
   flex: 1;
 }
@@ -211,7 +215,7 @@ svg {
 }
 
 /* Mobile layout */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .responsive-container {
     flex-direction: column;
   }
@@ -293,7 +297,15 @@ svg {
   color: white;
 }
 
+.nodatasection {
+  text-align: center;
+  margin-top: 40px;
+  font-weight: bold;
+  font-size: 16px;
+}
 
 
-
+.irs-handle.from {
+  z-index: 3 !important;
+}
 

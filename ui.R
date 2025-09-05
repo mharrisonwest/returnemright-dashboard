@@ -49,14 +49,14 @@ ui <- fluidPage(
                            "Regions",
                            choices = list("Atlantic" = "Atlantic", "Gulf" = "Gulf"),
                            selected = c("Atlantic","Gulf")
-                         ),
-                         
-                         checkboxGroupInput(
-                           "sector_historical",
-                           "Sector",
-                           choices = list("For Hire" = "For Hire", "Private" = "Private"),
-                           selected = c("For Hire","Private")
                          )
+                         
+                         # checkboxGroupInput(
+                         #   "sector_historical",
+                         #   "Sector",
+                         #   choices = list("For Hire" = "For Hire", "Private" = "Private"),
+                         #   selected = c("For Hire","Private")
+                         # )
                          
       )),
       
@@ -88,7 +88,7 @@ ui <- fluidPage(
                 column(4, id = "filters-panel-2", class = "filters-panel", wellPanel(
                   h3("Filters"),
                   
-                  h4(style="width: 140px","% of Anglers Using Descender Devices"),
+                  h4(style="width: 320px","% of Anglers Using Descender Devices"),
                   div(class = "radio-button",
                       tags$input(type = "radio",name="scenario_choice", id="scenario_1", value=.25, checked="checked"),
                       tags$label('for'="scenario_1","25%"),
@@ -134,32 +134,28 @@ ui <- fluidPage(
                     "Regions",
                     choices = list("Atlantic" = "Atlantic", "Gulf" = "Gulf"),
                     selected = c("Atlantic","Gulf")
-                  ),
-                  
-                  checkboxGroupInput(
-                    "sector_scenario",
-                    "Sector",
-                    choices = list("For Hire" = "For Hire", "Private" = "Private"),
-                    selected = c("For Hire","Private")
                   )
+                  
+                  # checkboxGroupInput(
+                  #   "sector_scenario",
+                  #   "Sector",
+                  #   choices = list("For Hire" = "For Hire", "Private" = "Private"),
+                  #   selected = c("For Hire","Private")
+                  # )
                   
                 )),
                 
                 div(id = "scenario-main-content",
                   ##Graph Section##
-                  column(6,wellPanel(style = "padding:0",
+                  column(6,style="padding:0", wellPanel(style = "padding:0",
                     ##d3 scenario chart here
-                    d3Output(height = "450px", "scenariochart")
+                    uiOutput("nodatatext"),
+                    d3Output(height = "500px", "scenariochart")
                     
                   )),
                   ##Text Section##
-                  column(5, wellPanel(style = "margin:auto",
-                    div(id = "fish-saved-block",
-                        div(id = "fish-saved-title",
-                            "Total Fish Saved"),
-                        div(id = "fish-saved-amount",
-                            uiOutput("fish_saved_text"))
-                    ),
+                  column(5, wellPanel(style = "margin:auto;padding:0",
+                    uiOutput("fish_saved_text"),
                     br(),
                     div(id = "fish-saved-narrative",
                         uiOutput("selected_scenario")
@@ -170,7 +166,13 @@ ui <- fluidPage(
               )
              
     )),##End DD Use Panel##
-    nav_panel("About", "About page content")
+    
+    ##about page panel##
+    nav_panel("About",
+              fluidRow(
+                downloadButton("historicaldatadownload", label = "Download Historical Data")
+              )
+              )
   ),
   
   #new mobile viewing

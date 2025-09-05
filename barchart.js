@@ -1,8 +1,8 @@
 svg.style("background", "none");
 
-var isMobile = width < 350;
+var isMobile = width < 400;
 
-var height = isMobile ? 350 : 500;
+var height = isMobile ? 350 : 450;
 
 var margin = isMobile ? { top: 80, right: 30, bottom: 30, left: 70 } : { top: 120, right: 30, bottom: 100, left: 70 };
 
@@ -29,6 +29,7 @@ r2d3.onRender(function(data, svg, width, height, options) {
       .attr("dy", "1em")
       .style("text-anchor", "middle")
       .style("font-size", "16px")
+      .style("font-weight", "bold")
       .text("Millions");
   }
 
