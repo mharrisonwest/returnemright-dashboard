@@ -3,6 +3,7 @@ library(bslib)
 library(r2d3)
 library(tidyverse)
 library(readxl)
+library(openxlsx)
 
 server <- function(input, output, session) {
   
@@ -18,7 +19,7 @@ server <- function(input, output, session) {
       filter(!is.na(sector)) %>%
       select(-name)
     
-    
+    scen_mort_long
   })
   
   scenariodata <- reactive({
@@ -42,8 +43,8 @@ server <- function(input, output, session) {
              inc_benefit = max_benefit/(100-base_desc_pct),  # incremental benefit in thousands of fish
              calcd_benefit=max_benefit*descender_usage)
     
-    print("fish saved")
-    print(fishsaved$discards)
+    #print("fish saved")
+    #print(fishsaved$discards)
 
     # print(hist_data_filtered)
     # #filter based on user inputs
@@ -98,8 +99,16 @@ server <- function(input, output, session) {
       NULL
     }else{
     div(
-      "With a ", span(class = "narrative_emphasis",paste0(as.numeric(input$scenario_choice)*100,"%")), " Descender Device usage rate, fish survival would increase by ", span(class = "narrative_emphasis", paste0(round((scenariodata()$value[2]/scenariodata()$value[1]-1)*100,0),"%")),
-      if(input$years_scenario[1]==input$years_scenario[2]){paste0(" in ",input$years_scenario[1])}else{paste0(" from ",input$years_scenario[1]," to ",input$years_scenario[2])},"."
+      "With a ", span(class = "narrative_emphasis",paste0(as.numeric(input$scenario_choice)*100,"%")), " Descender Device usage rate, fish survival would have increased by ", 
+      span(class = "narrative_emphasis", 
+           paste0(
+             if(round((scenariodata()$value[2]/scenariodata()$value[1]-1)*100,0)==0){
+               "<1"
+             }else{
+               round((scenariodata()$value[2]/scenariodata()$value[1]-1)*100,0)
+             },
+           "%")),
+      if(input$years_scenario[1]==input$years_scenario[2]){paste0(" in ",input$years_scenario[1],".")}else{paste0(" from ",input$years_scenario[1]," to ",input$years_scenario[2],".")},
     )
     }
   })
@@ -108,11 +117,13 @@ server <- function(input, output, session) {
     if(scenariodata()$value[1]==0){
       NULL
     }else{
+      amount <- (scenariodata()$value[2]-scenariodata()$value[1])*1000000
       div(id = "fish-saved-block",
           div(id = "fish-saved-title",
               "Total Fish Saved"),
           div(id = "fish-saved-amount",
-              format(round((scenariodata()$value[2]-scenariodata()$value[1])*1000000,-3),big.mark=",")
+              format(if(amount<1000){round(amount,-2)}else{round(amount,-3)},
+                big.mark=",")
           )
       )
     }
@@ -151,7 +162,7 @@ server <- function(input, output, session) {
         year = str_replace(as.character(year),"20","'")
       )
     
-    print(summed_data)
+    #print(summed_data)
     
     summed_data$type <- sapply(summed_data$series,function(x){if(x=="Fish Kept"){"line"}else{"area"}})
     summed_data$value <- summed_data$value/1000
@@ -176,6 +187,61 @@ server <- function(input, output, session) {
       write.csv(data, con)
     }
   )
+  
+  
+  
+  output$historicaldatadownload <- downloadHandler(
+    filename = function() {
+      paste0('Historical Data', '.xlsx')
+    },
+    content = function(file) {
+
+      
+      data <- select(source_historical_data(),!(fill:sector2))
+      
+
+      #write to the excel file
+      fname <- "Historical Data Template.xlsx"
+      wb <- openxlsx::loadWorkbook(fname)
+      writeData(wb,"Sheet1",data,startRow=2,startCol=1,colNames=F)
+
+      openxlsx::saveWorkbook(wb, file,overwrite = T)
+      
+      removeModal()
+      
+    }
+  )
+  
+  ##adjust slider input when selected species changes:
+  observe({
+    hist_data_filtered <- source_historical_data()%>%
+      filter(species %in% input$fishery_historical,
+             region %in% input$region_historical
+      )
+    maxyear <- max(hist_data_filtered$year)
+    minyear <- min(hist_data_filtered$year)
+    #print(maxyear)
+    if(maxyear == -Inf){return(0)}
+    inputhighvalue <- if(input$years_historical[2] > maxyear){maxyear}else if(input$years_historical[2] < minyear){minyear}else{input$years_historical[2]}
+    inputlowvalue <- if(input$years_historical[1] > maxyear){maxyear}else if(input$years_historical[1] < minyear){minyear}else{input$years_historical[1]}
+    updateSliderInput(session, "years_historical",value = c(inputlowvalue,inputhighvalue),
+                      min = minyear, max = maxyear)
+  })
+  
+  observe({
+    hist_data_filtered <- source_historical_data()%>%
+      filter(species %in% input$fishery_scenario,
+             region %in% input$region_scenario
+      )
+    maxyear <- max(hist_data_filtered$year)
+    minyear <- min(hist_data_filtered$year)
+    #print(maxyear)
+    if(maxyear == -Inf){return(0)}
+    inputhighvalue <- if(input$years_scenario[2] > maxyear){maxyear}else if(input$years_scenario[2] < minyear){minyear}else{input$years_scenario[2]}
+    inputlowvalue <- if(input$years_scenario[1] > maxyear){maxyear}else if(input$years_scenario[1] < minyear){minyear}else{input$years_scenario[1]}
+    updateSliderInput(session, "years_scenario",value = c(inputlowvalue,inputhighvalue),
+                      min = minyear, max = maxyear)
+  })
   
   
   

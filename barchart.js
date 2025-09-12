@@ -25,7 +25,7 @@ r2d3.onRender(function(data, svg, width, height, options) {
       .attr("class", "y-axis-label")
       .attr("transform", "rotate(-90)")
       .attr("x", -innerHeight / 2)
-      .attr("y",isMobile ? -55 : -70)
+      .attr("y",isMobile ? -65 : -65)
       .attr("dy", "1em")
       .style("text-anchor", "middle")
       .style("font-size", "16px")
@@ -36,7 +36,7 @@ r2d3.onRender(function(data, svg, width, height, options) {
   var x = d3.scaleBand()
     .domain(data.map(d => d.group))
     .range([0, innerWidth])
-    .padding(0.5);
+    .padding(0.4);
 
   var y = d3.scaleLinear()
     .domain([0,data[0].value*1.2]).nice()
@@ -71,7 +71,7 @@ r2d3.onRender(function(data, svg, width, height, options) {
     .attr("y", y(0)) // Start from bottom
     .attr("height", 0)
     .attr("fill", (d, i) => color(i))
-    .merge(bars) // ENTER + UPDATE
+    .merge(bars)
     .transition()
     .duration(800)
     .attr("x", d => x(d.group))
@@ -105,7 +105,6 @@ r2d3.onRender(function(data, svg, width, height, options) {
   updateText(".chart-title2", options.title2, 18);
   svg.select(".chart-title2").style("fill", "#000");
   updateText(".chart-subtitle", options.subtitle, 40);
-  //svg.select(".chart-subtitle").style("fill", "#94989D");
 });
 
 //r2d3.onResize(function(width, height) {

@@ -233,6 +233,14 @@ r2d3.onRender((data, svg, width, height, options) => {
     .style("font-size", "14px")
     .style("font-weight", "bold");
   
+  const cursorLine = g.append("line")
+  .attr("class", "cursor-line")
+  .attr("y1", 0)
+  .attr("y2", innerHeight)
+  .attr("stroke", "black")
+  .attr("stroke-width", 1)
+  .attr("stroke-dasharray", "3,3")
+  .style("display", "none");
   
   // Transparent overlay to capture mouse events
   g.append("rect")
@@ -245,13 +253,18 @@ r2d3.onRender((data, svg, width, height, options) => {
       var closestYear = x.domain().reduce((a, b) => {
         return Math.abs(x(a) - mouseX) < Math.abs(x(b) - mouseX) ? a : b;
       });
+
+      cursorLine
+        .attr("x1", x(closestYear))
+        .attr("x2", x(closestYear))
+        .style("display", null);
   
       var values = data.filter(d => d.year === closestYear);
   
       if (values.length === 0) return;
   
       // Position the tooltip
-      let tooltipX = mouseX + margin.left + 10;
+      let tooltipX = x(closestYear) + margin.left + 10;
       let tooltipY = margin.top - 10;
       
       if (tooltipX + tooltipwidth + margin.right > width) {
@@ -272,14 +285,23 @@ r2d3.onRender((data, svg, width, height, options) => {
         .attr("x", 8)
         .attr("dy", "1.2em")
         .style("font-size", "16px");
+        
+      let dead = values.find(d => d.series === "Dead Upon Release")?.value
   
       values.forEach((d, i) => {
         let format = d3.format(",.1f")
-        
+      if(d.series == "Released Alive"){
+        tooltipText.append("tspan")
+          .text(`${d.series}: ${format(d.value-dead)} million`)
+          .attr("x", 8)
+          .attr("dy", "1.2em");
+      }else{
         tooltipText.append("tspan")
           .text(`${d.series}: ${format(d.value)} million`)
           .attr("x", 8)
           .attr("dy", "1.2em");
+      }
+
       });
   
   
@@ -287,6 +309,7 @@ r2d3.onRender((data, svg, width, height, options) => {
     })
     .on("mouseleave", () => {
       tooltip.style("display", "none");
+      cursorLine.style("display", "none");
     });
   
 });

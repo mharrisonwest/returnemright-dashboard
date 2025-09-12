@@ -136,6 +136,16 @@ h4 {
   text-align: center;
 }
 
+.btn {
+  display: inline-block;
+  background-color: white;
+  padding: 3px 5px;
+  font-size: 14px;
+  border: 1.5px solid black;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
 .radio-button label:hover {
   background-color: #DBDDDE;
 }

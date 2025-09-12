@@ -169,9 +169,9 @@ ui <- fluidPage(
     
     ##about page panel##
     nav_panel("About",
-              fluidRow(
+              fluidRow(column(12,wellPanel(
                 downloadButton("historicaldatadownload", label = "Download Historical Data")
-              )
+              )))
               )
   ),
   
