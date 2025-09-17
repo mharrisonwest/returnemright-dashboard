@@ -98,7 +98,7 @@ ui <- fluidPage(
                       tags$label('for'="scenario_3","75%"),
                       tags$input(type = "radio",name="scenario_choice", id="scenario_4", value=1),
                       tags$label('for'="scenario_4","100%")
-                      
+
                   ),
                   tags$script(HTML("
                   $(document).on('shiny:connected', function(event) {
@@ -111,6 +111,11 @@ ui <- fluidPage(
                       Shiny.setInputValue('scenario_choice', this.value);
                     });
                   ")),
+                  
+                  # radioButtons("scenario_choice","Scenario",
+                  #              choices = list("25%" = .25, "50%" = .5, "75%" = .75, "100%" = 1),
+                  #              selected = .25
+                  #              ),
                   
                   checkboxGroupInput(
                     "fishery_scenario",
@@ -151,7 +156,6 @@ ui <- fluidPage(
                     ##d3 scenario chart here
                     uiOutput("nodatatext"),
                     d3Output(height = "500px", "scenariochart")
-                    
                   )),
                   ##Text Section##
                   column(5, wellPanel(style = "margin:auto;padding:0",
@@ -228,6 +232,8 @@ ui <- fluidPage(
           filters2.classList.add('mobile-hidden');
           mainContent2.classList.remove('mobile-hidden');
           toggleBtn2.textContent = 'Show Filters';
+          console.log('Re-binding Shiny on scenario-main-content');
+          Shiny.bindAll(mainContent2);
         }
       });
     

@@ -82,6 +82,27 @@ r2d3.onRender((data, svg, width, height, options) => {
   var x = d3.scalePoint()
     .domain(fullDomain)
     .range([0, innerWidth]);
+    
+  
+  const incompleteYears = Array.from(
+    new Set(data.filter(d => d.complete === false).map(d => d.year))
+  );
+  
+  let backgroundGroup = g.select(".incomplete-backgrounds");
+  if (backgroundGroup.empty()) {
+    backgroundGroup = g.insert("g", ":first-child")  // behind everything else
+      .attr("class", "incomplete-backgrounds");
+  }
+  
+  backgroundGroup.selectAll("rect")
+    .data(incompleteYears, d => d)
+    .join("rect")
+    .attr("x", d => x(d) - (x.step()))
+    .attr("y", -margin.top/6)
+    .attr("width", x.step())
+    .attr("height", innerHeight+margin.top/6)
+    .attr("fill", "#ccc")
+    .attr("opacity", 0.3);
   
   //set tick years to show
   let tickYears;
@@ -222,7 +243,7 @@ r2d3.onRender((data, svg, width, height, options) => {
   const tooltipBox = tooltip.append("rect")
   .attr("fill", "white")
   .attr("width", tooltipwidth)
-  .attr("height", 90)
+  .attr("height", 110)
   .attr("rx", 4)
   .attr("ry", 4)
   .attr("opacity", 0.9);
@@ -232,6 +253,7 @@ r2d3.onRender((data, svg, width, height, options) => {
     .attr("y", 10)
     .style("font-size", "14px")
     .style("font-weight", "bold");
+    
   
   const cursorLine = g.append("line")
   .attr("class", "cursor-line")
@@ -303,6 +325,17 @@ r2d3.onRender((data, svg, width, height, options) => {
       }
 
       });
+      
+      if (values.some(d => d.complete === false)) {
+        tooltipText.append("tspan")
+          .text("Data for this year is incomplete")
+          .attr("x", 8)
+          .attr("dy", "1.5em")
+          .style("font-size", "13px")
+          .style("font-style", "italic")
+          .style("font-weight", "normal");
+      }
+
   
   
       tooltip.style("display", null);

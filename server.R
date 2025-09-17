@@ -131,17 +131,29 @@ server <- function(input, output, session) {
   
   
   source_historical_data <- reactive(({
-    read.csv('historical data.csv')
+    read.csv('historical data.csv') %>%
+      group_by(species,region,year) %>%
+      summarise(discards = sum(discards),
+                dead_disc = sum(dead_disc),
+                landings = sum(landings)) %>%
+      as_data_frame()
   }))
   
   historicaldata<-reactive({
+    
+    input_length <- length(input$fishery_historical)*length(input$region_historical)
+    print(input_length)
     hist_data_filtered <- source_historical_data()%>%
       filter(species %in% input$fishery_historical,
              year >= input$years_historical[1],
              year <= input$years_historical[2],
              #sector1 %in% input$sector_historical | sector2 %in% input$sector_historical,
              region %in% input$region_historical
-             )
+             )%>%
+      add_count(year) %>%
+      mutate(complete = (n == input_length))
+    
+    print(hist_data_filtered,n=200)
     
     #filter based on user inputs
     summed_data <- hist_data_filtered %>% group_by(year) %>%
@@ -150,6 +162,7 @@ server <- function(input, output, session) {
                 tot_landings = sum(landings),
                 type = "",
                 yearnumeric = 0,
+                complete = sum(complete)>0
       ) %>%
       pivot_longer(cols = tot_discards:tot_landings,
                    names_to = "series",
@@ -162,7 +175,7 @@ server <- function(input, output, session) {
         year = str_replace(as.character(year),"20","'")
       )
     
-    #print(summed_data)
+    print(summed_data)
     
     summed_data$type <- sapply(summed_data$series,function(x){if(x=="Fish Kept"){"line"}else{"area"}})
     summed_data$value <- summed_data$value/1000
@@ -227,7 +240,7 @@ server <- function(input, output, session) {
     updateSliderInput(session, "years_historical",value = c(inputlowvalue,inputhighvalue),
                       min = minyear, max = maxyear)
   })
-  
+
   observe({
     hist_data_filtered <- source_historical_data()%>%
       filter(species %in% input$fishery_scenario,
@@ -241,6 +254,10 @@ server <- function(input, output, session) {
     inputlowvalue <- if(input$years_scenario[1] > maxyear){maxyear}else if(input$years_scenario[1] < minyear){minyear}else{input$years_scenario[1]}
     updateSliderInput(session, "years_scenario",value = c(inputlowvalue,inputhighvalue),
                       min = minyear, max = maxyear)
+  })
+  
+  observe({
+    print(input$fishery_scenario)
   })
   
   
