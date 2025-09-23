@@ -5,8 +5,10 @@ library(tidyverse)
 
 ui <- fluidPage(
   tags$head(
-    tags$link(rel = "stylesheet", type = "text/css", href = "stylesheet.css")
-    ),
+    tags$link(rel = "stylesheet", type = "text/css", href = "stylesheet.css"),
+    tags$link(rel = "stylesheet", type = "text/css", href = "https://fonts.googleapis.com/css?family=Montserrat:700"),
+    tags$link(rel = "stylesheet", type = "text/css", href = "https://fonts.googleapis.com/css?family=Montserrat:100")
+  ),
   
   
   navset_pill( 
@@ -174,6 +176,15 @@ ui <- fluidPage(
     ##about page panel##
     nav_panel("About",
               fluidRow(column(12,wellPanel(
+                
+                
+                includeHTML("www/about-page.html"),
+                
+                
+                
+                
+                
+                
                 downloadButton("historicaldatadownload", label = "Download Historical Data")
               )))
               )

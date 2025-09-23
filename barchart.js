@@ -4,6 +4,8 @@ var isMobile = width < 400;
 
 var height = isMobile ? 350 : 450;
 
+var width = isMobile ? width : 400;
+
 var margin = isMobile ? { top: 80, right: 30, bottom: 30, left: 70 } : { top: 120, right: 30, bottom: 100, left: 70 };
 
 var innerWidth = width - margin.left - margin.right;
@@ -35,8 +37,8 @@ r2d3.onRender(function(data, svg, width, height, options) {
 
   var x = d3.scaleBand()
     .domain(data.map(d => d.group))
-    .range([0, innerWidth])
-    .padding(0.4);
+    .range([35, innerWidth])
+    .padding(0);
 
   var y = d3.scaleLinear()
     .domain([0,data[0].value*1.2]).nice()

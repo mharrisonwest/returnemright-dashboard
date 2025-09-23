@@ -39,7 +39,7 @@ server <- function(input, output, session) {
     
     fishsaved <- scen_data %>% 
       left_join(discards_historic) %>%
-      mutate(max_benefit = m_diff*discards,                  # max benefit in this scenario (thousands of fish)
+      mutate(max_benefit = m_diff_max*discards,                  # max benefit in this scenario (thousands of fish)
              inc_benefit = max_benefit/(100-base_desc_pct),  # incremental benefit in thousands of fish
              calcd_benefit=max_benefit*descender_usage)
     
@@ -191,16 +191,6 @@ server <- function(input, output, session) {
   })
   
   
-  output$historicaldatadownload <- downloadHandler(
-    filename = function() {
-      paste0('Historical Data', '.xlsx')
-    },
-    content = function(con) {
-      data <- source_historical_data()
-      write.csv(data, con)
-    }
-  )
-  
   
   
   output$historicaldatadownload <- downloadHandler(
@@ -209,8 +199,7 @@ server <- function(input, output, session) {
     },
     content = function(file) {
 
-      
-      data <- select(source_historical_data(),!(fill:sector2))
+      data <- select(read.csv('historical data.csv'),!(fill:sector2))
       
 
       #write to the excel file
