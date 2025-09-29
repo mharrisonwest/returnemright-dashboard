@@ -222,13 +222,26 @@ server <- function(input, output, session) {
       )
     maxyear <- max(hist_data_filtered$year)
     minyear <- min(hist_data_filtered$year)
-    #print(maxyear)
+    #update year slider
     if(maxyear == -Inf){return(0)}
     inputhighvalue <- if(input$years_historical[2] > maxyear){maxyear}else if(input$years_historical[2] < minyear){minyear}else{input$years_historical[2]}
     inputlowvalue <- if(input$years_historical[1] > maxyear){maxyear}else if(input$years_historical[1] < minyear){minyear}else{input$years_historical[1]}
     updateSliderInput(session, "years_historical",value = c(inputlowvalue,inputhighvalue),
                       min = minyear, max = maxyear)
+    
+    #update region
+    print(input$years_historical[2])
+    hist_data_yearfiltered <- filter(source_historical_data(),
+                                     species %in% input$fishery_historical,
+                                     year >= input$years_historical[1],
+                                     year <= input$years_historical[2])
+    selected_region <- input$region_historical
+    print(selected_region)
+    updateCheckboxGroupInput(session,"region_historical",choices = unique(hist_data_yearfiltered$region),selected = selected_region)
+    
   })
+  
+  
 
   observe({
     hist_data_filtered <- source_historical_data()%>%
@@ -243,10 +256,15 @@ server <- function(input, output, session) {
     inputlowvalue <- if(input$years_scenario[1] > maxyear){maxyear}else if(input$years_scenario[1] < minyear){minyear}else{input$years_scenario[1]}
     updateSliderInput(session, "years_scenario",value = c(inputlowvalue,inputhighvalue),
                       min = minyear, max = maxyear)
-  })
-  
-  observe({
-    print(input$fishery_scenario)
+    
+    #update region
+    scen_data_yearfiltered <- filter(source_historical_data(),
+                                     species %in% input$fishery_scenario,
+                                     year >= input$years_scenario[1],
+                                     year <= input$years_scenario[2])
+    selected_region <- input$region_scenario
+    updateCheckboxGroupInput(session,"region_scenario",choices = unique(scen_data_yearfiltered$region),selected = selected_region)
+    
   })
   
   

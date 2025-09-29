@@ -38,11 +38,11 @@ if (isMobile) {
   title.append("tspan")
     .attr("x", width / 2)
     .attr("dy", "1.2em")
-    .text("Dead Upon Release,");
-    title.append("tspan")
-    .attr("x", width / 2)
-    .attr("dy", "1.2em")
-    .text("and Fish Kept");
+    .text("Dead Upon Release, and Fish Kept");
+  //title.append("tspan")
+  //  .attr("x", width / 2)
+  //  .attr("dy", "1.2em")
+  //  .text("and Fish Kept");
 } else {
   // Single line title for desktop
   title.text("Historical Fish Released Alive, Dead Upon Release, and Fish Kept");
@@ -51,7 +51,7 @@ if (isMobile) {
 svg.append("text")
   .attr("class", "chart-subtitle")
   .attr("x", width / 2)
-  .attr("y", isMobile ? 80 : margin.top / 2 + 18)
+  .attr("y", isMobile ? 60 : margin.top / 2 + 18)
   .attr("text-anchor", "middle")
   .style("font-size", "16px")
   .style("font-weight", "bold");
@@ -88,29 +88,16 @@ r2d3.onRender((data, svg, width, height, options) => {
     new Set(data.filter(d => d.complete === false).map(d => d.year))
   );
   
-  let backgroundGroup = g.select(".incomplete-backgrounds");
-  if (backgroundGroup.empty()) {
-    backgroundGroup = g.insert("g", ":first-child")  // behind everything else
-      .attr("class", "incomplete-backgrounds");
-  }
-  
-  backgroundGroup.selectAll("rect")
-    .data(incompleteYears, d => d)
-    .join("rect")
-    .attr("x", d => x(d) - (x.step()))
-    .attr("y", -margin.top/6)
-    .attr("width", x.step())
-    .attr("height", innerHeight+margin.top/6)
-    .attr("fill", "#ccc")
-    .attr("opacity", 0.3);
-  
+
   //set tick years to show
   let tickYears;
   if (isMobile) {
     var step = Math.floor(fullDomain.length / 4);
     tickYears = [fullDomain[0], fullDomain[step], fullDomain[2 * step], fullDomain[3 * step], fullDomain[fullDomain.length - 1]];
   } else {
-    tickYears = fullDomain;
+    var step = Math.floor(fullDomain.length / 6);
+    tickYears = [fullDomain[0], fullDomain[step], fullDomain[2 * step], fullDomain[3 * step], fullDomain[4 * step], fullDomain[5 * step], fullDomain[fullDomain.length - 1]];
+    
   }
 
   var y = d3.scaleLinear()
@@ -122,11 +109,13 @@ r2d3.onRender((data, svg, width, height, options) => {
     .range(["#043D5D", "#6FA0A2", "#DBE5F0"]);
 
   var area = d3.area()
+    .curve(d3.curveMonotoneX)
     .x(d => x(d.year))
     .y0(innerHeight)
     .y1(d => y(d.value));
 
   var line = d3.line()
+    .curve(d3.curveMonotoneX)
     .x(d => x(d.year))
     .y(d => y(d.value));
 
@@ -184,7 +173,7 @@ r2d3.onRender((data, svg, width, height, options) => {
 
   g.select(".y-axis")
     .transition().duration(1000)
-    .call(d3.axisLeft(y).ticks(isMobile ? 4 : null))
+    .call(d3.axisLeft(y).ticks(isMobile ? 4 : 6))
     .style("font-size","14px");
 
   //subtitle update
@@ -228,7 +217,8 @@ r2d3.onRender((data, svg, width, height, options) => {
       .attr("y", yPos + 10)
       .style("font-size", "14px")
       .style("font-weight", "bold")
-      .text(name);
+      .text(name)
+      .attr("class",name.replace(/\s+/g, '-'));
   });
   
   
@@ -264,6 +254,15 @@ r2d3.onRender((data, svg, width, height, options) => {
   .attr("stroke-dasharray", "3,3")
   .style("display", "none");
   
+  const hoverYearText = isMobile ? svg.append("text")
+  .attr("class", "hover-year-label")
+  .attr("x", width / 2)
+  .attr("y", legendYStart - 20)
+  .attr("text-anchor", "middle")
+  .style("font-size", "16px")
+  .style("font-weight", "bold")
+  .text("") : null;
+  
   // Transparent overlay to capture mouse events
   g.append("rect")
     .attr("class", "overlay")
@@ -284,6 +283,8 @@ r2d3.onRender((data, svg, width, height, options) => {
       var values = data.filter(d => d.year === closestYear);
   
       if (values.length === 0) return;
+      
+      if (!isMobile) {
   
       // Position the tooltip
       let tooltipX = x(closestYear) + margin.left + 10;
@@ -336,9 +337,31 @@ r2d3.onRender((data, svg, width, height, options) => {
           .style("font-weight", "normal");
       }
 
-  
-  
       tooltip.style("display", null);
+      }
+      
+      if (isMobile) {
+        
+        hoverYearText
+          .text(`${values[0]?.yearnumeric ?? closestYear}`)
+          .attr("x", x(closestYear) + margin.left + 25)
+          .attr("y", margin.top + 10);
+
+        // Update legend values
+        values.forEach(d => {
+          let dead = values.find(d => d.series === "Dead Upon Release")?.value
+          let format = d3.format(",.1f");
+          let valueText = (d.series === "Released Alive") ?
+            `${format(d.value - dead)}M` :
+            `${format(d.value)}M`;
+          
+  
+          svg.select(`.${d.series.replace(/\s+/g, '-')}`)
+            .text(`${d.series} (${valueText})`);
+        });
+
+      }
+    
     })
     .on("mouseleave", () => {
       tooltip.style("display", "none");

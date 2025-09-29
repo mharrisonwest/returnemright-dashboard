@@ -28,8 +28,7 @@ ui <- fluidPage(
       ##Filters Section##
       column(4,id = "filters-panel", class = "filters-panel", wellPanel(
                          h3("Filters"),
-                         
-                         checkboxGroupInput(
+                         radioButtons(
                            "fishery_historical",
                            "Fishery",
                            choices = list("Red Snapper" = "Red Snapper", "Gag" = "Gag", "Red Grouper" = "Red Grouper"),
@@ -80,11 +79,11 @@ ui <- fluidPage(
                 div(class = "responsive-container",
                     
                     #toggle buttom (mobile only)
-                    tags$button(
-                      id = "toggle-filters-2",
-                      class = "mobile-toggle",
-                      "Show Filters"
-                    ),
+                    # tags$button(
+                    #   id = "toggle-filters-2",
+                    #   class = "mobile-toggle",
+                    #   "Show Filters"
+                    # ),
                 
                 ##Filters Section##
                 column(4, id = "filters-panel-2", class = "filters-panel", wellPanel(
@@ -270,7 +269,8 @@ ui <- fluidPage(
           toggleBtn2.textContent = 'Show Filters';
         }
       });
-    });  
+    }); 
+    
   "))
 
   

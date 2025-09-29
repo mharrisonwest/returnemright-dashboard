@@ -239,7 +239,7 @@ svg {
     flex-direction: column;
   }
 
-  .filters-panel, .graph-panel {
+/*commented out  .filters-panel, .graph-panel {
     width: 100% !important;
   }
 
@@ -257,11 +257,11 @@ svg {
   }
 
 
-  /* Default mobile: show graph, hide filters */
+  Default mobile: show graph, hide filters 
   .mobile-hidden {
     display: none;
   }
-  
+ */
   #scenariochart {
     height: 350px !important;
   }
@@ -282,12 +282,16 @@ svg {
 
 }
 
-/* new */
+/* new for the filter buttons */
 .checkbox input[type="checkbox"] {
   display: none;
 }
 
-.checkbox {
+.radio input[type="radio"] {
+  display: none;
+}
+
+.checkbox, .radio {
   display: inline-block;
   position: relative;
   display: block;
@@ -304,13 +308,13 @@ svg {
   min-width: 50px;
 }
 
-.checkbox label {
+.checkbox label, .radio label {
   padding-left: 0px;
   vertical-align: middle;
     font-weight: bold; 
 }
 
-.checkbox:has(input:checked) {
+.checkbox:has(input:checked), .radio:has(input:checked) {
   background-color: #043D5D;
   border-color: black;
   color: white;
