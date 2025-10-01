@@ -41,11 +41,38 @@ r2d3.onRender(function(data, svg, width, height, options) {
     .padding(.2);
     
   var y = d3.scaleLinear()
-    .domain([0,data[0].value*.6,data[0].value,data[0].value*1.2])
-    .range([innerHeight,innerHeight*2/3,innerHeight/3,0]);
+    .domain([0,data[0].value*.5,data[0].value*.95,data[0].value*1.15])
+    .range([innerHeight,innerHeight*5/8,innerHeight*3/8,0]);
 
   var color = d3.scaleOrdinal(["#043D5D", "#6FA0A2"]);
 
+  
+  var bars = g.selectAll("rect")
+    .data(data, d => d.group);
+
+  bars.enter()
+    .append("rect")
+    .attr("x", d => x(d.group))
+    .attr("width", x.bandwidth())
+    .attr("y", y(0)) // Start from bottom
+    .attr("height", 0)
+    .attr("fill", (d, i) => color(i))
+    .merge(bars)
+    .transition()
+    .duration(800)
+    .attr("x", d => x(d.group))
+    .attr("width", x.bandwidth())
+    .attr("y", d => y(d.value))
+    .attr("height", d => innerHeight - y(d.value))
+    .attr("fill", (d, i) => color(i));
+
+  bars.exit()
+    .transition()
+    .duration(400)
+    .attr("y", y(0))
+    .attr("height", 0)
+    .remove();
+    
   // Update axes
   let tickLabels = ['Historical',options.scenario];
   
@@ -72,32 +99,40 @@ r2d3.onRender(function(data, svg, width, height, options) {
       gAxis.selectAll("text")
         .style("font-size", "12pt")
     });  
+    
+  
+  const breakY = innerHeight*7/16+4
+    const axisX = 0;            
+    const size = 8;             
+    
+  svg.selectAll(".axis-break").remove();
+  
+  g.append("line")
+    .attr("class", "axis-break")
+    .attr("x1", axisX)
+    .attr("y1", breakY+4)
+    .attr("x2", innerWidth)
+    .attr("y2", breakY+4)
+    .attr("stroke", "#f9f9f9")
+    .attr("stroke-width", 8);
+    
 
-  var bars = g.selectAll("rect")
-    .data(data, d => d.group);
+  g.append("line")
+    .attr("class", "axis-break")
+    .attr("x1", axisX-size)
+    .attr("y1", breakY-size/2)
+    .attr("x2", axisX + size)
+    .attr("y2", breakY + size/2)
+    .attr("stroke", "black");
+  
+  g.append("line")
+    .attr("class", "axis-break")
+    .attr("x1", axisX-size)
+    .attr("y1", breakY-size/2+8)
+    .attr("x2", axisX + size)
+    .attr("y2", breakY + size/2+8)
+    .attr("stroke", "black");
 
-  bars.enter()
-    .append("rect")
-    .attr("x", d => x(d.group))
-    .attr("width", x.bandwidth())
-    .attr("y", y(0)) // Start from bottom
-    .attr("height", 0)
-    .attr("fill", (d, i) => color(i))
-    .merge(bars)
-    .transition()
-    .duration(800)
-    .attr("x", d => x(d.group))
-    .attr("width", x.bandwidth())
-    .attr("y", d => y(d.value))
-    .attr("height", d => innerHeight - y(d.value))
-    .attr("fill", (d, i) => color(i));
-
-  bars.exit()
-    .transition()
-    .duration(400)
-    .attr("y", y(0))
-    .attr("height", 0)
-    .remove();
 
   //titles
   function updateText(selector, text, dy) {
@@ -105,8 +140,8 @@ r2d3.onRender(function(data, svg, width, height, options) {
     if (el.empty()) {
       el = svg.append("text").attr("class", selector.replace(".", ""));
     }
-    el.attr("x", width / 2)
-      .attr("y", margin.top / 2 + dy)
+    el.attr("x", width / 2 + margin.left/2)
+      .attr("y", margin.top*1/3 + dy)
       .attr("text-anchor", "middle")
       .style("font-size", "16px")
       .style("font-weight", "bold")
