@@ -41,8 +41,8 @@ r2d3.onRender(function(data, svg, width, height, options) {
     .padding(.2);
     
   var y = d3.scaleLinear()
-    .domain([0,data[0].value*.5,data[0].value*.95,data[0].value*1.15])
-    .range([innerHeight,innerHeight*5/8,innerHeight*3/8,0]);
+    .domain([0,data[0].value*.95,data[0].value*1.15])
+    .range([innerHeight,innerHeight*5/6,0]);
 
   var color = d3.scaleOrdinal(["#043D5D", "#6FA0A2"]);
 
@@ -89,8 +89,10 @@ r2d3.onRender(function(data, svg, width, height, options) {
     .transition()
     .duration(500)
     .call(gAxis => {
-      const maxY = y.domain()[3];
-      gAxis.call(d3.axisLeft(y).ticks(3).tickValues([0, maxY*.5, maxY*.8,maxY]));
+      const maxY = y.domain()[2];
+      const tickFormat = maxY > 10 ? d3.format("d") : d3.format(".1f");
+      
+      gAxis.call(d3.axisLeft(y).ticks(4).tickValues([0,maxY/1.2,maxY/1.1,maxY]).tickFormat(tickFormat));
       gAxis.selectAll(".tick line")
         .attr("x1", -5)
         .attr("x2", 5)
@@ -101,7 +103,7 @@ r2d3.onRender(function(data, svg, width, height, options) {
     });  
     
   
-  const breakY = innerHeight*7/16+4
+  const breakY = innerHeight*5/6+4
     const axisX = 0;            
     const size = 8;             
     
@@ -140,7 +142,7 @@ r2d3.onRender(function(data, svg, width, height, options) {
     if (el.empty()) {
       el = svg.append("text").attr("class", selector.replace(".", ""));
     }
-    el.attr("x", width / 2 + margin.left/2)
+    el.attr("x", width / 2 + 20)
       .attr("y", margin.top*1/3 + dy)
       .attr("text-anchor", "middle")
       .style("font-size", "16px")
