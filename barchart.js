@@ -2,7 +2,7 @@ svg.style("background", "none");
 
 var isMobile = width < 400;
 
-var height = isMobile ? 350 : 450;
+var height = isMobile ? 350 : 420; //  = isMobile ? 350 : 450
 
 var width = isMobile ? width : 400;
 
