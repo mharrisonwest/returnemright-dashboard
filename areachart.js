@@ -1,4 +1,6 @@
 svg.style("background", "none");
+svg.style("font-family", "Montserrat");
+
 
 //var height = width
 var isMobile = width < 400;
@@ -26,7 +28,6 @@ var title = svg.append("text")
   .attr("y",isMobile ? 0 : margin.top / 2)
   .attr("text-anchor", "middle")
   .style("font-size", "16px")
-  .style("font-weight", "bold");
 
 if (isMobile) {
   // Manual wrap with multiple tspans for mobile
@@ -54,14 +55,13 @@ svg.append("text")
   .attr("y", isMobile ? 60 : margin.top / 2 + 18)
   .attr("text-anchor", "middle")
   .style("font-size", "16px")
-  .style("font-weight", "bold");
 
 g.append("text")
   .attr("class", "y-label")
   .attr("text-anchor", "middle")
   .attr("transform", `rotate(-90)`)
   .attr("x", -innerHeight / 2)
-  .attr("y", -30)
+  .attr("y", -45)
   .style("font-size", "14px")
   .style("font-weight", "bold")
   .text(options.yLabel);
@@ -169,12 +169,14 @@ r2d3.onRender((data, svg, width, height, options) => {
   g.select(".x-axis")
     .transition().duration(1000)
     .call(d3.axisBottom(x).tickSize(0).tickPadding(15).tickValues(tickYears))
-    .style("font-size","14px");
+    .style("font-size","14px")
+    .style("font-family", "Montserrat");
 
   g.select(".y-axis")
     .transition().duration(1000)
     .call(d3.axisLeft(y).ticks(isMobile ? 4 : 6))
-    .style("font-size","14px");
+    .style("font-size","14px")
+    .style("font-family", "Montserrat");
 
   //subtitle update
   svg.select(".chart-subtitle").text(options.subtitle || "");
@@ -185,7 +187,7 @@ r2d3.onRender((data, svg, width, height, options) => {
   var seriesNames = [...new Set(data.map(d => d.series))];
   legendGroup.selectAll("*").remove();
 
-  var legendSpacing = isMobile ? 30 : 180;
+  var legendSpacing = isMobile ? 30 : 210;
   var legendXStart = isMobile ? margin.left : (width - legendSpacing * seriesNames.length) / 2 + 20;
   var legendYStart = isMobile ? innerHeight + margin.top + 50 : innerHeight + margin.top + 60;
   
@@ -342,9 +344,16 @@ r2d3.onRender((data, svg, width, height, options) => {
       
       if (isMobile) {
         
+        let tooltipX = x(closestYear) + margin.left + 25;
+
+        if (tooltipX + 20 + margin.right > width) {
+          tooltipX = tooltipX - 50;
+        }
+
+        
         hoverYearText
           .text(`${values[0]?.yearnumeric ?? closestYear}`)
-          .attr("x", x(closestYear) + margin.left + 25)
+          .attr("x", tooltipX)
           .attr("y", margin.top + 10);
 
         // Update legend values

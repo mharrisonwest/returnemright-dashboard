@@ -2,16 +2,18 @@ library(shiny)
 library(bslib)
 library(r2d3)
 library(tidyverse)
+library(shinyWidgets)
 
 ui <- fluidPage(
   tags$head(
     tags$link(rel = "stylesheet", type = "text/css", href = "stylesheet.css"),
-    tags$link(rel = "stylesheet", type = "text/css", href = "https://fonts.googleapis.com/css?family=Montserrat:700"),
-    tags$link(rel = "stylesheet", type = "text/css", href = "https://fonts.googleapis.com/css?family=Montserrat:300")
+    tags$link(rel = "stylesheet", type = "text/css", href = "https://fonts.googleapis.com/css?family=Montserrat:600"),
+    tags$link(rel = "stylesheet", type = "text/css", href = "https://fonts.googleapis.com/css?family=Montserrat:400"),
+    #tags$style("body{font-family:Montserrat}")
   ),
   
   navset_pill( 
-    nav_panel("Historical Discards",
+    nav_panel(div(tags$img(class = "tabicon", src = "historical.png"),"HISTORICAL DISCARDS"),
     ##Historical Panel##
     fluidRow(
       
@@ -26,17 +28,16 @@ ui <- fluidPage(
       
       ##Filters Section##
       column(4,id = "filters-panel", class = "filters-panel", wellPanel(
-                         h3("Filters"),
                          radioButtons(
                            "fishery_historical",
-                           "Fishery",
+                           "FISHERY",
                            choices = list("Red Snapper" = "Red Snapper", "Gag" = "Gag", "Red Grouper" = "Red Grouper"),
                            selected = "Red Snapper"
                          ),
                          
                          sliderInput(
                            "years_historical",
-                           "Years",
+                           "YEARS",
                            min = 2005,
                            max = 2023,
                            value = c(2005, 2023),
@@ -46,7 +47,7 @@ ui <- fluidPage(
                          
                          checkboxGroupInput(
                            "region_historical",
-                           "Regions",
+                           "REGIONS",
                            choices = list("Atlantic" = "Atlantic", "Gulf" = "Gulf"),
                            selected = c("Atlantic","Gulf")
                          )
@@ -71,7 +72,7 @@ ui <- fluidPage(
     ),##End Historical Panel##
     
     
-    nav_panel("Descender Device Use",
+    nav_panel(div(tags$img(class = "tabicon", src = "ddusage.png"),"DESCENDER DEVICE USE"),
               ##DD Use Panel##
               fluidRow(
                 
@@ -86,47 +87,23 @@ ui <- fluidPage(
                 
                 ##Filters Section##
                 column(4, id = "filters-panel-2", class = "filters-panel", wellPanel(
-                  h3("Filters"),
-                  
-                  h4(style="width: 320px","% of Anglers Using Descender Devices"),
-                  div(class = "radio-button",
-                      tags$input(type = "radio",name="scenario_choice", id="scenario_1", value=.25, checked="checked"),
-                      tags$label('for'="scenario_1","25%"),
-                      tags$input(type = "radio",name="scenario_choice", id="scenario_2", value=.5),
-                      tags$label('for'="scenario_2","50%"),
-                      tags$input(type = "radio",name="scenario_choice", id="scenario_3", value=.75),
-                      tags$label('for'="scenario_3","75%"),
-                      tags$input(type = "radio",name="scenario_choice", id="scenario_4", value=1),
-                      tags$label('for'="scenario_4","100%")
 
-                  ),
-                  tags$script(HTML("
-                  $(document).on('shiny:connected', function(event) {
-                      setTimeout(function() {
-                        var checked = $('input[name=\"scenario_choice\"]:checked').val();
-                        Shiny.setInputValue('scenario_choice', checked, {priority: 'event'});
-                      }, 50);
-                    });
-                    $(document).on('change', 'input[name=\"scenario_choice\"]', function() {
-                      Shiny.setInputValue('scenario_choice', this.value);
-                    });
-                  ")),
                   
                   # radioButtons("scenario_choice","Scenario",
                   #              choices = list("25%" = .25, "50%" = .5, "75%" = .75, "100%" = 1),
                   #              selected = .25
                   #              ),
                   
-                  checkboxGroupInput(
+                  radioButtons(
                     "fishery_scenario",
-                    "Fishery",
+                    "FISHERY",
                     choices = list("Red Snapper" = "Red Snapper", "Gag" = "Gag", "Red Grouper" = "Red Grouper"),
                     selected = "Red Snapper"
                   ),
                   
                   sliderInput(
                     "years_scenario",
-                    "Years",
+                    "YEARS",
                     min = 2005,
                     max = 2023,
                     value = c(2023,2023),
@@ -136,7 +113,7 @@ ui <- fluidPage(
                   
                   checkboxGroupInput(
                     "region_scenario",
-                    "Regions",
+                    "REGIONS",
                     choices = list("Atlantic" = "Atlantic", "Gulf" = "Gulf"),
                     selected = c("Atlantic","Gulf")
                   )
@@ -152,18 +129,47 @@ ui <- fluidPage(
                 
                 div(id = "scenario-main-content",
                   ##Graph Section##
-                  column(6,style="padding:0", wellPanel(style = "padding:0",
+                  
+                  
+                  column(5, id="scenario-panel-middle", wellPanel(style = "padding:0",
+                                                        
+                    # sliderInput(
+                    #   "scenario_choice",
+                    #   "% OF ANGLERS USING DESCENDER DEVICE",
+                    #   min = 0,
+                    #   max = 100,
+                    #   post = "%",
+                    #   step = 25,
+                    #   value = 25,
+                    #   sep = ""
+                    # ),
+                    wellPanel(id = "scenario-choice-panel",
+                      sliderTextInput(
+                        inputId = "scenario_choice", 
+                        label = "% OF ANGLERS USING DESCENDER DEVICE", 
+                        grid = TRUE, 
+                        force_edges = TRUE,
+                        choices = c(
+                          "25%",
+                          "50%",
+                          "75%", 
+                          "100%"
+                        )
+                      )
+                    ),
+                    
                     ##d3 scenario chart here
-                    uiOutput("nodatatext"),
-                    d3Output(height = "500px", "scenariochart")
+                    uiOutput("fish_saved_text"),
+                    #uiOutput("nodatatext")
                   )),
                   ##Text Section##
-                  column(5, wellPanel(style = "margin:auto;padding:0",
-                    uiOutput("fish_saved_text"),
+                  column(6, wellPanel(style = "margin:auto;padding:0",
+                    d3Output(height = "500px", "scenariochart"),
                     br(),
                     div(id = "fish-saved-narrative",
                         uiOutput("selected_scenario")
                     )
+                    
                   ))
                 )
                 
@@ -172,7 +178,7 @@ ui <- fluidPage(
     )),##End DD Use Panel##
     
     ##about page panel##
-    nav_panel("About",
+    nav_panel(div(tags$img(class = "tabicon", src = "info.png"),"ABOUT"),
               fluidRow(column(12,wellPanel(
                 
                 

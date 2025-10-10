@@ -1,4 +1,5 @@
 svg.style("background", "none");
+svg.style("font-family", "Montserrat");
 
 var isMobile = width < 400;
 
@@ -21,8 +22,8 @@ r2d3.onRender(function(data, svg, width, height, options) {
       .attr("class", "main-group")
       .attr("transform", `translate(${margin.left},${margin.top})`);
 
-    g.append("g").attr("class", "x-axis").attr("transform", `translate(0,${innerHeight})`);
-    g.append("g").attr("class", "y-axis");
+    g.append("g").attr("class", "x-axis").attr("transform", `translate(0,${innerHeight})`).style("font-family", "Montserrat");
+    g.append("g").attr("class", "y-axis").style("font-family", "Montserrat");
     g.append("text")
       .attr("class", "y-axis-label")
       .attr("transform", "rotate(-90)")
@@ -135,6 +136,7 @@ r2d3.onRender(function(data, svg, width, height, options) {
     .attr("y2", breakY + size/2+8)
     .attr("stroke", "black");
 
+  svg.select(".y-axis-label").text(options.yLabel || "");
 
   //titles
   function updateText(selector, text, dy) {

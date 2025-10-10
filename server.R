@@ -35,8 +35,8 @@ server <- function(input, output, session) {
     #apply scenario differences:
     scen_data <- mortality_effects()
     
-    descender_usage <- as.numeric(input$scenario_choice)
-    
+    descender_usage <- as.numeric(str_remove(input$scenario_choice,"%"))/100
+    print(descender_usage)
     fishsaved <- scen_data %>% 
       left_join(discards_historic) %>%
       mutate(max_benefit = m_diff_max*discards,                  # max benefit in this scenario (thousands of fish)
@@ -73,13 +73,19 @@ server <- function(input, output, session) {
   })
   
   output$scenariochart <- renderD3({
+    ylabel = "Millions"
+    chartdata <- scenariodata()
+    if(scenariodata()$value[1] < .5){
+      chartdata$value <- chartdata$value*1000
+      ylabel <- "Thousands"
+    }
     if(scenariodata()$value[1]==0){
       NULL
     }else{
-      r2d3(data=scenariodata(), script = "barchart.js", options =  list(scenario = paste0(as.numeric(input$scenario_choice)*100,"%"),
+      r2d3(data=chartdata, script = "barchart.js", options =  list(scenario = input$scenario_choice,
                                                                         xLabel = "",
-                                                                        yLabel = "Millions",
-                                                                        title = paste0("Fish Released Alive with ",as.numeric(input$scenario_choice)*100,"% of"),
+                                                                        yLabel = ylabel,
+                                                                        title = paste0("Fish Released Alive with ",input$scenario_choice," of"),
                                                                         title2 = "Anglers Using Descender Devices",
                                                                         subtitle = if(input$years_scenario[1]==input$years_scenario[2]){input$years_scenario[1]}else{paste0(input$years_scenario[1]," - ",input$years_scenario[2])}))
       
@@ -99,7 +105,7 @@ server <- function(input, output, session) {
       NULL
     }else{
     div(
-      "With a ", span(class = "narrative_emphasis",paste0(as.numeric(input$scenario_choice)*100,"%")), " Descender Device usage rate, fish survival would have increased by ", 
+      "With a ", span(class = "narrative_emphasis",input$scenario_choice), " Descender Device usage rate, fish survival would have increased by ", 
       span(class = "narrative_emphasis", 
            paste0(
              if(round((scenariodata()$value[2]/scenariodata()$value[1]-1)*100,0)==0){
@@ -119,12 +125,19 @@ server <- function(input, output, session) {
     }else{
       amount <- (scenariodata()$value[2]-scenariodata()$value[1])*1000000
       div(id = "fish-saved-block",
-          div(id = "fish-saved-title",
-              "Total Fish Saved"),
+          if(input$fishery_scenario=="Red Snapper"){
+            div(class = "fish-saved-image snapper")
+          }else if(input$fishery_scenario=="Gag"){
+            div(class = "fish-saved-image gag")
+          }else{
+            div(class = "fish-saved-image grouper")
+          },
           div(id = "fish-saved-amount",
               format(if(amount<1000){round(amount,-2)}else{round(amount,-3)},
                 big.mark=",")
-          )
+          ),
+          div(id = "fish-saved-title",
+              paste0(input$fishery_scenario, " Saved"))
       )
     }
   })
@@ -215,11 +228,59 @@ server <- function(input, output, session) {
   )
   
   ##adjust slider input when selected species changes:
-  observe({
+  observeEvent(c(input$fishery_historical),ignoreInit = T,{
+    hist_data_filtered <- source_historical_data()%>%
+      filter(species %in% input$fishery_historical)
+    print(hist_data_filtered)
+    maxyear <- max(hist_data_filtered$year)
+    minyear <- min(hist_data_filtered$year)
+    #update year slider
+    if(maxyear == -Inf){return(0)}
+    # inputhighvalue <- if(input$years_historical[2] > maxyear){maxyear}else if(input$years_historical[2] < minyear){minyear}else{input$years_historical[2]}
+    # inputlowvalue <- if(input$years_historical[1] > maxyear){maxyear}else if(input$years_historical[1] < minyear){minyear}else{input$years_historical[1]}
+    
+    #update region
+    print(input$years_historical[2])
+    hist_data_yearfiltered <- source_historical_data()%>%
+      filter(species %in% input$fishery_historical,
+                                     year >= minyear,
+                                     year <= maxyear)
+    
+    updateSliderInput(session, "years_historical",value = c(minyear,maxyear),
+                      min = minyear, max = maxyear)
+    updateCheckboxGroupInput(session,"region_historical",choices = unique(hist_data_yearfiltered$region),selected = unique(hist_data_yearfiltered$region))
+    
+
+  })
+  
+
+  observeEvent(c(input$fishery_scenario),ignoreInit = T,{
+    hist_data_filtered <- source_historical_data()%>%
+      filter(species %in% input$fishery_scenario)
+    maxyear <- max(hist_data_filtered$year)
+    minyear <- min(hist_data_filtered$year)
+    #print(maxyear)
+    if(maxyear == -Inf){return(0)}
+    # inputhighvalue <- if(input$years_scenario[2] > maxyear){maxyear}else if(input$years_scenario[2] < minyear){minyear}else{input$years_scenario[2]}
+    # inputlowvalue <- if(input$years_scenario[1] > maxyear){maxyear}else if(input$years_scenario[1] < minyear){minyear}else{input$years_scenario[1]}
+    updateSliderInput(session, "years_scenario",value = c(maxyear,maxyear),
+                      min = minyear, max = maxyear)
+    
+    #update region
+    scen_data_yearfiltered <- filter(source_historical_data(),
+                                     species %in% input$fishery_scenario,
+                                     year == maxyear)
+    #print(scen_data_yearfiltered)
+    
+    updateCheckboxGroupInput(session,"region_scenario",choices = unique(scen_data_yearfiltered$region),selected = unique(scen_data_yearfiltered$region))
+    
+  })
+  
+  #when region changes, update year options
+  observeEvent(c(input$region_historical),ignoreInit = T,{
     hist_data_filtered <- source_historical_data()%>%
       filter(species %in% input$fishery_historical,
-             region %in% input$region_historical
-      )
+             region %in% input$region_historical)
     maxyear <- max(hist_data_filtered$year)
     minyear <- min(hist_data_filtered$year)
     #update year slider
@@ -229,44 +290,61 @@ server <- function(input, output, session) {
     updateSliderInput(session, "years_historical",value = c(inputlowvalue,inputhighvalue),
                       min = minyear, max = maxyear)
     
-    #update region
-    print(input$years_historical[2])
-    hist_data_yearfiltered <- filter(source_historical_data(),
-                                     species %in% input$fishery_historical,
-                                     year >= input$years_historical[1],
-                                     year <= input$years_historical[2])
-    selected_region <- input$region_historical
-    print(selected_region)
-    updateCheckboxGroupInput(session,"region_historical",choices = unique(hist_data_yearfiltered$region),selected = selected_region)
-    
   })
   
-  
-
-  observe({
+  observeEvent(c(input$region_scenario),ignoreInit = T,{
     hist_data_filtered <- source_historical_data()%>%
       filter(species %in% input$fishery_scenario,
-             region %in% input$region_scenario
-      )
+             region %in% input$region_scenario)
     maxyear <- max(hist_data_filtered$year)
     minyear <- min(hist_data_filtered$year)
-    #print(maxyear)
+    #update year slider
     if(maxyear == -Inf){return(0)}
     inputhighvalue <- if(input$years_scenario[2] > maxyear){maxyear}else if(input$years_scenario[2] < minyear){minyear}else{input$years_scenario[2]}
     inputlowvalue <- if(input$years_scenario[1] > maxyear){maxyear}else if(input$years_scenario[1] < minyear){minyear}else{input$years_scenario[1]}
     updateSliderInput(session, "years_scenario",value = c(inputlowvalue,inputhighvalue),
                       min = minyear, max = maxyear)
     
-    #update region
-    scen_data_yearfiltered <- filter(source_historical_data(),
-                                     species %in% input$fishery_scenario,
-                                     year >= input$years_scenario[1],
-                                     year <= input$years_scenario[2])
-    selected_region <- input$region_scenario
-    updateCheckboxGroupInput(session,"region_scenario",choices = unique(scen_data_yearfiltered$region),selected = selected_region)
+  })
+  
+  
+  
+  #when year changes, update region
+  observeEvent(c(input$years_scenario),ignoreInit = T,{
+    hist_data_yearfiltered <- source_historical_data()%>%
+      filter(species %in% input$fishery_scenario,
+             year >= input$years_scenario[1],
+             year <= input$years_scenario[2])
+    region_options <- unique(hist_data_yearfiltered$region)
+    selected_region <- if(input$region_scenario[1]%in%region_options){input$region_scenario}else{region_options}
+    updateCheckboxGroupInput(session,"region_scenario",choices = region_options,selected = selected_region)
     
   })
   
+  observeEvent(c(input$years_historical),ignoreInit = T,{
+    hist_data_yearfiltered <- source_historical_data()%>%
+      filter(species %in% input$fishery_historical,
+             year >= input$years_historical[1],
+             year <= input$years_historical[2])
+    region_options <- unique(hist_data_yearfiltered$region)
+    selected_region <- if(input$region_historical[1]%in%region_options){input$region_historical}else{region_options}
+    updateCheckboxGroupInput(session,"region_historical",choices = region_options,selected = selected_region)
+    
+  })
+  
+  
+  
+  
+  
+  #make fishery filters sticky across tabs:
+  
+  observeEvent(input$fishery_historical,{
+    updateRadioButtons(session,"fishery_scenario",selected = input$fishery_historical)
+  })
+  
+  observeEvent(input$fishery_scenario,{
+    updateRadioButtons(session,"fishery_historical",selected = input$fishery_scenario)
+  })
   
   
 }
