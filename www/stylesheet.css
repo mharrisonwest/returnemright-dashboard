@@ -56,8 +56,15 @@ h4 {
   margin-top: 10px;
 }
 
+.nav-pills > li span {
+  padding: 5px;
+}
+
 .nav-pills > li.active > a, .nav-pills > li.active > a:focus, .nav-pills > li.active > a:hover {
   background: #f9f9f9;
+}
+
+.nav-pills > li.active span, .nav-pills > li.active span:focus, .nav-pills > li.active span:hover {
   color: #043D5D;
   border-bottom: solid #043D5D 1.5px;
   border-radius: 0;
@@ -195,9 +202,9 @@ svg {
   color: white;
   text-align: center;
   font-weight: bold;
-  margin-top: 10px;
   border-radius: 0 0 10px 10px;
   font-family: "Montserrat" !important;
+  min-width: 320px;
 }
 
 .fish-saved-image {
@@ -220,11 +227,13 @@ svg {
 #fish-saved-title {
   font-size:24px;
   font-weight: normal;
-  height: 50px;
+  height: 45px;
 }
 
 #fish-saved-amount {
   font-size:48px;
+  margin-top: -5px;
+  margin-bottom: -15px;
 }
 
 
@@ -263,6 +272,8 @@ svg {
   padding-left: 0px;
   background: white;
   font-family: "Montserrat";
+  min-width: 300px;
+  max-width: 300px;
 }
 
 #filters-panel {
@@ -276,6 +287,7 @@ svg {
 #scenario-panel-middle {
   padding: 0;
   min-width: 300px;
+  margin-right: 15px;
 }
 
 #scenario-choice-panel {
@@ -287,8 +299,10 @@ svg {
   padding-top: 10px;
   padding-bottom: 0px;
   margin-top: 15px;
+  margin-bottom: 15px;
   background: white;
   font-family: "Montserrat" !important;
+  min-width: 320px;
 }
 
 /*dont show min and max above*/ 
@@ -316,7 +330,8 @@ svg {
     flex-direction: column;
   }
 
-/*commented out  .filters-panel, .graph-panel {
+/*commented out*/
+  .filters-panel, .graph-panel {
     width: 100% !important;
   }
 
@@ -333,13 +348,21 @@ svg {
     font-weight: bold;
   }
 
-
-  Default mobile: show graph, hide filters 
   .mobile-hidden {
     display: none;
   }
- */
-  #scenariochart {
+
+ 
+ .filters-panel {
+    width: 100% !important;
+    margin: auto;
+  }
+  
+  #scenario-choice-panel {
+    margin-left: 15px;
+  }
+  
+  #scenariochart, #fish_saved_text {
     height: 350px !important;
     min-width: 320px !important;
   }
@@ -430,5 +453,18 @@ td, th {
 
 #scenariochart {
   height: 350px !important;
+}
+
+/* style disabled inputs */
+.checkbox:has(input:disabled) {
+  background-color: #e0e0e0;
+  color: #a0a0a0;
+  border-color: #a0a0a0;
+}
+
+.checkbox:has(input:disabled):hover {
+  background-color: #e0e0e0;
+  color: #a0a0a0;
+  border-color: #a0a0a0;
 }
 

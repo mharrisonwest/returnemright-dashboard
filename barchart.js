@@ -22,7 +22,12 @@ r2d3.onRender(function(data, svg, width, height, options) {
       .attr("class", "main-group")
       .attr("transform", `translate(${margin.left},${margin.top})`);
 
-    g.append("g").attr("class", "x-axis").attr("transform", `translate(0,${innerHeight})`).style("font-family", "Montserrat");
+    g.append("g")
+      .attr("class", "x-axis")
+      .attr("transform", `translate(0,${innerHeight})`)
+      .style("font-family", "Montserrat")
+      .style("font-weight", "bold");
+      
     g.append("g").attr("class", "y-axis").style("font-family", "Montserrat");
     g.append("text")
       .attr("class", "y-axis-label")

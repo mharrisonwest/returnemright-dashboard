@@ -3,6 +3,7 @@ library(bslib)
 library(r2d3)
 library(tidyverse)
 library(shinyWidgets)
+library(shinyjs)
 
 ui <- fluidPage(
   tags$head(
@@ -13,7 +14,8 @@ ui <- fluidPage(
   ),
   
   navset_pill( 
-    nav_panel(div(tags$img(class = "tabicon", src = "historical.png"),"HISTORICAL DISCARDS"),
+    id="navset",
+    nav_panel(span(class="tab_label",tags$img(class = "tabicon", src = "historical.png"),"HISTORICAL DISCARDS"),value = "historical_panel",
     ##Historical Panel##
     fluidRow(
       
@@ -72,18 +74,19 @@ ui <- fluidPage(
     ),##End Historical Panel##
     
     
-    nav_panel(div(tags$img(class = "tabicon", src = "ddusage.png"),"DESCENDER DEVICE USE"),
+    nav_panel(span(class="tab_label",tags$img(class = "tabicon", src = "ddusage.png"),"DESCENDER DEVICE USE"),value = "dd_panel",
+              useShinyjs(),
               ##DD Use Panel##
               fluidRow(
                 
                 div(class = "responsive-container",
                     
                     #toggle buttom (mobile only)
-                    # tags$button(
-                    #   id = "toggle-filters-2",
-                    #   class = "mobile-toggle",
-                    #   "Show Filters"
-                    # ),
+                    tags$button(
+                      id = "toggle-filters-2",
+                      class = "mobile-toggle",
+                      "Show Filters"
+                    ),
                 
                 ##Filters Section##
                 column(4, id = "filters-panel-2", class = "filters-panel", wellPanel(
@@ -178,7 +181,7 @@ ui <- fluidPage(
     )),##End DD Use Panel##
     
     ##about page panel##
-    nav_panel(div(tags$img(class = "tabicon", src = "info.png"),"ABOUT"),
+    nav_panel(span(class="tab_label",tags$img(class = "tabicon", src = "info.png"),"ABOUT"),value = "about_panel",
               fluidRow(column(12,wellPanel(
                 
                 

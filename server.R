@@ -4,6 +4,7 @@ library(r2d3)
 library(tidyverse)
 library(readxl)
 library(openxlsx)
+library(shinyjs)
 
 server <- function(input, output, session) {
   
@@ -105,7 +106,7 @@ server <- function(input, output, session) {
       NULL
     }else{
     div(
-      "With a ", span(class = "narrative_emphasis",input$scenario_choice), " Descender Device usage rate, fish survival would have increased by ", 
+      "With a ", span(class = "narrative_emphasis",input$scenario_choice), " descender device usage rate, fish survival would have increased by ", 
       span(class = "narrative_emphasis", 
            paste0(
              if(round((scenariodata()$value[2]/scenariodata()$value[1]-1)*100,0)==0){
@@ -228,7 +229,7 @@ server <- function(input, output, session) {
   )
   
   ##adjust slider input when selected species changes:
-  observeEvent(c(input$fishery_historical),ignoreInit = T,{
+  observeEvent(c(input$fishery_historical),{
     hist_data_filtered <- source_historical_data()%>%
       filter(species %in% input$fishery_historical)
     print(hist_data_filtered)
@@ -239,6 +240,11 @@ server <- function(input, output, session) {
     # inputhighvalue <- if(input$years_historical[2] > maxyear){maxyear}else if(input$years_historical[2] < minyear){minyear}else{input$years_historical[2]}
     # inputlowvalue <- if(input$years_historical[1] > maxyear){maxyear}else if(input$years_historical[1] < minyear){minyear}else{input$years_historical[1]}
     
+    gulf_years <- filter(hist_data_filtered, region == "Gulf")$year
+    label_gulf <- paste0("Gulf (",min(gulf_years),"-",max(gulf_years),")")
+    atlantic_years <- filter(hist_data_filtered, region == "Atlantic")$year
+    label_atlantic <- paste0("Atlantic (",min(atlantic_years),"-",max(atlantic_years),")")
+    
     #update region
     print(input$years_historical[2])
     hist_data_yearfiltered <- source_historical_data()%>%
@@ -248,13 +254,24 @@ server <- function(input, output, session) {
     
     updateSliderInput(session, "years_historical",value = c(minyear,maxyear),
                       min = minyear, max = maxyear)
-    updateCheckboxGroupInput(session,"region_historical",choices = unique(hist_data_yearfiltered$region),selected = unique(hist_data_yearfiltered$region))
     
-
+    updateCheckboxGroupInput(session,"region_historical",choices = setNames(c("Gulf", "Atlantic"), c(label_gulf, label_atlantic)), selected = unique(hist_data_yearfiltered$region))
+    
+    #disable
+    # updateCheckboxGroupInput(session,"region_historical",selected = unique(hist_data_yearfiltered$region))
+    # if(!"Atlantic"%in%hist_data_yearfiltered$region){
+    #   disable(selector = "#region_historical input[value='Atlantic']")
+    # }
+    # if(!"Gulf"%in%hist_data_yearfiltered$region){
+    #   disable(selector = "#region_historical input[value='Gulf']")
+    # }
+    
+    
   })
   
 
-  observeEvent(c(input$fishery_scenario),ignoreInit = T,{
+  observeEvent(c(input$fishery_scenario),{
+    print(274)
     hist_data_filtered <- source_historical_data()%>%
       filter(species %in% input$fishery_scenario)
     maxyear <- max(hist_data_filtered$year)
@@ -263,6 +280,12 @@ server <- function(input, output, session) {
     if(maxyear == -Inf){return(0)}
     # inputhighvalue <- if(input$years_scenario[2] > maxyear){maxyear}else if(input$years_scenario[2] < minyear){minyear}else{input$years_scenario[2]}
     # inputlowvalue <- if(input$years_scenario[1] > maxyear){maxyear}else if(input$years_scenario[1] < minyear){minyear}else{input$years_scenario[1]}
+    
+    gulf_years <- filter(hist_data_filtered, region == "Gulf")$year
+    label_gulf <- paste0("Gulf (",min(gulf_years),"-",max(gulf_years),")")
+    atlantic_years <- filter(hist_data_filtered, region == "Atlantic")$year
+    label_atlantic <- paste0("Atlantic (",min(atlantic_years),"-",max(atlantic_years),")")
+    
     updateSliderInput(session, "years_scenario",value = c(maxyear,maxyear),
                       min = minyear, max = maxyear)
     
@@ -271,9 +294,20 @@ server <- function(input, output, session) {
                                      species %in% input$fishery_scenario,
                                      year == maxyear)
     #print(scen_data_yearfiltered)
+    print('re render region')
+    updateCheckboxGroupInput(session,"region_scenario",choices = setNames(c("Gulf", "Atlantic"), c(label_gulf, label_atlantic)), selected = unique(scen_data_yearfiltered$region))
     
-    updateCheckboxGroupInput(session,"region_scenario",choices = unique(scen_data_yearfiltered$region),selected = unique(scen_data_yearfiltered$region))
-    
+    # updateCheckboxGroupInput(session,"region_scenario",selected = unique(scen_data_yearfiltered$region))
+    # if(!"Atlantic"%in%scen_data_yearfiltered$region){
+    #   disable(selector = "#region_scenario input[value='Atlantic']")
+    # }else{enable(selector = "#region_scenario input[value='Atlantic']")}
+    # if(!"Gulf"%in%scen_data_yearfiltered$region){
+    #   print('disable gulf')
+    #   #runjs("$(\"#region_scenario input[value='Gulf']\").prop('disabled', true);")
+    #   shinyjs::disable(id="region_scenario")
+    #   shinyjs::disable(selector = "#region_scenario input[value='Gulf']")
+    # }else{enable(selector = "#region_scenario input[value='Gulf']")}
+
   })
   
   #when region changes, update year options
@@ -293,6 +327,7 @@ server <- function(input, output, session) {
   })
   
   observeEvent(c(input$region_scenario),ignoreInit = T,{
+    print(328)
     hist_data_filtered <- source_historical_data()%>%
       filter(species %in% input$fishery_scenario,
              region %in% input$region_scenario)
@@ -310,14 +345,38 @@ server <- function(input, output, session) {
   
   
   #when year changes, update region
-  observeEvent(c(input$years_scenario),ignoreInit = T,{
+  observeEvent(c(input$years_scenario),{
+    print(347)
     hist_data_yearfiltered <- source_historical_data()%>%
       filter(species %in% input$fishery_scenario,
              year >= input$years_scenario[1],
              year <= input$years_scenario[2])
     region_options <- unique(hist_data_yearfiltered$region)
     selected_region <- if(input$region_scenario[1]%in%region_options){input$region_scenario}else{region_options}
-    updateCheckboxGroupInput(session,"region_scenario",choices = region_options,selected = selected_region)
+    
+    
+    # updateCheckboxGroupInput(session,"region_scenario",selected = selected_region)
+    # if(!"Atlantic"%in%region_options){
+    #   disable(selector = "#region_scenario input[value='Atlantic']")
+    # }else{enable(selector = "#region_scenario input[value='Atlantic']")}
+    # if(!"Gulf"%in%region_options){
+    #   disable(selector = "#region_scenario input[value='Gulf']")
+    # }else{enable(selector = "#region_scenario input[value='Gulf']")}
+    
+    print('re render region')
+    updateCheckboxGroupInput(session,"region_scenario",selected = selected_region)
+    
+    if(!"Atlantic"%in%region_options){
+      disable(selector = "#region_scenario input[value='Atlantic']")
+    }else{enable(selector = "#region_scenario input[value='Atlantic']")}
+    if(!"Gulf"%in%region_options){
+      print('disable gulf')
+      #runjs("$(\"#region_scenario input[value='Gulf']\").prop('disabled', true);")
+      shinyjs::disable(selector = "#region_scenario input[value='Gulf']")
+    }else{enable(selector = "#region_scenario input[value='Gulf']")}
+    
+    
+    #updateCheckboxGroupInput(session,"region_scenario",choices = region_options,selected = selected_region)
     
   })
   
@@ -328,11 +387,42 @@ server <- function(input, output, session) {
              year <= input$years_historical[2])
     region_options <- unique(hist_data_yearfiltered$region)
     selected_region <- if(input$region_historical[1]%in%region_options){input$region_historical}else{region_options}
-    updateCheckboxGroupInput(session,"region_historical",choices = region_options,selected = selected_region)
+    
+    updateCheckboxGroupInput(session,"region_historical",selected = selected_region)
+    #updateCheckboxGroupInput(session,"region_historical",choices = region_options,selected = selected_region)
+    
+    #grey out if not applicable
+    if(!"Atlantic"%in%region_options){
+      disable(selector = "#region_historical input[value='Atlantic']")
+    }else{enable(selector = "#region_historical input[value='Atlantic']")}
+    if(!"Gulf"%in%region_options){
+      print('disable gulf')
+      #runjs("$(\"#region_scenario input[value='Gulf']\").prop('disabled', true);")
+      shinyjs::disable(selector = "#region_historical input[value='Gulf']")
+    }else{enable(selector = "#region_historical input[value='Gulf']")}
     
   })
   
-  
+  #make sure that region disabling works (need to do it when tab loads)
+  observeEvent(c(input$navset,input$`toggle-filters-2`), {
+    if(input$navset=="dd_panel"){
+      hist_data_yearfiltered <- source_historical_data()%>%
+        filter(species %in% input$fishery_scenario,
+               year >= input$years_scenario[1],
+               year <= input$years_scenario[2])
+      region_options <- unique(hist_data_yearfiltered$region)
+      
+      if(!"Atlantic"%in%region_options){
+        disable(selector = "#region_scenario input[value='Atlantic']")
+      }else{enable(selector = "#region_scenario input[value='Atlantic']")}
+      if(!"Gulf"%in%region_options){
+        print('disable gulf')
+        #runjs("$(\"#region_scenario input[value='Gulf']\").prop('disabled', true);")
+        shinyjs::disable(selector = "#region_scenario input[value='Gulf']")
+      }else{enable(selector = "#region_scenario input[value='Gulf']")}
+    }
+    
+  })
   
   
   
