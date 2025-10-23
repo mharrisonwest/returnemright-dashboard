@@ -83,10 +83,11 @@ server <- function(input, output, session) {
     if(scenariodata()$value[1]==0){
       NULL
     }else{
+      title <-paste0(if(length(input$region_scenario)==1){paste0(input$region_scenario[1]," ")}else{""},input$fishery_scenario," Released Alive with ",input$scenario_choice," of")
       r2d3(data=chartdata, script = "barchart.js", options =  list(scenario = input$scenario_choice,
                                                                         xLabel = "",
                                                                         yLabel = ylabel,
-                                                                        title = paste0("Fish Released Alive with ",input$scenario_choice," of"),
+                                                                        title = title,
                                                                         title2 = "Anglers Using Descender Devices",
                                                                         subtitle = if(input$years_scenario[1]==input$years_scenario[2]){input$years_scenario[1]}else{paste0(input$years_scenario[1]," - ",input$years_scenario[2])}))
       
@@ -197,7 +198,14 @@ server <- function(input, output, session) {
   })
   
   output$historicalchart <- renderD3({
-    r2d3(data=historicaldata(), script = "areachart.js",options = list(subtitle = if(input$years_historical[1]==input$years_historical[2]){input$years_historical[1]}else{paste0(input$years_historical[1]," - ",input$years_historical[2])},
+    print('region hist')
+    print(input$region_historical)
+    print(length(input$region_historical))
+    title <- paste0(if(length(input$region_historical)==1){paste0(input$region_historical[1]," ")}else{""},input$fishery_historical," Released and Kept")
+    subtitle <- if(input$years_historical[1]==input$years_historical[2]){input$years_historical[1]}else{paste0(input$years_historical[1]," - ",input$years_historical[2])}
+    
+    r2d3(data=historicaldata(), script = "areachart.js",options = list(title = title,
+                                                                       subtitle = subtitle,
                                                                        yLabel = "Millions",
                                                                        x_min = input$years_historical[1],
                                                                        x_max = input$years_historical[2]

@@ -22,33 +22,17 @@ g.append("g").attr("class", "x-axis")
 
 g.append("g").attr("class", "y-axis");
 
-//title wraps only if mobile
-var title = svg.append("text")
+
+//title
+svg.append("text")
+  .attr("class", "chart-title")
   .attr("x", width / 2)
   .attr("y",isMobile ? 0 : margin.top / 2)
   .attr("text-anchor", "middle")
   .style("font-size", "16px")
 
-if (isMobile) {
-  // Manual wrap with multiple tspans for mobile
-  title.append("tspan")
-    .attr("x", width / 2)
-    .attr("dy", "1.2em")
-    .text("Historical Fish Released Alive,");
 
-  title.append("tspan")
-    .attr("x", width / 2)
-    .attr("dy", "1.2em")
-    .text("Dead Upon Release, and Fish Kept");
-  //title.append("tspan")
-  //  .attr("x", width / 2)
-  //  .attr("dy", "1.2em")
-  //  .text("and Fish Kept");
-} else {
-  // Single line title for desktop
-  title.text("Historical Fish Released Alive, Dead Upon Release, and Fish Kept");
-}
-
+//subtitle
 svg.append("text")
   .attr("class", "chart-subtitle")
   .attr("x", width / 2)
@@ -181,7 +165,9 @@ r2d3.onRender((data, svg, width, height, options) => {
   //subtitle update
   svg.select(".chart-subtitle").text(options.subtitle || "");
   
-  
+  //title update
+  svg.select(".chart-title").text(options.title || "");
+ 
 
   //legend
   var seriesNames = [...new Set(data.map(d => d.series))];

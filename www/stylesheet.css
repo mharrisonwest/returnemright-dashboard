@@ -468,3 +468,9 @@ td, th {
   border-color: #a0a0a0;
 }
 
+#scenariochartpanel {
+  margin:auto;
+  padding:0;
+  min-width: 330px;
+}
+

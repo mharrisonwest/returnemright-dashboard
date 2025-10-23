@@ -51,7 +51,7 @@ ui <- fluidPage(
                            "region_historical",
                            "REGIONS",
                            choices = list("Atlantic" = "Atlantic", "Gulf" = "Gulf"),
-                           selected = c("Atlantic","Gulf")
+                           selected = c("Atlantic")
                          )
                          
                          # checkboxGroupInput(
@@ -166,7 +166,7 @@ ui <- fluidPage(
                     #uiOutput("nodatatext")
                   )),
                   ##Text Section##
-                  column(6, wellPanel(style = "margin:auto;padding:0",
+                  column(6, wellPanel(id="scenariochartpanel",
                     d3Output(height = "500px", "scenariochart"),
                     br(),
                     div(id = "fish-saved-narrative",
