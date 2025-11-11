@@ -27,7 +27,7 @@ g.append("g").attr("class", "y-axis");
 svg.append("text")
   .attr("class", "chart-title")
   .attr("x", width / 2)
-  .attr("y",isMobile ? 0 : margin.top / 2)
+  .attr("y", margin.top / 2)
   .attr("text-anchor", "middle")
   .style("font-size", "16px")
 
@@ -200,6 +200,15 @@ r2d3.onRender((data, svg, width, height, options) => {
         .attr("fill", color(name));
     }
     
+    if (lineSeries.has(name)) {
+    legendGroup.append("text")
+      .attr("x", xPos + 36)
+      .attr("y", yPos + 10)
+      .style("font-size", "14px")
+      .style("font-weight", "bold")
+      .text(options.linelabel)
+      .attr("class",name.replace(/\s+/g, '-'));
+    } else {
     legendGroup.append("text")
       .attr("x", xPos + 36)
       .attr("y", yPos + 10)
@@ -207,6 +216,8 @@ r2d3.onRender((data, svg, width, height, options) => {
       .style("font-weight", "bold")
       .text(name)
       .attr("class",name.replace(/\s+/g, '-'));
+
+    }
   });
   
   
@@ -216,7 +227,7 @@ r2d3.onRender((data, svg, width, height, options) => {
     .attr("class", "tooltip")
     .style("display", "none");
   
-  var tooltipwidth = 220
+  var tooltipwidth = 235
   
   const tooltipBox = tooltip.append("rect")
   .attr("fill", "white")

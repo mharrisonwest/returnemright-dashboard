@@ -288,6 +288,7 @@ svg {
   padding: 0;
   min-width: 300px;
   margin-right: 15px;
+  max-width: 424px;
 }
 
 #scenario-choice-panel {
@@ -365,6 +366,10 @@ svg {
   #scenariochart, #fish_saved_text {
     height: 350px !important;
     min-width: 320px !important;
+  }
+  
+  #fish_saved_text {
+    margin-left: 15px;
   }
   
   /* make navigation pills stack */
@@ -453,6 +458,7 @@ td, th {
 
 #scenariochart {
   height: 350px !important;
+  max-width: 479px;
 }
 
 /* style disabled inputs */

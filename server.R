@@ -69,13 +69,19 @@ server <- function(input, output, session) {
 
     hist_tot <- sum(fishsaved$discards,na.rm=TRUE)/1000
     new_tot <- hist_tot + sum(fishsaved$calcd_benefit,na.rm=TRUE)/1000
-    return(data.frame(group=c("Historical","50%"), value=c(hist_tot,new_tot)))
+    max_tot <- hist_tot + sum(fishsaved$max_benefit,na.rm=TRUE)/1000
+    return(data.frame(group=c("Historical","50%","Max"), value=c(hist_tot,new_tot,max_tot)))
     
   })
   
   output$scenariochart <- renderD3({
     ylabel = "Millions"
     chartdata <- scenariodata()
+    print('chart data')
+    print(chartdata)
+    saved_max <- chartdata[3,2]+(chartdata[3,2]-chartdata[1,2])*.2
+    saved_mid <- chartdata[1,2]-(chartdata[3,2]-chartdata[1,2])*.1
+    chartdata <- chartdata[-3,]
     if(scenariodata()$value[1] < .5){
       chartdata$value <- chartdata$value*1000
       ylabel <- "Thousands"
@@ -85,6 +91,8 @@ server <- function(input, output, session) {
     }else{
       title <-paste0(if(length(input$region_scenario)==1){paste0(input$region_scenario[1]," ")}else{""},input$fishery_scenario," Released Alive with ",input$scenario_choice," of")
       r2d3(data=chartdata, script = "barchart.js", options =  list(scenario = input$scenario_choice,
+                                                                        ymax = saved_max,
+                                                                        ymid = saved_mid,
                                                                         xLabel = "",
                                                                         yLabel = ylabel,
                                                                         title = title,
@@ -136,7 +144,7 @@ server <- function(input, output, session) {
           },
           div(id = "fish-saved-amount",
               format(if(amount<1000){round(amount,-2)}else{round(amount,-3)},
-                big.mark=",")
+                big.mark=",",scientific = FALSE)
           ),
           div(id = "fish-saved-title",
               paste0(input$fishery_scenario, " Saved"))
@@ -208,7 +216,8 @@ server <- function(input, output, session) {
                                                                        subtitle = subtitle,
                                                                        yLabel = "Millions",
                                                                        x_min = input$years_historical[1],
-                                                                       x_max = input$years_historical[2]
+                                                                       x_max = input$years_historical[2],
+                                                                       linelabel = paste0(input$fishery_historical," Kept")
                                                                        ))
   })
   

@@ -47,8 +47,8 @@ r2d3.onRender(function(data, svg, width, height, options) {
     .padding(.2);
     
   var y = d3.scaleLinear()
-    .domain([0,data[0].value*.95,data[0].value*1.15])
-    .range([innerHeight,innerHeight*5/6,0]);
+    .domain([0,options.ymid,options.ymax])
+    .range([innerHeight,innerHeight*9/12,0]);
 
   var color = d3.scaleOrdinal(["#043D5D", "#6FA0A2"]);
 
@@ -96,9 +96,10 @@ r2d3.onRender(function(data, svg, width, height, options) {
     .duration(500)
     .call(gAxis => {
       const maxY = y.domain()[2];
+      const midY = y.domain()[1];
       const tickFormat = maxY > 10 ? d3.format("d") : d3.format(".1f");
       
-      gAxis.call(d3.axisLeft(y).ticks(4).tickValues([0,maxY/1.2,maxY/1.1,maxY]).tickFormat(tickFormat));
+      gAxis.call(d3.axisLeft(y).ticks(4).tickValues([0,midY,midY+(maxY-midY)/2,maxY]).tickFormat(tickFormat));
       gAxis.selectAll(".tick line")
         .attr("x1", -5)
         .attr("x2", 5)
