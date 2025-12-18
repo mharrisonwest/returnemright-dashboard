@@ -74,6 +74,17 @@ server <- function(input, output, session) {
     
   })
   
+  scenariodata <- scenariodata %>% debounce(300)
+  
+  scenariochartvariables <- reactive({
+    title <- paste0(if(length(input$region_scenario)==1){paste0(input$region_scenario[1]," ")}else{""},input$fishery_scenario," Released Alive with ",input$scenario_choice," of")
+    subtitle <- if(input$years_scenario[1]==input$years_scenario[2]){input$years_scenario[1]}else{paste0(input$years_scenario[1]," - ",input$years_scenario[2])}
+    scenario <- input$scenario_choice
+    list(title=title,subtitle=subtitle,scenario=scenario)
+  })
+  
+  scenariochartvariables <- scenariochartvariables %>% debounce(300)
+  
   output$scenariochart <- renderD3({
     ylabel = "Millions"
     chartdata <- scenariodata()
@@ -89,15 +100,14 @@ server <- function(input, output, session) {
     if(scenariodata()$value[1]==0){
       NULL
     }else{
-      title <-paste0(if(length(input$region_scenario)==1){paste0(input$region_scenario[1]," ")}else{""},input$fishery_scenario," Released Alive with ",input$scenario_choice," of")
-      r2d3(data=chartdata, script = "barchart.js", options =  list(scenario = input$scenario_choice,
+      r2d3(data=chartdata, script = "barchart.js", options =  list(scenario = scenariochartvariables()[["scenario"]],
                                                                         ymax = saved_max,
                                                                         ymid = saved_mid,
                                                                         xLabel = "",
                                                                         yLabel = ylabel,
-                                                                        title = title,
+                                                                        title = scenariochartvariables()[["title"]],
                                                                         title2 = "Anglers Using Descender Devices",
-                                                                        subtitle = if(input$years_scenario[1]==input$years_scenario[2]){input$years_scenario[1]}else{paste0(input$years_scenario[1]," - ",input$years_scenario[2])}))
+                                                                        subtitle = scenariochartvariables()[["subtitle"]]))
       
     }
     
@@ -205,33 +215,38 @@ server <- function(input, output, session) {
     return(summed_data)
   })
   
-  output$historicalchart <- renderD3({
-    print('region hist')
-    print(input$region_historical)
-    print(length(input$region_historical))
+  historicaldata <- historicaldata %>% debounce(300)
+  
+  histchartvariables <- reactive({
     title <- paste0(if(length(input$region_historical)==1){paste0(input$region_historical[1]," ")}else{""},input$fishery_historical," Released and Kept")
     subtitle <- if(input$years_historical[1]==input$years_historical[2]){input$years_historical[1]}else{paste0(input$years_historical[1]," - ",input$years_historical[2])}
+    list(title=title,subtitle=subtitle,x_min=input$years_historical[1],x_max=input$years_historical[2],linelabel=paste0(input$fishery_historical," Kept"))
+  })
+  
+  histchartvariables <- histchartvariables %>% debounce(300)
+  
+  output$historicalchart <- renderD3({
+
     
-    r2d3(data=historicaldata(), script = "areachart.js",options = list(title = title,
-                                                                       subtitle = subtitle,
+    r2d3(data=historicaldata(), script = "areachart.js",options = list(title = histchartvariables()[["title"]],
+                                                                       subtitle = histchartvariables()[["subtitle"]],
                                                                        yLabel = "Millions",
-                                                                       x_min = input$years_historical[1],
-                                                                       x_max = input$years_historical[2],
-                                                                       linelabel = paste0(input$fishery_historical," Kept")
+                                                                       x_min = histchartvariables()[["x_min"]],
+                                                                       x_max = histchartvariables()[["x_max"]],
+                                                                       linelabel = histchartvariables()[["linelabel"]]
                                                                        ))
   })
   
   
   
   
-  output$historicaldatadownload <- downloadHandler(
-    filename = function() {
-      paste0('Historical Data', '.xlsx')
-    },
+  output$historical_data_download_1 <- downloadHandler(
+    filename = 'Historical Data.xlsx',
     content = function(file) {
-
+      print("excel data:")
       data <- select(read.csv('historical data.csv'),!(fill:sector2))
-      
+      print("excel data:")
+      print(data)
 
       #write to the excel file
       fname <- "Historical Data Template.xlsx"
@@ -239,8 +254,6 @@ server <- function(input, output, session) {
       writeData(wb,"Sheet1",data,startRow=2,startCol=1,colNames=F)
 
       openxlsx::saveWorkbook(wb, file,overwrite = T)
-      
-      removeModal()
       
     }
   )
@@ -452,6 +465,25 @@ server <- function(input, output, session) {
   observeEvent(input$fishery_scenario,{
     updateRadioButtons(session,"fishery_historical",selected = input$fishery_scenario)
   })
+  
+  #make region filters sticky across tabs:
+  
+  observeEvent(input$region_historical,{
+    updateRadioButtons(session,"region_scenario",selected = input$region_historical)
+  })
+
+  # observeEvent(input$fishery_scenario,{
+  #   updateRadioButtons(session,"region_historical",selected = input$region_scenario)
+  # })
+  # 
+  # #make year filters sticky across tabs:
+  # 
+  observeEvent(input$years_historical,ignoreInit = TRUE,{
+      updateSliderInput(session,"years_scenario",value = input$years_historical)
+  })
+  # 
+  # 
+  # 
   
   
 }

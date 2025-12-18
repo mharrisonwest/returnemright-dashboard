@@ -8,7 +8,6 @@ h3 {
   color: #043D5D;
   font-weight: bold;
   font-size: 18px;
-  font-weight: bold;
 }
 
 h4 {
@@ -217,7 +216,7 @@ svg {
 }
 
 .gag {
-    background-image: url("gag.jpeg");
+    background-image: url("gag.jpg");
 }
 
 .grouper {
@@ -386,6 +385,15 @@ svg {
   .nav-pills > li > a {
     margin-top: 5px;
   }
+  
+  #about-page {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  
+  ul {
+    padding-left: 20px;
+  }
 
 }
 
@@ -480,3 +488,139 @@ td, th {
   min-width: 330px;
 }
 
+/* accordion panels about page */
+.accordion, .accordion-bottom {
+  color: #043D5D;
+  font-weight: bold;
+  font-size: 18px;
+  background: none;
+  cursor: pointer;
+  padding: 10px;
+  width: 100%;
+  text-align: left;
+  border: none;
+  outline: none;
+  transition: 0.4s;
+}
+
+
+.accordion:hover,.accordion-bottom:hover {
+  color: #6FA0A2;
+}
+
+/*style accordion panel*/
+.panel {
+  padding: 0 18px;
+  background: none;
+  display: none;
+  overflow: hidden;
+  box-shadow: none;
+  font-size: 15px;
+}
+
+ol {
+  padding-left: 15px;
+}
+
+
+ul {
+  list-style-type: disc;
+}
+
+li {
+  padding-left: 10px;
+}
+    
+li::marker {
+  font-weight: bold;
+}
+
+ol > li {
+  padding-bottom:10px;
+}
+
+h5 {
+  font-style: italic;
+  color: #043D5D;
+}
+
+.small-list {
+  margin-left: 20px;
+}
+.small-list > li{
+  padding-bottom:0px;
+}
+
+.small-list > li::marker {
+  font-weight: normal;
+}
+
+caption {
+  color: #043D5D;
+}
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  vertical-align: top;
+}
+
+th {
+  border-bottom: 2px solid black;
+}
+
+ul ul {
+  list-style-type: circle;
+}
+
+.links-sublist li {
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+#about-page {
+  font-family: "Montserrat" !important;
+}
+
+
+.accordion-arrow {
+  transition: transform 0.3s ease; 
+}
+
+.accordion-arrow.rotate {
+  transform: rotate(180deg); 
+}
+
+.infoicon {
+  width: 15px;
+  margin-bottom: 5px;
+  margin-left: 5px;
+}
+
+.tooltip {
+  position: relative;
+  display: inline;
+  cursor: pointer;  
+  opacity: 1;
+}
+
+.tooltiptext {
+  visibility: hidden;
+  width: 300px;
+  background-color: #f9f9f9;
+  color: #043D5D;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  top: calc(100% + 10px);
+  right: 5px;
+  margin-left: -65px;
+  padding: 5px;
+  border: 1px solid lightgray;
+  font-size: 14px;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
