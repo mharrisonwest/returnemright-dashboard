@@ -504,28 +504,6 @@ ui <- fluidPage(
         }
       });
     
-      // Reset view on resize for both tabs
-      window.addEventListener('resize', function () {
-        if (!isMobile()) {
-          filters1.classList.remove('mobile-hidden');
-          graph1.classList.remove('mobile-hidden');
-          toggleBtn1.style.display = 'none';
-    
-          filters2.classList.remove('mobile-hidden');
-          mainContent2.classList.remove('mobile-hidden');
-          toggleBtn2.style.display = 'none';
-        } else {
-          filters1.classList.add('mobile-hidden');
-          graph1.classList.remove('mobile-hidden');
-          toggleBtn1.style.display = 'block';
-          toggleBtn1.textContent = 'Show Filters';
-    
-          filters2.classList.add('mobile-hidden');
-          mainContent2.classList.remove('mobile-hidden');
-          toggleBtn2.style.display = 'block';
-          toggleBtn2.textContent = 'Show Filters';
-        }
-      });
     });
     
     // make accordion collapse
