@@ -150,7 +150,7 @@ r2d3.onRender(function(data, svg, width, height, options) {
     if (el.empty()) {
       el = svg.append("text").attr("class", selector.replace(".", ""));
     }
-    el.attr("x", width / 2 + 20)
+    el.attr("x", width / 2)
       .attr("y", margin.top*1/3 + dy)
       .attr("text-anchor", "middle")
       .style("font-size", "16px")

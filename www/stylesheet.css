@@ -203,7 +203,7 @@ svg {
   font-weight: bold;
   border-radius: 0 0 10px 10px;
   font-family: "Montserrat" !important;
-  min-width: 320px;
+  min-width: 340px;
 }
 
 .fish-saved-image {
@@ -302,7 +302,7 @@ svg {
   margin-bottom: 15px;
   background: white;
   font-family: "Montserrat" !important;
-  min-width: 320px;
+  min-width: 340px;
 }
 
 /*dont show min and max above*/ 
@@ -594,7 +594,6 @@ ul ul {
 .infoicon {
   width: 15px;
   margin-bottom: 5px;
-  margin-left: 5px;
 }
 
 .tooltip {
