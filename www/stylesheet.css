@@ -240,6 +240,7 @@ svg {
 #fish-saved-narrative {
   text-align: center;
   font-size: 16px;
+  margin-top: -25px;
 }
 
 .narrative_emphasis {
@@ -393,6 +394,15 @@ svg {
   
   ul {
     padding-left: 20px;
+  }
+  
+  #scenario-choice-label{
+    font-size:13px;
+  }
+  
+  #scenariocharttitle {
+    margin-top: -40px;
+    height: 30px;
   }
 
 }
@@ -622,4 +632,17 @@ ul ul {
 
 .tooltip:hover .tooltiptext {
   visibility: visible;
+}
+
+
+#scenariocharttitle {
+  font-family: Montserrat;
+  font-weight: bold;
+  font-size: 16px;
+  text-align: center;
+  height: 0px;
+  width: 350px;
+  margin: auto;
+    margin-top: auto;
+  margin-top: 20px;
 }

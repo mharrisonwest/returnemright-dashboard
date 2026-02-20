@@ -85,6 +85,13 @@ server <- function(input, output, session) {
   
   scenariochartvariables <- scenariochartvariables %>% debounce(300)
   
+  output$scenariocharttitle <- renderUI(
+    div(
+      div(paste(scenariochartvariables()[["title"]],"Anglers Using Descender Devices")),
+      div(scenariochartvariables()[["subtitle"]])
+    )
+  )
+  
   output$scenariochart <- renderD3({
     ylabel = "Millions"
     chartdata <- scenariodata()

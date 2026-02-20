@@ -171,7 +171,8 @@ ui <- fluidPage(
                   )),
                   ##Text Section##
                   column(6, wellPanel(id="scenariochartpanel",
-                    d3Output(height = "500px", "scenariochart"),
+                    uiOutput("scenariocharttitle"),
+                    d3Output( "scenariochart"),
                     br(),
                     div(id = "fish-saved-narrative",
                         uiOutput("selected_scenario")
