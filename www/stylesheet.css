@@ -325,7 +325,7 @@ svg {
   margin-bottom: 10px;
 }
 
-#scenariocharttitle {
+#scenariocharttitle, #historicalcharttitle {
   font-family: Montserrat;
   font-weight: bold;
   font-size: 16px;

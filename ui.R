@@ -66,6 +66,7 @@ ui <- fluidPage(
       
       ##Graph Section##
       column(8,id = "graph-panel", class = "graph-panel", style= "max-width:800px; aspect-ratio: 16 / 9;", wellPanel(
+            uiOutput("historicalcharttitle"),
             d3Output("historicalchart")             
       ))
       )

@@ -23,23 +23,6 @@ g.append("g").attr("class", "x-axis")
 g.append("g").attr("class", "y-axis");
 
 
-//title
-svg.append("text")
-  .attr("class", "chart-title")
-  .attr("x", width / 2)
-  .attr("y", margin.top / 2)
-  .attr("text-anchor", "middle")
-  .style("font-size", "16px")
-
-
-//subtitle
-svg.append("text")
-  .attr("class", "chart-subtitle")
-  .attr("x", width / 2)
-  .attr("y", isMobile ? 60 : margin.top / 2 + 18)
-  .attr("text-anchor", "middle")
-  .style("font-size", "16px")
-
 g.append("text")
   .attr("class", "y-label")
   .attr("text-anchor", "middle")
@@ -161,12 +144,6 @@ r2d3.onRender((data, svg, width, height, options) => {
     .call(d3.axisLeft(y).ticks(isMobile ? 4 : 6))
     .style("font-size","14px")
     .style("font-family", "Montserrat");
-
-  //subtitle update
-  svg.select(".chart-subtitle").text(options.subtitle || "");
-  
-  //title update
-  svg.select(".chart-title").text(options.title || "");
  
 
   //legend

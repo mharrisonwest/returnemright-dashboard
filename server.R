@@ -232,6 +232,13 @@ server <- function(input, output, session) {
   
   histchartvariables <- histchartvariables %>% debounce(300)
   
+  output$historicalcharttitle <- renderUI(
+    div(
+      div(histchartvariables()[["title"]]),
+      div(scenariochartvariables()[["subtitle"]])
+    )
+  )
+  
   output$historicalchart <- renderD3({
 
     
