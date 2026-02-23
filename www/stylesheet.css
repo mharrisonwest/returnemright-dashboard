@@ -325,6 +325,15 @@ svg {
   margin-bottom: 10px;
 }
 
+#scenariocharttitle {
+  font-family: Montserrat;
+  font-weight: bold;
+  font-size: 16px;
+  text-align: center;
+  height: 0px;
+  margin-top: 20px;
+}
+
 /* Mobile layout */
 @media (max-width: 900px) {
   .responsive-container {
@@ -401,8 +410,11 @@ svg {
   }
   
   #scenariocharttitle {
-    margin-top: -40px;
-    height: 30px;
+    height: 0px;
+    margin: auto;
+    margin-top: -50px;
+    margin-bottom: 20px;
+    width: 100%;
   }
 
 }
@@ -632,17 +644,4 @@ ul ul {
 
 .tooltip:hover .tooltiptext {
   visibility: visible;
-}
-
-
-#scenariocharttitle {
-  font-family: Montserrat;
-  font-weight: bold;
-  font-size: 16px;
-  text-align: center;
-  height: 0px;
-  width: 350px;
-  margin: auto;
-    margin-top: auto;
-  margin-top: 20px;
 }
