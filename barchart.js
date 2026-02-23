@@ -122,7 +122,7 @@ r2d3.onRender(function(data, svg, width, height, options) {
     .attr("y1", breakY+4)
     .attr("x2", innerWidth)
     .attr("y2", breakY+4)
-    .attr("stroke", "#f9f9f9")
+    .attr("stroke", "white")
     .attr("stroke-width", 8);
     
 

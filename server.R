@@ -97,13 +97,18 @@ server <- function(input, output, session) {
     chartdata <- scenariodata()
     print('chart data')
     print(chartdata)
-    saved_max <- chartdata[3,2]+(chartdata[3,2]-chartdata[1,2])*.2
-    saved_mid <- chartdata[1,2]-(chartdata[3,2]-chartdata[1,2])*.1
-    chartdata <- chartdata[-3,]
+    
     if(scenariodata()$value[1] < .5){
       chartdata$value <- chartdata$value*1000
       ylabel <- "Thousands"
     }
+    
+    saved_max <- chartdata[3,2]+(chartdata[3,2]-chartdata[1,2])*.2
+    saved_mid <- chartdata[1,2]-(chartdata[3,2]-chartdata[1,2])*.1
+    chartdata <- chartdata[-3,]
+    
+    
+    
     if(scenariodata()$value[1]==0){
       NULL
     }else{
@@ -234,7 +239,7 @@ server <- function(input, output, session) {
   
   output$historicalcharttitle <- renderUI(
     div(
-      div(histchartvariables()[["title"]]),
+      div(scenariochartvariables()[["title"]]),
       div(scenariochartvariables()[["subtitle"]])
     )
   )

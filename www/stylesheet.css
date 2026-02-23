@@ -373,11 +373,16 @@ svg {
   
   #scenario-choice-panel {
     margin-left: 15px;
+    min-width: 300px
   }
   
   #scenariochart, #fish_saved_text {
     height: 350px !important;
-    min-width: 320px !important;
+    min-width: 300px !important;
+  }
+  
+  #fish-saved-block, #scenariochartpanel {
+    min-width: 300px !important;
   }
   
   #fish_saved_text {
@@ -407,6 +412,11 @@ svg {
   ul {
     padding-left: 20px;
   }
+  
+  #scenario-choice-panel {
+    min-width: 310px;
+  }
+  
   
   #scenario-choice-label{
     font-size:13px;
