@@ -444,9 +444,9 @@ ui <- fluidPage(
                         downloadLink("historical_data_download_1", label = ""),
                         
                  ),
-                 column(5,
-                        tags$img(style="width:100%;margin-top: 15px;",src = "about page image.jpg")
-                 )
+                 # column(5,
+                 #        tags$img(style="width:100%;margin-top: 15px;",src = "about page image.jpg")
+                 # )
 
               )))
               )

@@ -1,8 +1,8 @@
-
+/*
 body {
   background: #f9f9f9;
 }
-
+*/
 
 h3 {
   color: #043D5D;
@@ -23,12 +23,14 @@ h4 {
   color: #4D6D7E;
 }
 
+/*
 .tab-content {
   background: #f9f9f9;
 }
+*/
 
 .well {
-  background-color: #f9f9f9;
+  /*background-color: #f9f9f9;*/
   border: none;
   border-radius: none;
   -webkit-box-shadow: none;
@@ -45,7 +47,7 @@ h4 {
 }
 
 .nav-pills > li > a {
-  background: #f9f9f9;
+  /*background: #f9f9f9;*/
   color: #043D5D;
   height: 30px;
   width: 240px;
@@ -60,8 +62,9 @@ h4 {
 }
 
 .nav-pills > li.active > a, .nav-pills > li.active > a:focus, .nav-pills > li.active > a:hover {
-  background: #f9f9f9;
+  background: white;
 }
+
 
 .nav-pills > li.active span, .nav-pills > li.active span:focus, .nav-pills > li.active span:hover {
   color: #043D5D;
@@ -628,7 +631,7 @@ ul ul {
 .tooltiptext {
   visibility: hidden;
   width: 300px;
-  background-color: #f9f9f9;
+  /*background-color: #f9f9f9;*/
   color: #043D5D;
   border-radius: 6px;
   padding: 5px 0;
