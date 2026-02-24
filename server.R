@@ -74,7 +74,7 @@ server <- function(input, output, session) {
     
   })
   
-  scenariodata <- scenariodata %>% debounce(300)
+  scenariodata <- scenariodata %>% debounce(500)
   
   scenariochartvariables <- reactive({
     title <- paste0(if(length(input$region_scenario)==1){paste0(input$region_scenario[1]," ")}else{""},input$fishery_scenario," Released Alive with ",input$scenario_choice," of")
@@ -83,7 +83,7 @@ server <- function(input, output, session) {
     list(title=title,subtitle=subtitle,scenario=scenario)
   })
   
-  scenariochartvariables <- scenariochartvariables %>% debounce(300)
+  scenariochartvariables <- scenariochartvariables %>% debounce(500)
   
   output$scenariocharttitle <- renderUI(
     div(
@@ -227,7 +227,7 @@ server <- function(input, output, session) {
     return(summed_data)
   })
   
-  historicaldata <- historicaldata %>% debounce(300)
+  historicaldata <- historicaldata %>% debounce(500)
   
   histchartvariables <- reactive({
     title <- paste0(if(length(input$region_historical)==1){paste0(input$region_historical[1]," ")}else{""},input$fishery_historical," Released and Kept")
@@ -235,7 +235,7 @@ server <- function(input, output, session) {
     list(title=title,subtitle=subtitle,x_min=input$years_historical[1],x_max=input$years_historical[2],linelabel=paste0(input$fishery_historical," Kept"))
   })
   
-  histchartvariables <- histchartvariables %>% debounce(300)
+  histchartvariables <- histchartvariables %>% debounce(500)
   
   output$historicalcharttitle <- renderUI(
     div(
@@ -479,11 +479,11 @@ server <- function(input, output, session) {
   
   observeEvent(input$fishery_historical,{
     updateRadioButtons(session,"fishery_scenario",selected = input$fishery_historical)
-  })
+  }, ignoreInit = TRUE)
   
   observeEvent(input$fishery_scenario,{
     updateRadioButtons(session,"fishery_historical",selected = input$fishery_scenario)
-  })
+  }, ignoreInit = TRUE)
   
   #make region filters sticky across tabs:
   

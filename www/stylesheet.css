@@ -415,6 +415,10 @@ svg {
   
   #scenario-choice-panel {
     min-width: 310px;
+    width: 100%;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 13px;
   }
   
   
@@ -641,13 +645,13 @@ ul ul {
 .tooltiptext {
   visibility: hidden;
   width: 300px;
-  /*background-color: #f9f9f9;*/
+  background-color: #f9f9f9;
   color: #043D5D;
   border-radius: 6px;
   padding: 5px 0;
   position: absolute;
   z-index: 1;
-  top: calc(100% + 10px);
+  top: calc(100% + 20px);
   right: 5px;
   margin-left: -65px;
   padding: 5px;
