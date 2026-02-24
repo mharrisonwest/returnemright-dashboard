@@ -239,8 +239,8 @@ server <- function(input, output, session) {
   
   output$historicalcharttitle <- renderUI(
     div(
-      div(scenariochartvariables()[["title"]]),
-      div(scenariochartvariables()[["subtitle"]])
+      div(histchartvariables()[["title"]]),
+      div(histchartvariables()[["subtitle"]])
     )
   )
   
