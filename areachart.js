@@ -28,7 +28,7 @@ g.append("text")
   .attr("text-anchor", "middle")
   .attr("transform", `rotate(-90)`)
   .attr("x", -innerHeight / 2)
-  .attr("y", -45)
+  .attr("y", isMobile ? -25 : -45)
   .style("font-size", "14px")
   .style("font-weight", "bold")
   .text(options.yLabel);

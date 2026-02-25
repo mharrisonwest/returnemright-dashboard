@@ -433,6 +433,11 @@ svg {
     margin-bottom: 20px;
     width: 100%;
   }
+  
+  graph-well {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
 
 }
 
