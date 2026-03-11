@@ -7,7 +7,7 @@ var isMobile = width < 400;
 
 var height = isMobile ? 370 : height;
 
-var margin = isMobile ? { top: 90, right: 10, bottom: 100, left: 45 } : { top: 80, right: 30, bottom: 100, left: 70 },
+var margin = isMobile ? { top: 90, right: 10, bottom: 100, left: 60 } : { top: 80, right: 30, bottom: 100, left: 70 },
     innerWidth = width - margin.left - margin.right,
     innerHeight = height - margin.top - margin.bottom,
     color = d3.scaleOrdinal()
@@ -28,7 +28,7 @@ g.append("text")
   .attr("text-anchor", "middle")
   .attr("transform", `rotate(-90)`)
   .attr("x", -innerHeight / 2)
-  .attr("y", isMobile ? -25 : -45)
+  .attr("y", isMobile ? -40 : -45)
   .style("font-size", "14px")
   .style("font-weight", "bold")
   .text(options.yLabel);
